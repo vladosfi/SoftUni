@@ -9,29 +9,31 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "02.StackSum", "02.StackSum\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "03.SimpleCalculator", "03.SimpleCalculator\03.SimpleCalculator.csproj", "{131F875F-2674-4F88-A895-95BF69850693}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "04.MatchingBrackets", "04.MatchingBrackets\04.MatchingBrackets.csproj", "{D1E43C76-694B-4F8B-BF37-7643BBD98662}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "04.MatchingBrackets", "04.MatchingBrackets\04.MatchingBrackets.csproj", "{D1E43C76-694B-4F8B-BF37-7643BBD98662}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "05.Supermarket", "06.Supermarket\05.Supermarket.csproj", "{D03C8131-4713-4F02-833A-D131F001BFFB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "05.Supermarket", "06.Supermarket\05.Supermarket.csproj", "{D03C8131-4713-4F02-833A-D131F001BFFB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "06.HotPotato", "06.HotPotato\06.HotPotato.csproj", "{3C0722AF-99C6-445D-93C1-E437611F33FF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "06.HotPotato", "06.HotPotato\06.HotPotato.csproj", "{3C0722AF-99C6-445D-93C1-E437611F33FF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "07.TrafficJam", "07.TrafficJam\07.TrafficJam.csproj", "{08FBF806-C77D-45FA-866E-1794EA625A71}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "07.TrafficJam", "07.TrafficJam\07.TrafficJam.csproj", "{08FBF806-C77D-45FA-866E-1794EA625A71}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lab", "Lab", "{63F36024-8D2C-4187-90E4-8D4E9A72FC88}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Exercise", "Exercise", "{937AC58A-55EE-489F-AA82-9FD64C5AAD88}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "01.BasicStackOperations", "01.BasicStackOperations\01.BasicStackOperations.csproj", "{F2076EFF-D3F3-4B15-9105-9700F976D63F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "01.BasicStackOperations", "01.BasicStackOperations\01.BasicStackOperations.csproj", "{F2076EFF-D3F3-4B15-9105-9700F976D63F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "02.BasicQueueOperations", "02.BasicQueueOperations\02.BasicQueueOperations.csproj", "{614858CA-38A6-4B05-B034-7A16F305B216}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "02.BasicQueueOperations", "02.BasicQueueOperations\02.BasicQueueOperations.csproj", "{614858CA-38A6-4B05-B034-7A16F305B216}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "03.MaximumAndMinimumElement", "03.MaximumAndMinimumElement\03.MaximumAndMinimumElement.csproj", "{AD745D82-D55B-4613-878D-B15B55F21014}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "03.MaximumAndMinimumElement", "03.MaximumAndMinimumElement\03.MaximumAndMinimumElement.csproj", "{AD745D82-D55B-4613-878D-B15B55F21014}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "04.FastFood", "04.FastFood\04.FastFood.csproj", "{48764EAF-EF6E-4B90-896F-4208FE7E0B01}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "04.FastFood", "04.FastFood\04.FastFood.csproj", "{48764EAF-EF6E-4B90-896F-4208FE7E0B01}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "05.FashionBoutique", "05.FashionBoutique\05.FashionBoutique.csproj", "{86CCAC9B-560D-48A4-9F3F-27F47D984080}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "05.FashionBoutique", "05.FashionBoutique\05.FashionBoutique.csproj", "{86CCAC9B-560D-48A4-9F3F-27F47D984080}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "06.AutoRepairAndService", "06.AutoRepairAndService\06.AutoRepairAndService.csproj", "{F15EEFA5-DC5A-49E8-B354-BF19AF8A0923}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "06.AutoRepairAndService", "06.AutoRepairAndService\06.AutoRepairAndService.csproj", "{F15EEFA5-DC5A-49E8-B354-BF19AF8A0923}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "07.TruckTour", "07.TruckTour\07.TruckTour.csproj", "{75D81E95-935C-4818-B0A3-1FD069A16C3F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -91,6 +93,10 @@ Global
 		{F15EEFA5-DC5A-49E8-B354-BF19AF8A0923}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F15EEFA5-DC5A-49E8-B354-BF19AF8A0923}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F15EEFA5-DC5A-49E8-B354-BF19AF8A0923}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75D81E95-935C-4818-B0A3-1FD069A16C3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75D81E95-935C-4818-B0A3-1FD069A16C3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75D81E95-935C-4818-B0A3-1FD069A16C3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75D81E95-935C-4818-B0A3-1FD069A16C3F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -109,6 +115,7 @@ Global
 		{48764EAF-EF6E-4B90-896F-4208FE7E0B01} = {937AC58A-55EE-489F-AA82-9FD64C5AAD88}
 		{86CCAC9B-560D-48A4-9F3F-27F47D984080} = {937AC58A-55EE-489F-AA82-9FD64C5AAD88}
 		{F15EEFA5-DC5A-49E8-B354-BF19AF8A0923} = {937AC58A-55EE-489F-AA82-9FD64C5AAD88}
+		{75D81E95-935C-4818-B0A3-1FD069A16C3F} = {937AC58A-55EE-489F-AA82-9FD64C5AAD88}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C1C7D67F-081A-4C7A-B0A6-82299B9871C5}

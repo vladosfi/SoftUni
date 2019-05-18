@@ -24,7 +24,6 @@ namespace _07.TruckTour
 
                 foreach (var pump in pumps)
                 {
-                    int[] tokens = pump;
                     int fuelAmount = pump[0];
                     int distance = pump[1];
                     tankAmount += fuelAmount - distance;

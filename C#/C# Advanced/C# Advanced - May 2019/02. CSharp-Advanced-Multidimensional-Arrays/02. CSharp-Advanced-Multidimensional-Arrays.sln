@@ -3,21 +3,33 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28306.52
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "01.SumMatrixElements", "01.SumMatrixElements\01.SumMatrixElements.csproj", "{B31D0FF2-B2DA-43B1-BF2B-25D4BE122E82}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "01.SumMatrixElements", "01.SumMatrixElements\01.SumMatrixElements.csproj", "{B31D0FF2-B2DA-43B1-BF2B-25D4BE122E82}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "02.SumMatrixColumns", "02.SumMatrixColumns\02.SumMatrixColumns.csproj", "{780BBEC3-5B26-45D7-AD83-2A67115C2480}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "02.SumMatrixColumns", "02.SumMatrixColumns\02.SumMatrixColumns.csproj", "{780BBEC3-5B26-45D7-AD83-2A67115C2480}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "03.PrimaryDiagonal", "03.PrimaryDiagonal\03.PrimaryDiagonal.csproj", "{1E13EE2D-8563-446A-BB44-F137DEDCAD91}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "03.PrimaryDiagonal", "03.PrimaryDiagonal\03.PrimaryDiagonal.csproj", "{1E13EE2D-8563-446A-BB44-F137DEDCAD91}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "04.SymbolInMatrix", "04.SymbolInMatrix\04.SymbolInMatrix.csproj", "{963989E6-7766-4747-AE03-3A040482E606}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "04.SymbolInMatrix", "04.SymbolInMatrix\04.SymbolInMatrix.csproj", "{963989E6-7766-4747-AE03-3A040482E606}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "05.SquareWithMaximumSum", "05.SquareWithMaximumSum\05.SquareWithMaximumSum.csproj", "{51792C10-5D11-46CB-A826-96297D684A0E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "05.SquareWithMaximumSum", "05.SquareWithMaximumSum\05.SquareWithMaximumSum.csproj", "{51792C10-5D11-46CB-A826-96297D684A0E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "06.Jagged-ArrayModification", "06.Jagged-ArrayModification\06.Jagged-ArrayModification.csproj", "{78B15375-20C6-479B-83A3-F7468A96377E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "06.Jagged-ArrayModification", "06.Jagged-ArrayModification\06.Jagged-ArrayModification.csproj", "{78B15375-20C6-479B-83A3-F7468A96377E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "07.PascalTriangle", "07.PascalTriangle\07.PascalTriangle.csproj", "{4CF8E124-48BC-4989-8FCE-6FC19BCA80E2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "07.PascalTriangle", "07.PascalTriangle\07.PascalTriangle.csproj", "{4CF8E124-48BC-4989-8FCE-6FC19BCA80E2}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LAB", "LAB", "{C1433FD2-24DE-4546-B968-6ED2C11BF3C6}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lab", "Lab", "{C1433FD2-24DE-4546-B968-6ED2C11BF3C6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Exercise", "Exercise", "{F8B89416-F733-4628-BD9A-B2068B2F60B2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "01.DiagonalDifference", "01.DiagonalDifference\01.DiagonalDifference.csproj", "{118E914F-B3D8-4736-B181-F8BAA8B06FBB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "02.2x2SquaresInMatrix", "02.2x2SquaresInMatrix\02.2x2SquaresInMatrix.csproj", "{6552017D-1B80-4814-8F2C-5EE25FA2C267}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "03.MaximalSum", "03.MaximalSum\03.MaximalSum.csproj", "{8532EC53-9075-4458-9EFC-D89B31327AEB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "04.MatrixShuffling", "04.MatrixShuffling\04.MatrixShuffling.csproj", "{E86FDB57-4D28-4834-9C36-649F081886B3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "05.SnakeMoves", "05.SnakeMoves\05.SnakeMoves.csproj", "{1EBDCFEB-E635-4F1E-B6A2-2C02E218857D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +65,26 @@ Global
 		{4CF8E124-48BC-4989-8FCE-6FC19BCA80E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4CF8E124-48BC-4989-8FCE-6FC19BCA80E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4CF8E124-48BC-4989-8FCE-6FC19BCA80E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{118E914F-B3D8-4736-B181-F8BAA8B06FBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{118E914F-B3D8-4736-B181-F8BAA8B06FBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{118E914F-B3D8-4736-B181-F8BAA8B06FBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{118E914F-B3D8-4736-B181-F8BAA8B06FBB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6552017D-1B80-4814-8F2C-5EE25FA2C267}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6552017D-1B80-4814-8F2C-5EE25FA2C267}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6552017D-1B80-4814-8F2C-5EE25FA2C267}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6552017D-1B80-4814-8F2C-5EE25FA2C267}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8532EC53-9075-4458-9EFC-D89B31327AEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8532EC53-9075-4458-9EFC-D89B31327AEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8532EC53-9075-4458-9EFC-D89B31327AEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8532EC53-9075-4458-9EFC-D89B31327AEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E86FDB57-4D28-4834-9C36-649F081886B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E86FDB57-4D28-4834-9C36-649F081886B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E86FDB57-4D28-4834-9C36-649F081886B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E86FDB57-4D28-4834-9C36-649F081886B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1EBDCFEB-E635-4F1E-B6A2-2C02E218857D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1EBDCFEB-E635-4F1E-B6A2-2C02E218857D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1EBDCFEB-E635-4F1E-B6A2-2C02E218857D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1EBDCFEB-E635-4F1E-B6A2-2C02E218857D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -65,6 +97,11 @@ Global
 		{51792C10-5D11-46CB-A826-96297D684A0E} = {C1433FD2-24DE-4546-B968-6ED2C11BF3C6}
 		{78B15375-20C6-479B-83A3-F7468A96377E} = {C1433FD2-24DE-4546-B968-6ED2C11BF3C6}
 		{4CF8E124-48BC-4989-8FCE-6FC19BCA80E2} = {C1433FD2-24DE-4546-B968-6ED2C11BF3C6}
+		{118E914F-B3D8-4736-B181-F8BAA8B06FBB} = {F8B89416-F733-4628-BD9A-B2068B2F60B2}
+		{6552017D-1B80-4814-8F2C-5EE25FA2C267} = {F8B89416-F733-4628-BD9A-B2068B2F60B2}
+		{8532EC53-9075-4458-9EFC-D89B31327AEB} = {F8B89416-F733-4628-BD9A-B2068B2F60B2}
+		{E86FDB57-4D28-4834-9C36-649F081886B3} = {F8B89416-F733-4628-BD9A-B2068B2F60B2}
+		{1EBDCFEB-E635-4F1E-B6A2-2C02E218857D} = {F8B89416-F733-4628-BD9A-B2068B2F60B2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {99362CF9-B663-472B-9937-4957E6C45DA0}

@@ -32,8 +32,7 @@ namespace _06.BombTheBasement
                 else
                 {
                     shift--;
-                }
-                
+                }                
 
                 for (int col = colHit - shift; col <= colHit + shift; col++)
                 {
@@ -41,7 +40,6 @@ namespace _06.BombTheBasement
                 }
             }            
 
-            //Print(rows, cols, basement);
             FallingDown(rows, cols, basement);
             Print(rows, cols, basement);
         }

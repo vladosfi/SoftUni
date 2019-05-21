@@ -7,7 +7,7 @@ namespace _01.SnakeMoves
     {
         static void Main(string[] args)
         {
-            int[] size = Console.ReadLine().Split().Select(int.Parse).ToArray();
+            int[] size = Console.ReadLine().Split(" ",StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray();
             int rows = size[0];
             int cols = size[1];
             char[,] matrix = new char[rows, cols];
@@ -30,16 +30,14 @@ namespace _01.SnakeMoves
                     {
                         matrix[row, col] = snake[0];
                     }
-                    
                 }
             }
-
 
             for (int row = 0; row < rows; row++)
             {
                 for (int col = 0; col < cols; col++)
                 {
-                    Console.Write(matrix[row, col] + " ");
+                    Console.Write(matrix[row, col]);
                 }
 
                 Console.WriteLine();

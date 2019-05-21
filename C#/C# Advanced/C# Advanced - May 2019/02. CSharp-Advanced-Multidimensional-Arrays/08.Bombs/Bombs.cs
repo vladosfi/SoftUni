@@ -29,10 +29,12 @@ namespace _08.Bombs
                 int bombCol = bombCoordinates[1];
                 int damage = matrix[bombRow, bombCol];
 
-                if (matrix[bombRow, bombCol] > 0)
+                if (matrix[bombRow, bombCol] <= 0)
                 {
-                    matrix[bombRow, bombCol] = 0;
+                    continue;
                 }
+
+                matrix[bombRow, bombCol] = 0;
 
                 for (int row = bombRow - 1; row <= bombRow + 1; row++)
                 {
@@ -50,7 +52,7 @@ namespace _08.Bombs
             }
 
             Console.WriteLine($"Alive cells: {GetAliveCells(n, matrix)}");
-            Console.WriteLine($"GetSum: {GetSum(n, matrix)}");
+            Console.WriteLine($"Sum: {GetSum(n, matrix)}");
             Print(n, matrix);
         }
 
@@ -94,7 +96,14 @@ namespace _08.Bombs
             {
                 for (int col = 0; col < n; col++)
                 {
-                    Console.Write(matrix[row, col] + " ");
+                    if (col == n - 1)
+                    {
+                        Console.Write(matrix[row, col]);
+                    }
+                    else
+                    {
+                        Console.Write(matrix[row, col] + " ");
+                    }
                 }
 
                 Console.WriteLine();

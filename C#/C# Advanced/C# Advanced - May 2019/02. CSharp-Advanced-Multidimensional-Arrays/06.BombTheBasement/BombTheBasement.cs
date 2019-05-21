@@ -32,14 +32,18 @@ namespace _06.BombTheBasement
                 else
                 {
                     shift--;
-                }                
+                }
 
                 for (int col = colHit - shift; col <= colHit + shift; col++)
                 {
-                    basement[row, col] = 1;
+                    if (row >= 0 && row < rows && col >=0 && col < cols)
+                    {
+                        basement[row, col] = 1;
+                    }
                 }
-            }            
+            }
 
+            
             FallingDown(rows, cols, basement);
             Print(rows, cols, basement);
         }
@@ -54,13 +58,13 @@ namespace _06.BombTheBasement
                     {
                         for (int i = row; i > 0; i--)
                         {
-                            if (matrix[i-1, col] == 0)
+                            if (matrix[i - 1, col] == 0)
                             {
                                 matrix[i, col] = 0;
                                 matrix[i - 1, col] = 1;
                             }
                         }
-                    }   
+                    }
                 }
             }
         }
@@ -71,7 +75,7 @@ namespace _06.BombTheBasement
             {
                 for (int col = 0; col < cols; col++)
                 {
-                    Console.Write(matrix[row, col] + " ");
+                    Console.Write(matrix[row, col]);
                 }
 
                 Console.WriteLine();

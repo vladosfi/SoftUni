@@ -7,14 +7,19 @@ namespace _03.MaximalSum
     {
         static void Main(string[] args)
         {
-            int[] size = Console.ReadLine().Split().Select(int.Parse).ToArray();
+            int[] size = Console.ReadLine()
+                .Split(" ",StringSplitOptions.RemoveEmptyEntries)
+                .Select(int.Parse)
+                .ToArray();
             int rows = size[0];
             int cols = size[1];
             int[,] matrix = new int[rows, cols];
 
             for (int row = 0; row < rows; row++)
             {
-                int[] line = Console.ReadLine().Split().Select(int.Parse).ToArray();
+                int[] line = Console.ReadLine().Split(" ", StringSplitOptions.RemoveEmptyEntries)
+                    .Select(int.Parse)
+                    .ToArray();
 
                 for (int col = 0; col < cols; col++)
                 {
@@ -44,13 +49,20 @@ namespace _03.MaximalSum
                 }
             }
 
-            Console.WriteLine($"Sum {maxSum}");
+            Console.WriteLine($"Sum = {maxSum}");
 
             for (int row = maxRow; row < maxRow+3; row++)
             {
                 for (int col = maxCol; col < maxCol+3; col++)
                 {
-                    Console.Write(matrix[row,col] + " ");
+                    if (col == maxCol + 2)
+                    {
+                        Console.Write(matrix[row, col]);
+                    }
+                    else
+                    {
+                        Console.Write(matrix[row, col] + " ");
+                    }
                 }
                 Console.WriteLine();
             }

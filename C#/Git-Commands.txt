@@ -1,6 +1,0 @@
-1. git clone https://github.com/vladosfi/SoftUni
-2. git add .
-3. git commit -m "Commit all cources til 17.05.2019"
-4. git push origin master
-	master - your-branch
-5. git pull

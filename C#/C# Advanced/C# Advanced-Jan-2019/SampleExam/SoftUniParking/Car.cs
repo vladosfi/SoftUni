@@ -1,6 +1,9 @@
-﻿namespace SoftUniParking
+﻿using System;
+using System.Text;
+
+namespace SoftUniParking
 {
-    public class Car
+    public class Car : IComparable<Car>
     {
         private string make;
         private string model;
@@ -20,6 +23,18 @@
         public int HorsePower => this.horsePower;
         public string RegistrationNumber => this.registrationNumber;
 
+        public int CompareTo(Car other)
+        {
+            int resultNames = this.registrationNumber.CompareTo(other.registrationNumber);
+            return resultNames;
+        }
 
+        public override string ToString()
+        {
+            return $"Make: {this.make}" + Environment.NewLine +
+             $"Model: {this.model}" + Environment.NewLine +
+             $"HorsePower: {this.horsePower}" + Environment.NewLine +
+             $"RegistrationNumber: {this.registrationNumber}";
+        }
     }
 }

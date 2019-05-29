@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.28307.271
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "01.Hospital", "01.Hospital\01.Hospital.csproj", "{110BC4C4-D4F5-4583-B85B-093C9570FD90}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "02.Sneaking", "02.Sneaking\02.Sneaking.csproj", "{A0EA06E1-1F6F-4D28-840E-2DBAC7E35640}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "02.Sneaking", "02.Sneaking\02.Sneaking.csproj", "{A0EA06E1-1F6F-4D28-840E-2DBAC7E35640}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

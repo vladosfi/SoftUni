@@ -3,17 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.271
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "01.OddLines", "01.OddLines\01.OddLines.csproj", "{92340D89-3899-42C7-B7A1-AB30BCB7A465}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "01.OddLines", "01.OddLines\01.OddLines.csproj", "{92340D89-3899-42C7-B7A1-AB30BCB7A465}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "02.LineNumbers", "02.LineNumbers\02.LineNumbers.csproj", "{9C643DF0-526E-406E-9E44-CE14CACA7059}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "02.LineNumbers", "02.LineNumbers\02.LineNumbers.csproj", "{9C643DF0-526E-406E-9E44-CE14CACA7059}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "03.WordCount", "03.WordCount\03.WordCount.csproj", "{00B1407F-1998-4F3E-B30D-74F46A11B662}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "03.WordCount", "03.WordCount\03.WordCount.csproj", "{00B1407F-1998-4F3E-B30D-74F46A11B662}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "04.MergeFiles", "04.MergeFiles\04.MergeFiles.csproj", "{E76EFBF4-AE9E-43CD-951D-F90BA4CE0185}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "04.MergeFiles", "04.MergeFiles\04.MergeFiles.csproj", "{E76EFBF4-AE9E-43CD-951D-F90BA4CE0185}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "06.FolderSize", "06.FolderSize\06.FolderSize.csproj", "{BFD4FFB5-BB24-4BEC-8AB8-95F3D74FDA2F}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lab", "Lab", "{96683A74-B6D8-4AE3-A151-E8029951423F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "06.FolderSize", "06.FolderSize\06.FolderSize.csproj", "{BFD4FFB5-BB24-4BEC-8AB8-95F3D74FDA2F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,13 +42,6 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{92340D89-3899-42C7-B7A1-AB30BCB7A465} = {96683A74-B6D8-4AE3-A151-E8029951423F}
-		{9C643DF0-526E-406E-9E44-CE14CACA7059} = {96683A74-B6D8-4AE3-A151-E8029951423F}
-		{00B1407F-1998-4F3E-B30D-74F46A11B662} = {96683A74-B6D8-4AE3-A151-E8029951423F}
-		{E76EFBF4-AE9E-43CD-951D-F90BA4CE0185} = {96683A74-B6D8-4AE3-A151-E8029951423F}
-		{BFD4FFB5-BB24-4BEC-8AB8-95F3D74FDA2F} = {96683A74-B6D8-4AE3-A151-E8029951423F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4A2AFC8B-6DF5-4AE3-9437-1220C126BFBB}

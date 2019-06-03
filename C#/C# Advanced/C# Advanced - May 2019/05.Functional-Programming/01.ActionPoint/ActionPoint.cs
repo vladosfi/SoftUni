@@ -7,10 +7,12 @@ namespace _01.ActionPoint
     {
         static void Main()
         {
-            Console.ReadLine()
-                .Split(" ", StringSplitOptions.RemoveEmptyEntries)
-                .ToList()
-                .ForEach(Console.WriteLine);
+            Action<string[]> printNames = names =>
+                Console.WriteLine(string.Join(Environment.NewLine,names));
+
+            string[] inputNames = Console.ReadLine().Split(" ", StringSplitOptions.RemoveEmptyEntries);
+
+            printNames(inputNames);
         }
     }
 }

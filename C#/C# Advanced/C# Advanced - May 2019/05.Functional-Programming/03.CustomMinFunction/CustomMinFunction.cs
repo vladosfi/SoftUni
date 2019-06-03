@@ -7,14 +7,27 @@ namespace _03.CustomMinFunction
     {
         static void Main()
         {
-            Func<int[], int> Smallest = n => n.Min();
+            Func<int[], int> minVal = n =>
+            {
+                int minValue = int.MaxValue;
+
+                foreach (var num in n)
+                {
+                    if (minValue > num)
+                    {
+                        minValue = num;
+                    }
+                }
+
+                return minValue;
+            };
 
             int[] numbers = Console.ReadLine()
                 .Split(" ", StringSplitOptions.RemoveEmptyEntries)
                 .Select(int.Parse)
                 .ToArray();
 
-            Console.WriteLine(Smallest(numbers));
+            Console.WriteLine(minVal(numbers));
         }
 
     }

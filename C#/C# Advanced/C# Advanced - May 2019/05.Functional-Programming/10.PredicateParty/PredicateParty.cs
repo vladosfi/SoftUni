@@ -51,27 +51,25 @@ namespace _10.PredicateParty
                     doubleGuests = guests.Where(n => lengthWith(n, int.Parse(filter))).ToList();
                 }
 
-                if (command == "Remove")
+
+                for (int i = 0; i < doubleGuests.Count; i++)
                 {
-                    for (int i = 0; i < doubleGuests.Count; i++)
+                    if (command == "Remove")
                     {
                         guests.Remove(doubleGuests[i]);
                     }
-                }
-                else if (command == "Double")
-                {
-                    for (int i = 0; i < doubleGuests.Count; i++)
+                    else if (command == "Double")
                     {
                         int indexOfGuest = guests.IndexOf(doubleGuests[i]);
                         guests.Insert(indexOfGuest + 1, doubleGuests[i]);
                     }
                 }
-                
 
                 input = Console.ReadLine();
             }
 
             print(guests);
+
         }
     }
 }

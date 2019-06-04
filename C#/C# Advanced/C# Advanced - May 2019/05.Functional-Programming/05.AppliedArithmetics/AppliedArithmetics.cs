@@ -8,40 +8,45 @@ namespace _05.AppliedArithmetics
     {
         static void Main()
         {
-            List<int> numbers = Console.ReadLine()
+            Func<int, int> addOne = x => x + 1;
+
+            Func<int, int> multiplyByTwo = x => x * 2;
+
+            Func<int, int> subtractOne = x => x - 1;
+
+            Action<int[]> print = nums
+                => Console.WriteLine(string.Join(" ", nums));
+
+            int[] numbers = Console.ReadLine()
                 .Split(" ", StringSplitOptions.RemoveEmptyEntries)
                 .Select(int.Parse)
-                .ToList();
-
-            Func<List<int>, string, List<int>> ApplyArithmetics = (nums, opr) =>
-            {
-                if (opr == "add")
-                {
-                    nums = nums.Select(n => ++n).ToList();
-                }
-                else if (opr == "multiply")
-                {
-                    nums = nums.Select(n => n =n * 2).ToList();
-                }
-                else if (opr == "subtract")
-                {
-                    nums = nums.Select(n => --n).ToList();
-                }
-                else if (opr == "print")
-                {
-                    Console.WriteLine(string.Join(" ", nums));
-                }
-
-                return nums;
-            };
+                .ToArray();
 
             string command = Console.ReadLine().ToLower();
 
             while (command != "end")
             {
-                numbers = ApplyArithmetics(numbers, command);
+                if (command == "add")
+                {
+                    numbers = numbers.Select(addOne).ToArray();
+                }
+                else if (command == "multiply")
+                {
+                    numbers = numbers.Select(multiplyByTwo).ToArray();
+                }
+                else if (command == "subtract")
+                {
+                    numbers = numbers.Select(subtractOne).ToArray();
+                }
+                else if (command == "print")
+                {
+                    print(numbers);
+                }
+                
                 command = Console.ReadLine().ToLower();
             }
+
+            
         }
     }
 }

@@ -8,32 +8,28 @@ namespace _09.ListOfPredicates
     {
         static void Main()
         {
-            Func<int, int[], bool> ListOfPredicates = (int number, int[] devideNumbers) =>
-            {
-                foreach (var item in devideNumbers)
-                {
-                    if (number % item != 0)
-                    {
-                        return false;
-                    }
-                }
-                return true;
-            };
-
             int endRange = int.Parse(Console.ReadLine());
             int[] deviders = Console.ReadLine()
                 .Split(" ", StringSplitOptions.RemoveEmptyEntries)
                 .Select(int.Parse)
+                .Distinct()
                 .ToArray();
 
-            List<int> predicates = new List<int>();
+            var numbers = Enumerable.Range(1, endRange).ToList();
 
-            for (int i = 1; i <= endRange; i++)
+            List<Predicate<int>> listOfPredicates = new List<Predicate<int>>();
+
+            foreach (var devider in deviders)
             {
-                predicates.Add(i);
+                listOfPredicates.Add(x => x % devider == 0);
             }
 
-            Console.WriteLine(string.Join(" ", predicates.Where(n => ListOfPredicates(n, deviders))));
+            foreach (var currentPredicate in listOfPredicates)
+            {
+                numbers = numbers.FindAll(currentPredicate);
+            }
+
+            Console.WriteLine(string.Join(" ", numbers));
         }
     }
 }

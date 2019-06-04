@@ -8,28 +8,19 @@ namespace _10.PredicateParty
     {
         static void Main()
         {
-            Func<string, string, string, bool> RemoveFilter = (string nameToCheck, string filterType, string filter) =>
-             {
-                 if (filterType == "StartsWith" && nameToCheck.StartsWith(filter))
-                 {
-                     return false;
-                 }
-                 else if (filterType == "EndsWith" && nameToCheck.EndsWith(filter))
-                 {
-                     return false;
-                 }
-                 else if (filterType == "Lenght" && nameToCheck.Length == int.Parse(filter))
-                 {
-                     return false;
-                 }
-
-                 return true;
-             };
-
-
-            Func<List<string>, string, string, List<string>> DoubleFilter = (List<string> names, string filterType, string filter) =>
+            Func<string, string, bool> startsWith = (name, startText) => name.StartsWith(startText);
+            Func<string, string, bool> endWith = (name, startText) => name.EndsWith(startText);
+            Func<string, int, bool> lengthWith = (name, len) => name.Length == len;
+            Action<List<string>> print = guestsComming =>
             {
-
+                if (guestsComming.Count > 0)
+                {
+                    Console.WriteLine($"{string.Join(", ", guestsComming)} are going to the party!");
+                }
+                else
+                {
+                    Console.WriteLine("Nobody is going to the party!");
+                }
             };
 
             List<string> guests = Console.ReadLine()
@@ -45,17 +36,42 @@ namespace _10.PredicateParty
                 string filterType = tokens[1];
                 string filter = tokens[2];
 
+                List<string> doubleGuests = new List<string>();
+
+                if (filterType == "StartsWith")
+                {
+                    doubleGuests = guests.Where(n => startsWith(n, filter)).ToList();
+                }
+                else if (filterType == "EndsWith")
+                {
+                    doubleGuests = guests.Where(n => endWith(n, filter)).ToList();
+                }
+                else if (filterType == "Length")
+                {
+                    doubleGuests = guests.Where(n => lengthWith(n, int.Parse(filter))).ToList();
+                }
+
                 if (command == "Remove")
                 {
-                    guests = guests.Where(n => RemoveFilter(n, filterType, filter)).ToList();
+                    for (int i = 0; i < doubleGuests.Count; i++)
+                    {
+                        guests.Remove(doubleGuests[i]);
+                    }
                 }
                 else if (command == "Double")
                 {
-                    guests = DoubleFilter(guests, filterType, filter);
+                    for (int i = 0; i < doubleGuests.Count; i++)
+                    {
+                        int indexOfGuest = guests.IndexOf(doubleGuests[i]);
+                        guests.Insert(indexOfGuest + 1, doubleGuests[i]);
+                    }
                 }
+                
 
                 input = Console.ReadLine();
             }
+
+            print(guests);
         }
     }
 }

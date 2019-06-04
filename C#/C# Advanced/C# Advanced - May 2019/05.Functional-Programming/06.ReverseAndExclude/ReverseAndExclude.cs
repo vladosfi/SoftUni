@@ -10,6 +10,17 @@ namespace _06.ReverseAndExclude
         {
             Func<int,int,bool> RemoveDivisible = (n,m) => n % m != 0;
 
+            Func<List<int>, List<int>> ReverseList = nums =>
+            {
+                List<int> revercedList = new List<int>();
+
+                for (int i = nums.Count - 1; i >= 0; i--)
+                {
+                    revercedList.Add(nums[i]);
+                }
+                return revercedList;
+            };
+
             List<int> numbers = Console.ReadLine()
                 .Split(" ", StringSplitOptions.RemoveEmptyEntries)
                 .Select(int.Parse)
@@ -17,9 +28,9 @@ namespace _06.ReverseAndExclude
 
             int number = int.Parse(Console.ReadLine());
 
-            numbers = numbers.Where(x => RemoveDivisible(x, number)).Reverse().ToList();
+            numbers = numbers.Where(x => RemoveDivisible(x, number)).ToList();
 
-            Console.WriteLine(string.Join(" ", numbers));
+            Console.WriteLine(string.Join(" ", ReverseList(numbers)));
         }
 
     }

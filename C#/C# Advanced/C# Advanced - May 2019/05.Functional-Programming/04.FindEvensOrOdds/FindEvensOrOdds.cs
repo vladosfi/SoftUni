@@ -8,7 +8,16 @@ namespace _04.FindEvensOrOdds
     {
         static void Main()
         {
-            int[] bounds = Console.ReadLine()
+            Predicate<int> isEven = number 
+                => number % 2 == 0;
+
+            Predicate<int> isOdd = number 
+                => number % 2 != 0;
+
+            Action<List<int>> print = x 
+                => Console.WriteLine(string.Join(" ",x)); 
+            
+            int[] bounds = Console.ReadLine() 
                 .Split(" ", StringSplitOptions.RemoveEmptyEntries)
                 .Select(int.Parse)
                 .ToArray();
@@ -21,21 +30,16 @@ namespace _04.FindEvensOrOdds
                 numbers.Add(i);
             }
 
-            Console.WriteLine(string.Join(" ", numbers.Where(n => EvenOrOdd(n, command))));
-
-            Func<int, string, bool> Func = EvenOrOdd;
-        }
-
-        public static bool EvenOrOdd(int n, string criteria)
-        {
-            if (criteria == "odd")
+            if (command == "odd")
             {
-                return n % 2 != 0 ? true : false;
+                numbers = numbers.Where(n => isOdd(n)).ToList();
             }
             else
             {
-                return n % 2 == 0 ? true : false;
+                numbers = numbers.Where(n => isEven(n)).ToList();
             }
+
+            print(numbers);
         }
     }
 }

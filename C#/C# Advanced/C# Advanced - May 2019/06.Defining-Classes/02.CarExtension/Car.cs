@@ -21,12 +21,14 @@ namespace CarManufacturer
 
         public void Drive(double distance)
         {
-            if (this.FuelQuantity - (distance * (this.fuelConsumption / 100)) < 0)
+            if (fuelQuantity - (distance * fuelConsumption) >= 0){
+                this.FuelQuantity -= distance * this.FuelConsumption;
+            }   
+            else
             {
                 Console.WriteLine("Not enough fuel to perform this trip!");
             }
 
-            FuelQuantity -= distance * (this.fuelConsumption / 100);
         }
 
         public string WhoAmI()

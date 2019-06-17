@@ -8,13 +8,13 @@ namespace _02.Problem2
     {
         static void Main(string[] args)
         {
-            string[] vegetablesArray = Console.ReadLine().Split();
+            string[] vegetablesArray = Console.ReadLine().Split(" ",StringSplitOptions.RemoveEmptyEntries);
             string cal = Console.ReadLine();
             int[] caloriesArray = new int[0];
 
             if (cal != string.Empty)
             {
-                caloriesArray = cal.Split().Select(int.Parse).ToArray();
+                caloriesArray = cal.Split(" ", StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray();
             }
             
             Queue<string> vegetables = new Queue<string>();
@@ -46,6 +46,11 @@ namespace _02.Problem2
             {
                 string currentVegetable = vegetables.Dequeue();
 
+                if (!tableOfProducts.ContainsKey(currentVegetable))
+                {
+                    continue;
+                }
+
                 if (saladCaloriesNeeded <= 0)
                 {
                     saladCaloriesNeeded = calories.Peek() - Math.Abs(caloriesLeft);
@@ -59,7 +64,6 @@ namespace _02.Problem2
                     salads.Add(calories.Pop());
                     caloriesLeft = saladCaloriesNeeded;
                 }
-
             }
 
             if (salads.Count > 0)

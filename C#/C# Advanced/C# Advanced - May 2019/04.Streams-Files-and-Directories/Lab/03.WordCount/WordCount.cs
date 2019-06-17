@@ -7,34 +7,32 @@ namespace _03.WordCount
 {
     class WordCount
     {
-        static void Main()
+        static void Main(string[] args)
         {
-            Dictionary<string, int> words = new Dictionary<string, int>();
             string path = "Resources";
-            string filePath = Path.Combine(path, "words.txt");
+            string fileWords = Path.Combine(path, "words.txt");
+            string fileText = Path.Combine(path, "text.txt");
+            string actualResult = Path.Combine(path, "actualResult.txt");
+            string expectedResult = Path.Combine(path, "expectedResult.txt");
 
-            using (var reader = new StreamReader(filePath))
+            Dictionary<string, int> words = new Dictionary<string, int>();
+
+            using (var reader = new StreamReader(fileWords))
             {
                 while (true)
                 {
-                    string separateWord = reader.ReadLine();
+                    string word = reader.ReadLine();
 
-                    if (separateWord == null)
+                    if (word == null)
                     {
                         break;
                     }
 
-                    List<string> wordList = separateWord.Split().ToList();
-
-                    foreach (var word in wordList)
-                    {
-                        words[word] = 0;
-                    }
+                    words[word] = 0;
                 }
             }
 
-            filePath = Path.Combine(path, "Input.txt");
-            using (var reader = new StreamReader(filePath))
+            using (var reader = new StreamReader(fileText))
             {
                 while (true)
                 {
@@ -65,22 +63,18 @@ namespace _03.WordCount
                 }
             }
 
-            filePath = Path.Combine(path, "Output.txt");
-            using (var writer = new StreamWriter(filePath))
+            using (var writer = new StreamWriter(actualResult))
             {
                 foreach (var kvp in words.OrderByDescending(x => x.Value))
                 {
                     string line = $"{kvp.Key} - {kvp.Value}";
-                    //Console.WriteLine(line);
                     writer.WriteLine(line);
                 }
             }
 
-            string filePathExpected = Path.Combine(path, "expectedResult.txt");
-
-            using (var readerFileOne = new StreamReader(filePath))
+            using (var readerFileOne = new StreamReader(actualResult))
             {
-                using (var readerFileTwo = new StreamReader(filePathExpected))
+                using (var readerFileTwo = new StreamReader(expectedResult))
                 {
                     while (true)
                     {

@@ -10,7 +10,7 @@
     <None Update="Resources\expectedResult.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Resources\Input.txt">
+    <None Update="Resources\text.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Resources\words.txt">

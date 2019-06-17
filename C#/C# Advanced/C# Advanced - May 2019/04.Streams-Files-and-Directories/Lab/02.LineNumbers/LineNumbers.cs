@@ -5,12 +5,16 @@ namespace _02.LineNumbers
 {
     class LineNumbers
     {
-        static void Main()
+        static void Main(string[] args)
         {
-            using (var reader = new StreamReader(@"Resources\Input.txt"))
+            string path = "Resources";
+            string filePath = Path.Combine(path, "text.txt");
+            string fileOutputPath = Path.Combine(path, "output.txt");
+
+            using (var reader = new StreamReader(filePath))
             {
                 int counter = 1;
-                using (var writer = new StreamWriter(@"Resources\Output.txt"))
+                using (var writer = new StreamWriter(fileOutputPath))
                 {
                     while (true)
                     {

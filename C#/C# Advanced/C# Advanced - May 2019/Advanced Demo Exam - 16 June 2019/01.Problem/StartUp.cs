@@ -40,7 +40,7 @@ namespace _01.Problem
                 int col = int.Parse(tokens[2]);
 
                 if (row < 0 || row > garden.Length - 1 ||
-                    col < 0 || col > garden[row].Length -1)
+                    col < 0 || col > garden[row].Length - 1)
                 {
                     input = Console.ReadLine();
                     continue;
@@ -69,11 +69,11 @@ namespace _01.Problem
                 if (command == "mole")
                 {
                     string direction = tokens[3].ToLower();
+
                     if (garden[row][col] != ' ')
                     {
                         Move(direction, row, col, garden);
                     }
-                    
                 }
 
                 input = Console.ReadLine();
@@ -90,9 +90,9 @@ namespace _01.Problem
 
         private static void Print(char[][] garden)
         {
-            foreach (var col in garden)
+            foreach (var row in garden)
             {
-                Console.WriteLine(string.Join(" ", col));
+                Console.WriteLine(string.Join(" ", row));
             }
         }
 
@@ -102,10 +102,13 @@ namespace _01.Problem
             {
                 for (int i = row; i >= 0; i -= 2)
                 {
-                    if (CellContainsVegitable(i, col, garden))
+                    if (IsInside(i, col, garden))
                     {
-                        garden[i][col] = ' ';
-                        harmedCount++;
+                        if (CellContainsVegitable(i, col, garden))
+                        {
+                            garden[i][col] = ' ';
+                            harmedCount++;
+                        }
                     }
                 }
             }
@@ -113,10 +116,13 @@ namespace _01.Problem
             {
                 for (int i = row; i < garden.Length; i += 2)
                 {
-                    if (CellContainsVegitable(i, col, garden))
+                    if (IsInside(i, col, garden))
                     {
-                        garden[i][col] = ' ';
-                        harmedCount++;
+                        if (CellContainsVegitable(i, col, garden))
+                        {
+                            garden[i][col] = ' ';
+                            harmedCount++;
+                        }
                     }
                 }
             }
@@ -124,10 +130,13 @@ namespace _01.Problem
             {
                 for (int i = col; i >= 0; i -= 2)
                 {
-                    if (CellContainsVegitable(row, i, garden))
+                    if (IsInside(row, i, garden))
                     {
-                        garden[row][i] = ' ';
-                        harmedCount++;
+                        if (CellContainsVegitable(row, i, garden))
+                        {
+                            garden[row][i] = ' ';
+                            harmedCount++;
+                        }
                     }
                 }
             }
@@ -135,10 +144,13 @@ namespace _01.Problem
             {
                 for (int i = col; i < garden[row].Length; i += 2)
                 {
-                    if (CellContainsVegitable(row, i, garden))
+                    if (IsInside(row, i, garden))
                     {
-                        garden[row][i] = ' ';
-                        harmedCount++;
+                        if (CellContainsVegitable(row, i, garden))
+                        {
+                            garden[row][i] = ' ';
+                            harmedCount++;
+                        }
                     }
                 }
             }
@@ -152,6 +164,12 @@ namespace _01.Problem
             }
 
             return false;
+        }
+
+        private static bool IsInside(int row, int col, char[][] garden)
+        {
+            return row >= 0 && row < garden.Length
+                && col >= 0 && col < garden[row].Length;
         }
     }
 }

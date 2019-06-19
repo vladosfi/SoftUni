@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace HealthyHeaven
+﻿namespace HealthyHeaven
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
     public class Salad
     {
-        public string Name { get; set; }
+        public string Name { get; private set; }
         private List<Vegetable> products;
 
         public Salad(string name)
@@ -23,7 +22,7 @@ namespace HealthyHeaven
 
         public int GetProductCount()
         {
-            return this.products.Count;
+            return this.products.Count();
         }
 
         public void Add(Vegetable product)
@@ -34,11 +33,11 @@ namespace HealthyHeaven
         public override string ToString()
         {
             StringBuilder productInfo = new StringBuilder();
-            productInfo.AppendLine($" * Salad {this.Name} is {GetTotalCalories()} calories and have {GetProductCount()} products:");
+            productInfo.AppendLine($"* Salad {this.Name} is {GetTotalCalories()} calories and have {GetProductCount()} products:");
          
             foreach (var product in this.products)
             {
-                productInfo.AppendLine($"  - {product.Name} have {product.Calories} calories");
+                productInfo.AppendLine(product.ToString());
             }
                         
             return productInfo.ToString().TrimEnd();

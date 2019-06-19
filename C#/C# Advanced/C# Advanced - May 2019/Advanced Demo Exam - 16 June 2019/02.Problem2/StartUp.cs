@@ -8,15 +8,9 @@ namespace _02.Problem2
     {
         static void Main(string[] args)
         {
-            string[] vegetablesArray = Console.ReadLine().Split(" ",StringSplitOptions.RemoveEmptyEntries);
-            string cal = Console.ReadLine();
-            int[] caloriesArray = new int[0];
+            string[] vegetablesArray = Console.ReadLine().Split(" ", StringSplitOptions.RemoveEmptyEntries);
+            int[] caloriesArray = Console.ReadLine().Split(" ", StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray();
 
-            if (cal != string.Empty)
-            {
-                caloriesArray = cal.Split(" ", StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray();
-            }
-            
             Queue<string> vegetables = new Queue<string>();
             Stack<int> calories = new Stack<int>();
 
@@ -39,31 +33,24 @@ namespace _02.Problem2
                 ["potato"] = 215
             };
 
-
-            int saladCaloriesNeeded = 0;
-            int caloriesLeft = 0;
             while (vegetables.Any() && calories.Any())
             {
-                string currentVegetable = vegetables.Dequeue();
 
-                if (!tableOfProducts.ContainsKey(currentVegetable))
+                int saladCaloriesNeeded = calories.Peek();
+
+                while (vegetables.Any() && saladCaloriesNeeded > 0)
                 {
-                    continue;
+                    string currentVegetable = vegetables.Dequeue();
+
+                    if (!tableOfProducts.ContainsKey(currentVegetable))
+                    {
+                        continue;
+                    }
+
+                    saladCaloriesNeeded -= tableOfProducts[currentVegetable];
                 }
 
-                if (saladCaloriesNeeded <= 0)
-                {
-                    saladCaloriesNeeded = calories.Peek() - Math.Abs(caloriesLeft);
-                }
-
-                saladCaloriesNeeded -= tableOfProducts[currentVegetable];
-
-
-                if (saladCaloriesNeeded <= 0)
-                {
-                    salads.Add(calories.Pop());
-                    caloriesLeft = saladCaloriesNeeded;
-                }
+                salads.Add(calories.Pop());
             }
 
             if (salads.Count > 0)

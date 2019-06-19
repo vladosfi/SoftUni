@@ -27,7 +27,7 @@ namespace HealthyHeaven
 
             if (saladToRemove != null)
             {
-                data.Remove(saladToRemove);
+                this.data.Remove(saladToRemove);
                 return true;
             }
             return false;
@@ -35,7 +35,7 @@ namespace HealthyHeaven
 
         public Salad GetHealthiestSalad()
         {
-            Salad healthiestSalad = data.OrderBy(n => n.GetTotalCalories()).FirstOrDefault();
+            Salad healthiestSalad = this.data.OrderBy(n => n.GetTotalCalories()).FirstOrDefault();
 
             return healthiestSalad;
         }

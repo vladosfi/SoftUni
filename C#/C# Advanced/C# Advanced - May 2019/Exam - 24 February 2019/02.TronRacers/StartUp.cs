@@ -8,20 +8,40 @@ namespace _02.TronRacers
 
         static void Main(string[] args)
         {
-            int n = int.Parse(Console.ReadLine());            
+            int n = int.Parse(Console.ReadLine());
             int[] firstPalyerPosition = new int[2];
             int[] secondPalyerPosition = new int[2];
             matrix = new char[n][];
 
+            Initialize(n, firstPalyerPosition, secondPalyerPosition);
+
+            while (true)
+            {
+                string[] command = Console.ReadLine()
+                    .Split(" ", StringSplitOptions.RemoveEmptyEntries);
+
+                if (MovePlayer(command, 0, firstPalyerPosition) ||
+                    MovePlayer(command, 1, secondPalyerPosition))
+                {
+                    break;
+                }
+            }
+
+            foreach (var row in matrix)
+            {
+                Console.WriteLine(string.Join("", row));
+            }
+        }
+
+        private static void Initialize(int n, int[] firstPalyerPosition, int[] secondPalyerPosition)
+        {
             for (int row = 0; row < n; row++)
             {
-                string input = Console.ReadLine();
-                matrix[row] = new char[n];
+                char[] input = Console.ReadLine().ToCharArray();
+                matrix[row] = input;
 
                 for (int col = 0; col < n; col++)
                 {
-                    matrix[row][col] = input[col];
-
                     if (input[col] == 'f')
                     {
                         firstPalyerPosition[0] = row;
@@ -34,27 +54,6 @@ namespace _02.TronRacers
                     }
                 }
             }
-
-
-            while (true)
-            {
-
-                string[] command = Console.ReadLine()
-                    .Split(" ", StringSplitOptions.RemoveEmptyEntries);
-
-                if (MovePlayer(command, 0, firstPalyerPosition) ||
-                    MovePlayer(command, 1, secondPalyerPosition))
-                {
-                    break;
-                }
-            }
-
-            
-            foreach (var row in matrix)
-            {
-                Console.WriteLine(string.Join("", row));
-            }
-
         }
 
         private static bool MovePlayer(string[] command, int player, int[] playerPosition)
@@ -64,84 +63,51 @@ namespace _02.TronRacers
             int col = playerPosition[1];
             char playerSymbol = matrix[row][col];
 
-            switch (command[player])
+            if (command[player] == "up")
             {
-                case "up":
+                playerPosition[0]--;
 
-                    playerPosition[0]--;
+                if (GoesOut(playerPosition))
+                {
+                    playerPosition[0] = matrix.Length - 1;
+                }
+            }
+            else if (command[player] == "down")
+            {
+                playerPosition[0]++;
 
-                    if (GoesOut(playerPosition))
-                    {
-                        playerPosition[0] = matrix.Length - 1;
-                    }
+                if (GoesOut(playerPosition))
+                {
+                    playerPosition[0] = 0;
+                }
+            }
+            else if (command[player] == "left")
+            {
+                playerPosition[1]--;
 
-                    if (IsDead(playerPosition))
-                    {
-                        matrix[playerPosition[0]][playerPosition[1]] = 'x';
-                        isPlayerDead = true;
-                    }
-                    else
-                    {
-                        matrix[playerPosition[0]][playerPosition[1]] = playerSymbol;
-                    }                    
-                    break;
-                case "down":
+                if (GoesOut(playerPosition))
+                {
+                    playerPosition[1] = matrix[playerPosition[0]].Length - 1;
+                }
+            }
+            else if (command[player] == "right")
+            {
+                playerPosition[1]++;
 
-                    playerPosition[0]++;
+                if (GoesOut(playerPosition))
+                {
+                    playerPosition[1] = 0;
+                }
+            }
 
-                    if (GoesOut(playerPosition))
-                    {
-                        playerPosition[0] = 0;
-                    }
-
-                    if (IsDead(playerPosition))
-                    {
-                        matrix[playerPosition[0]][playerPosition[1]] = 'x';
-                        isPlayerDead = true;
-                    }
-                    else
-                    {
-                        matrix[playerPosition[0]][playerPosition[1]] = playerSymbol;
-                    }
-                    break;
-                case "left":
-                    playerPosition[1]--;
-
-                    if (GoesOut(playerPosition))
-                    {
-                        playerPosition[1] = matrix[playerPosition[0]].Length - 1;
-                    }
-
-                    if (IsDead(playerPosition))
-                    {
-                        matrix[playerPosition[0]][playerPosition[1]] = 'x';
-                        isPlayerDead = true;
-                    }
-                    else
-                    {
-                        matrix[playerPosition[0]][playerPosition[1]] = playerSymbol;
-                    }
-                    break;
-                case "right":
-                    playerPosition[1]++;
-
-                    if (GoesOut(playerPosition))
-                    {
-                        playerPosition[1] = 0;
-                    }
-
-                    if (IsDead(playerPosition))
-                    {
-                        matrix[playerPosition[0]][playerPosition[1]] = 'x';
-                        isPlayerDead = true;
-                    }
-                    else
-                    {
-                        matrix[playerPosition[0]][playerPosition[1]] = playerSymbol;
-                    }
-                    break;
-                default:
-                    break;
+            if (IsDead(playerPosition))
+            {
+                matrix[playerPosition[0]][playerPosition[1]] = 'x';
+                isPlayerDead = true;
+            }
+            else
+            {
+                matrix[playerPosition[0]][playerPosition[1]] = playerSymbol;
             }
 
             return isPlayerDead;

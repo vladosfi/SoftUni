@@ -20,17 +20,25 @@ namespace _01.TrojanInvasion
 
             int waveCounter = 0;
 
-            while (plates.Count > 0)
+
+            for (int i = 0; i < waves; i++)
             {
+                waveCounter++;
+
                 int[] trojansData = Console.ReadLine()
-                    .Split(" ", StringSplitOptions.RemoveEmptyEntries)
-                    .Select(int.Parse)
-                    .ToArray();
+                .Split(" ", StringSplitOptions.RemoveEmptyEntries)
+                .Select(int.Parse)
+                .ToArray();
+
+                if (trojanWarriors.Count > 0)
+                {
+                    break;
+                }
 
                 trojanWarriors = new Stack<int>(trojansData);
 
-                while (trojanWarriors.Count > 0)
-                {                    
+                while (plates.Count > 0 && trojanWarriors.Count > 0)
+                {
                     int warior = trojanWarriors.Pop();
                     int plate = plates.Dequeue();
 
@@ -50,11 +58,14 @@ namespace _01.TrojanInvasion
                         if (paleteValue > 0)
                         {
                             plates.Enqueue(paleteValue);
+
+                            for (int j = 1; j < plates.Count; j++)
+                            {
+                                plates.Enqueue(plates.Dequeue());
+                            }                            
                         }
                     }
                 }
-
-                waveCounter++;
 
                 if (waveCounter % 3 == 0)
                 {
@@ -64,7 +75,7 @@ namespace _01.TrojanInvasion
                 }
             }
 
-            if (trojanWarriors.Count>0)
+            if (trojanWarriors.Count > 0)
             {
                 Console.WriteLine("The Trojans successfully destroyed the Spartan defense.");
                 Console.WriteLine($"Warriors left: {string.Join(", ", trojanWarriors)}");
@@ -74,9 +85,6 @@ namespace _01.TrojanInvasion
                 Console.WriteLine("The Spartans successfully repulsed the Trojan attack.");
                 Console.WriteLine($"Plates left: {string.Join(", ", plates)}");
             }
-
-
-
         }
     }
 }

@@ -1,0 +1,32 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace SpaceStationRecruitment
+{
+    public class Astronaut
+    {
+        public Astronaut(string name, int age, string country)
+        {
+            this.Name = name;
+            this.Age = age;
+            this.Country = country;
+        }
+
+        public string Name { get; set; }
+
+        public int Age { get; set; }
+
+        public string Country { get; set; }
+
+
+        public override string ToString()
+        {
+            StringBuilder astronaut = new StringBuilder();
+
+            astronaut.AppendLine($"Astronaut: {this.Name}, {this.Age} ({this.Country})");
+
+            return astronaut.ToString().TrimEnd();
+        }
+    }
+}

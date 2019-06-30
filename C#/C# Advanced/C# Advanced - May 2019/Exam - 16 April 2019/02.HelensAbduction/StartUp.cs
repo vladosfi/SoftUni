@@ -1,156 +1,90 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
-namespace _02.HelensAbduction
+namespace _01.TrojanInvasion
 {
     class StartUp
     {
         static void Main(string[] args)
         {
-            int parisEnergy = int.Parse(Console.ReadLine());
-            int n = int.Parse(Console.ReadLine());
-            char[][] spartaField = new char[n][];
-            int parisRow = 0;
-            int parisCol = 0;
-            bool abductedHelen = true;
+            int waves = int.Parse(Console.ReadLine());
 
-            for (int i = 0; i < n; i++)
+            int[] platesData = Console.ReadLine()
+                .Split(" ", StringSplitOptions.RemoveEmptyEntries)
+                .Select(int.Parse)
+                .ToArray();
+            Queue<int> plates = new Queue<int>(platesData);
+
+            Stack<int> trojanWarriors = new Stack<int>();
+
+            int waveCounter = 0;
+
+
+            for (int i = 0; i < waves; i++)
             {
-                char[] inputField = Console.ReadLine().ToCharArray();
-                spartaField[i] = new char[inputField.Length];
+                waveCounter++;
 
-                for (int j = 0; j < inputField.Length; j++)
+                int[] trojansData = Console.ReadLine()
+                .Split(" ", StringSplitOptions.RemoveEmptyEntries)
+                .Select(int.Parse)
+                .ToArray();
+
+                if (trojanWarriors.Count > 0)
                 {
-                    spartaField[i][j] = inputField[j];
-
-                    if (inputField[j] == 'P')
-                    {
-                        parisRow = i;
-                        parisCol = j;
-                    }
-                }
-            }
-
-            while (true)
-            {
-                string[] tokens = Console.ReadLine().Split();
-                string moveDirection = tokens[0];
-                int spawnsRow = int.Parse(tokens[1]);
-                int spawnsCol = int.Parse(tokens[2]);
-
-                //set indices
-                if (InsideMatrix(spartaField, spawnsRow, spawnsCol))
-                {
-                    spartaField[spawnsRow][spawnsCol] = 'S';
-                }
-
-                parisEnergy--;
-                spartaField[parisRow][parisCol] = '-';
-
-                if (moveDirection == "up" && 
-                    InsideMatrix(spartaField, parisRow - 1, parisCol))
-                {
-                    parisRow--;
-
-                    if (spartaField[parisRow][parisCol] == 'S')
-                    {
-                        parisEnergy -= 2;
-                    }
-                    else if (spartaField[parisRow][parisCol] == 'H')
-                    {
-                        spartaField[parisRow][parisCol] = '-';
-                        break;
-                    }
-
-                    spartaField[parisRow][parisCol] = 'P';
-                }
-                else if (moveDirection == "down" && 
-                    InsideMatrix(spartaField, parisRow + 1, parisCol))
-                {
-                    parisRow++;
-
-                    if (spartaField[parisRow][parisCol] == 'S')
-                    {
-                        parisEnergy -= 2;
-                    }
-                    else if (spartaField[parisRow][parisCol] == 'H')
-                    {
-                        spartaField[parisRow][parisCol] = '-';
-                        break;
-                    }
-
-                    spartaField[parisRow][parisCol] = 'P';
-                }
-                else if (moveDirection == "left" && 
-                    InsideMatrix(spartaField, parisRow, parisCol - 1))
-                {
-                    parisCol--;
-
-                    if (spartaField[parisRow][parisCol] == 'S')
-                    {
-                        parisEnergy -= 2;
-                    }
-                    else if (spartaField[parisRow][parisCol] == 'H')
-                    {
-                        spartaField[parisRow][parisCol] = '-';
-                        break;
-                    }
-
-                    spartaField[parisRow][parisCol] = 'P';
-
-                }
-                else if (moveDirection == "right" && 
-                    InsideMatrix(spartaField, parisRow, parisCol + 1))
-                {
-                    parisCol++;
-
-                    if (spartaField[parisRow][parisCol] == 'S')
-                    {
-                        parisEnergy -= 2;
-                    }
-                    else if (spartaField[parisRow][parisCol] == 'H')
-                    {
-                        spartaField[parisRow][parisCol] = '-';
-                        break;
-                    }
-
-                    spartaField[parisRow][parisCol] = 'P';
-                }
-
-                if (parisEnergy <= 0)
-                {
-                    spartaField[parisRow][parisCol] = 'X';
-                    abductedHelen = false;
                     break;
                 }
+
+                trojanWarriors = new Stack<int>(trojansData);
+
+                while (plates.Count > 0 && trojanWarriors.Count > 0)
+                {
+                    int warior = trojanWarriors.Pop();
+                    int plate = plates.Dequeue();
+
+                    if (warior > plate)
+                    {
+                        int wariorValue = warior - plate;
+
+                        if (wariorValue > 0)
+                        {
+                            trojanWarriors.Push(wariorValue);
+                        }
+                    }
+                    else if (plate > warior)
+                    {
+                        int paleteValue = plate - warior;
+
+                        if (paleteValue > 0)
+                        {
+                            plates.Enqueue(paleteValue);
+
+                            for (int j = 1; j < plates.Count; j++)
+                            {
+                                plates.Enqueue(plates.Dequeue());
+                            }
+                        }
+                    }
+                }
+
+                if (waveCounter % 3 == 0)
+                {
+                    int extraPlate = int.Parse(Console.ReadLine());
+                    plates.Enqueue(extraPlate);
+                    waveCounter = 0;
+                }
             }
 
-            if (abductedHelen)
+            if (trojanWarriors.Count > 0)
             {
-                Console.WriteLine($"Paris has successfully abducted Helen! Energy left: {parisEnergy}");
+                Console.WriteLine("The Trojans successfully destroyed the Spartan defense.");
+                Console.WriteLine($"Warriors left: {string.Join(", ", trojanWarriors)}");
             }
             else
             {
-                Console.WriteLine($"Paris died at {parisRow};{parisCol}.");
+                Console.WriteLine("The Spartans successfully repulsed the Trojan attack.");
+                Console.WriteLine($"Plates left: {string.Join(", ", plates)}");
             }
-
-            foreach (var row in spartaField)
-            {
-                Console.WriteLine(string.Join("", row));
-            }
-        }
-
-        private static bool InsideMatrix(char[][] spartaField, int parisRow, int parisCol)
-        {
-            bool result = false;
-            if (parisRow >= 0 &&
-                    parisCol >= 0 &&
-                    parisRow < spartaField.Length &&
-                    parisCol < spartaField[parisRow].Length)
-            {
-                result = true;
-            }
-
-            return result;
         }
     }
 }

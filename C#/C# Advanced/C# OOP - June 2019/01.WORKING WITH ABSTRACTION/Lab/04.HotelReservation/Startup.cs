@@ -14,6 +14,8 @@ namespace HotelReservation
             int numberOfDays = int.Parse(reservationInfo[1]);
             Enum.TryParse(reservationInfo[2], out Season season);
             DiscountType discountType = DiscountType.None;
+
+            //var seasonTest = Enum.Parse<Season>(reservationInfo[2], ignoreCase: true);
             
             if (reservationInfo.Length == 4)
             {

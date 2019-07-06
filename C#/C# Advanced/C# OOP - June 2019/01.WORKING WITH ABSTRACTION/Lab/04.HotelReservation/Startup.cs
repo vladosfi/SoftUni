@@ -3,7 +3,7 @@ using System.Threading;
 
 namespace HotelReservation
 {
-    class Startup
+    public class Startup
     {
         static void Main(string[] args)
         {

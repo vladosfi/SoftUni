@@ -7,8 +7,12 @@ namespace Farm
         static void Main()
         {
             Dog dog = new Dog();
-            dog.Bark();
             dog.Eat();
+            dog.Bark();
+
+            Cat cat = new Cat();
+            cat.Eat();
+            cat.Meow();
 
         }
     }

@@ -1,6 +1,7 @@
 ﻿using System;
+using ShoppingSpree.Exceptions;
 
-namespace ShoppingSpree
+namespace ShoppingSpree.Models
 {
     public class Product
     {
@@ -21,9 +22,9 @@ namespace ShoppingSpree
             }
             private set
             {
-                if (String.IsNullOrEmpty(value))
+                if (String.IsNullOrWhiteSpace(value))
                 {
-                    throw new ArgumentException("Name cannot be empty");
+                    throw new ArgumentException(ExceptionMessages.NullOrEmptyNameException);
                 }
                 this.name = value;
             }
@@ -39,7 +40,7 @@ namespace ShoppingSpree
             {
                 if (value <= 0)
                 {
-                    throw new ArgumentException("Price cannot be zero or negative");
+                    throw new ArgumentException(ExceptionMessages.MoneyCannotBeNegativeException);
                 }
                 this.cost = value;
             }

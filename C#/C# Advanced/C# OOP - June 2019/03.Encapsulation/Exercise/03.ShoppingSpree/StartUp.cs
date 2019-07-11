@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using ShoppingSpree.Models;
 
 namespace ShoppingSpree
 {
-    public class Program
+    public class StartUp
     {
         static void Main()
         {
@@ -12,8 +13,8 @@ namespace ShoppingSpree
 
             try
             {
-                persons = Console.ReadLine().Split(';').ToList()
-                    .Select(t => t.Split('='))
+                persons = Console.ReadLine().Split(';', StringSplitOptions.RemoveEmptyEntries).ToList()
+                    .Select(t => t.Split('=', StringSplitOptions.RemoveEmptyEntries))
                     .Select(p => new Person(p[0], decimal.Parse(p[1])))
                     .ToList();
             }
@@ -23,27 +24,23 @@ namespace ShoppingSpree
                 return;
             }
 
-
-            string[] inpitProducts = Console.ReadLine().Split(";", StringSplitOptions.RemoveEmptyEntries);
             List<Product> products = new List<Product>();
 
-            foreach (var productNameAndCost in inpitProducts)
+            try
             {
-                string[] token = productNameAndCost.Split('=', StringSplitOptions.RemoveEmptyEntries);
-                string productName = token[0];
-                decimal productCost = decimal.Parse(token[1]);
-
-                try
-                {
-                    Product product = new Product(productName, productCost);
-                    products.Add(product);
-                }
-                catch (ArgumentException ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    return;
-                }                
+                products = Console.ReadLine()
+                    .Split(";",StringSplitOptions.RemoveEmptyEntries)
+                    .ToList()
+                    .Select(l => l.Split('=', StringSplitOptions.RemoveEmptyEntries))
+                    .Select(p => new Product(p[0], decimal.Parse(p[1])))
+                    .ToList();
             }
+            catch (ArgumentException ex)
+            {
+                Console.WriteLine(ex.Message);
+                return;
+            }
+
 
             string inputByParams = Console.ReadLine();
 
@@ -62,6 +59,10 @@ namespace ShoppingSpree
                     Console.WriteLine($"{person.Name} bought {product.Name}");
                 }
                 catch (ArgumentException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+                catch (InvalidOperationException ex)
                 {
                     Console.WriteLine(ex.Message);
                 }

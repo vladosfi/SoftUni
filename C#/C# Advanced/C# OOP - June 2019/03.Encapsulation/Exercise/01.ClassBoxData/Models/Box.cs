@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using ClassBoxData.Exceptions;
 
 namespace ClassBoxData.Models
@@ -26,7 +27,7 @@ namespace ClassBoxData.Models
             }
             private set
             {
-                if (value < 1)
+                if (value <= 0)
                 {
                     throw new ArgumentException(ExceptionMessages.LenghtZeroOrNegativeException);
                 }
@@ -43,7 +44,7 @@ namespace ClassBoxData.Models
             }
             private set
             {
-                if (value < 1)
+                if (value <= 0)
                 {
                     throw new ArgumentException(ExceptionMessages.WidthZeroOrNegativeException);
                 }
@@ -60,7 +61,7 @@ namespace ClassBoxData.Models
             }
             private set
             {
-                if (value < 1)
+                if (value <= 0)
                 {
                     throw new ArgumentException(ExceptionMessages.HeightZeroOrNegativeException);
                 }
@@ -89,6 +90,17 @@ namespace ClassBoxData.Models
             double volume = this.Lenght * this.Width * this.Height;
 
             return volume;
+        }
+
+        public override string ToString()
+        {
+            StringBuilder result = new StringBuilder();
+
+            result.AppendLine($"Surface Area - {this.SurfaceArea():f2}");
+            result.AppendLine($"Lateral Surface Area - {this.LateralSurfaceArea():f2}");
+            result.AppendLine($"Volume - {this.Volume():f2}");
+
+            return result.ToString().TrimEnd(); 
         }
     }
 }

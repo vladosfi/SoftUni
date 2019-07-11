@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using ShoppingSpree.Exceptions;
 
-namespace ShoppingSpree
+namespace ShoppingSpree.Models
 {
     public class Person
     {
@@ -16,14 +17,6 @@ namespace ShoppingSpree
             bagOfProducts = new List<Product>();
         }
 
-        public IReadOnlyList<Product> BagOfProducts
-        {
-            get
-            {
-                return this.bagOfProducts.AsReadOnly();
-            }            
-        }
-
         public string Name
         {
             get
@@ -33,9 +26,9 @@ namespace ShoppingSpree
 
             private set
             {
-                if (value == string.Empty)
+                if (string.IsNullOrWhiteSpace(value))
                 {
-                    throw new ArgumentException("Name cannot be empty");
+                    throw new ArgumentException(ExceptionMessages.NullOrEmptyNameException);
                 }
                 this.name = value;
             }
@@ -52,7 +45,7 @@ namespace ShoppingSpree
             {
                 if (value < 0)
                 {
-                    throw new ArgumentException("Money cannot be negative");
+                    throw new ArgumentException(ExceptionMessages.MoneyCannotBeNegativeException);
                 }
 
                 this.money = value;
@@ -61,24 +54,27 @@ namespace ShoppingSpree
 
         public void BuyProduct(Product product)
         {
-            if (this.Money - product.Cost < 0)
+            decimal moneyLeft = this.Money - product.Cost;
+
+            if (moneyLeft < 0)
             {
-                throw new ArgumentException($"{this.Name} can't afford {product.Name}");
+                throw new InvalidOperationException(
+                    string.Format(ExceptionMessages.CannotAffordAProductException, this.Name, product.Name));   
             }
 
-            this.Money -= product.Cost;
+            this.Money = moneyLeft;
 
             this.bagOfProducts.Add(product);
         }
 
         public override string ToString()
         {
-            if (this.BagOfProducts.Count <= 0)
+            if (this.bagOfProducts.Count <= 0)
             {
                 return $"{this.Name} - Nothing bought";
             }
 
-            return $"{this.Name} - {string.Join(", ", this.BagOfProducts)}";
+            return $"{this.Name} - {string.Join(", ", this.bagOfProducts)}";
         }
     }
 }

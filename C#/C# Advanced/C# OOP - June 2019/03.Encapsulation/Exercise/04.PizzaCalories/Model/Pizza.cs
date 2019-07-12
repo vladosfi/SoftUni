@@ -1,22 +1,24 @@
-﻿using PizzaCalories.Exceptions;
-using PizzaCalories.Model.Ingredient;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿
 
 namespace PizzaCalories.Model
 {
+    using PizzaCalories.Exceptions;
+    using PizzaCalories.Model.Ingredient;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
     public class Pizza
     {
         private string name;
         private Dough dough;
         private List<Topping> toppings;
 
-        public Pizza(string name, Dough dough, List<Topping> toppings)
+        public Pizza(string name, Dough dough)
         {
             this.Name = name;
-            this.Dough = dough;
-            this.Toppings = toppings;
+            this.dough = dough;
+            this.toppings = new List<Topping>();
         }
 
         public string Name
@@ -27,7 +29,7 @@ namespace PizzaCalories.Model
             }
             private set
             {
-                if (string.IsNullOrEmpty(value))
+                if (value.Length < 1 || value.Length > 15)
                 {
                     throw new ArgumentException(ExceptionMessages.InvalidPizzaNameException);
                 }
@@ -36,40 +38,20 @@ namespace PizzaCalories.Model
             }
         }
 
-        public Dough Dough
+        public void AddTopping(Topping topping)
         {
-            get
+            if (this.ToppingCount > 10)
             {
-                return this.dough;
+                throw new ArgumentException(ExceptionMessages.ToppingOutOfRangeException);
             }
 
-            private set
-            {
-                this.dough = value;
-            }
+            this.toppings.Add(topping);
         }
 
-        public List<Topping> Toppings
-        {
-            get
-            {
-                return this.toppings;
-            }
-            private set
-            {
-                if (value.Count > 10)
-                {
-                    throw new ArgumentException(ExceptionMessages.ToppingOutOfRangeException);
-                }
+        public int ToppingCount => this.toppings.Count;
 
-                this.toppings = new List<Topping>(value);
-            }
-        }
-
-        private int numberOfToppings => this.toppings.Count;
-
-        private double TotalCalories 
-            => this.dough.TotalCalories() + this.toppings.Sum(t => t.TotalCalories());
+        private double TotalCalories
+            => this.dough.CalculateCalories() + this.toppings.Sum(t => t.CalculateCalories());
 
         public override string ToString()
         {

@@ -8,50 +8,43 @@
 
     public class Engine
     {
-        List<Topping> toppings;
-
-        public Engine()
-        {
-            toppings = new List<Topping>();
-        }
-
         public void Run()
         {
+            string pizzaName = string.Empty;
+
             try
             {
-                string[] pizzaInfo = Console.ReadLine().Split(" ");
-                string pizzaName = pizzaInfo[1];
+                pizzaName = GetPizzaName();
+            }
+            catch (ArgumentException ae)
+            {
+                Console.WriteLine(ae.Message);
+            }
 
-                string inputTokens = Console.ReadLine();
-                Dough dough = new Dough();
+            try
+            {
+                string command = Console.ReadLine();
+                string[] doughTokens = command.Split(" ", StringSplitOptions.RemoveEmptyEntries);
+                string flourType = doughTokens[1];
+                string bakingTechnique = doughTokens[2];
+                double weight = double.Parse(doughTokens[3]);
 
-                while (inputTokens != "END")
+                Dough dough = new Dough(flourType, bakingTechnique, weight);
+                Pizza pizza = new Pizza(pizzaName, dough);
+
+                command = Console.ReadLine();
+
+                while (command != "END")
                 {
-                    string[] commandTokens = inputTokens.Split(" ", StringSplitOptions.RemoveEmptyEntries);
-                    string ingredientName = commandTokens[0];
+                    string[] toppingTokens = command.Split(" ", StringSplitOptions.RemoveEmptyEntries);
+                    string toppingType = toppingTokens[1];
+                    double weightTopping = double.Parse(toppingTokens[2]);
+                    Topping topping = new Topping(toppingType, weightTopping);
 
-                    if (ingredientName == "Dough")
-                    {
-                        string flourType = commandTokens[1];
-                        string bakingTechnique = commandTokens[2];
-                        int weight = int.Parse(commandTokens[3]);
+                    pizza.AddTopping(topping);
 
-                        dough = new Dough(flourType, bakingTechnique, weight);
-                    }
-                    else if (ingredientName == "Topping")
-                    {
-                        string toppingType = commandTokens[1];
-                        int weight = int.Parse(commandTokens[2]);
-
-                        Topping topping = new Topping(toppingType, weight);
-
-                        toppings.Add(topping);
-                    }
-
-                    inputTokens = Console.ReadLine();
+                    command = Console.ReadLine();
                 }
-
-                Pizza pizza = new Pizza(pizzaName, dough, toppings);
 
                 Console.WriteLine(pizza);
             }
@@ -62,7 +55,14 @@
             catch (ArgumentException ae)
             {
                 Console.WriteLine(ae.Message);
-            }
+            }       
+        }
+
+        private string GetPizzaName()
+        {
+            string[] pizzaInfo = Console.ReadLine().Split(" ");
+            string pizzaName = pizzaInfo[1];
+            return pizzaName;
         }
     }
 }

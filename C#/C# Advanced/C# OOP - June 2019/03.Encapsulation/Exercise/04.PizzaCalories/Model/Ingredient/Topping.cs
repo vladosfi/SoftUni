@@ -1,21 +1,21 @@
-﻿using PizzaCalories.Exceptions;
-using System;
-
-namespace PizzaCalories.Model.Ingredient
+﻿namespace PizzaCalories.Model.Ingredient
 {
+    using System;
+    using System.Collections.Generic;
+    using PizzaCalories.Exceptions;
+
     public class Topping
     {
-        private int weight;
+        private double weight;
         private string toppingType;
         private const int baseCaloriesPerGram = 2;
-        private const double meatModifier = 1.2;
-        private const double veggiesModifier = 0.8;
-        private const double cheeseModifier = 1.1;
-        private const double sauceModifier = 0.9;
 
+        private Dictionary<string, double> validToppingType;
 
-        public Topping(string toppingType, int weight)
+        public Topping(string toppingType, double weight)
         {
+            this.validToppingType = new Dictionary<string, double>();
+            this.SeedToppingType();
             this.ToppingType = toppingType;
             this.Weight = weight;
         }
@@ -28,16 +28,17 @@ namespace PizzaCalories.Model.Ingredient
             }
             private set
             {
-                if (!Enum.TryParse(value.ToLower(), out ToppingType validToppingType))
+                if (!this.validToppingType.ContainsKey(value.ToLower()))
                 {
                     throw new InvalidOperationException(
                         string.Format(ExceptionMessages.InvalidTypeOfToppingException, value));
                 }
 
-                this.toppingType = value;
+                this.toppingType = value; 
             }
         }
-        public int Weight
+
+        public double Weight
         {
             get
             {
@@ -55,30 +56,17 @@ namespace PizzaCalories.Model.Ingredient
             }
         }
 
-
-        public double TotalCalories()
+        public double CalculateCalories()
         {
-            double totalCalories = (baseCaloriesPerGram * this.Weight);
+            return (baseCaloriesPerGram * this.Weight) * this.validToppingType[this.ToppingType.ToLower()];
+        }
 
-            switch (this.ToppingType.ToLower())
-            {
-                case "meat":
-                    totalCalories *= meatModifier;
-                    break;
-                case "veggies":
-                    totalCalories *= veggiesModifier;
-                    break;
-                case "cheese":
-                    totalCalories *= cheeseModifier;
-                    break;
-                case "sauce":
-                    totalCalories *= sauceModifier;
-                    break;
-                default:
-                    break;
-            }
-
-            return totalCalories;
+        private void SeedToppingType()
+        {
+            this.validToppingType.Add("meat", 1.2);
+            this.validToppingType.Add("veggies", 0.8);
+            this.validToppingType.Add("cheese", 1.1);
+            this.validToppingType.Add("sauce", 0.9);
         }
     }
 }

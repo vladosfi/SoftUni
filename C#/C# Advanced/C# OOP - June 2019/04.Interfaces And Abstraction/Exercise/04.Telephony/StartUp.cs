@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace _04.Telephony
+namespace Telephony
 {
     public class StartUp
     {
@@ -9,16 +9,25 @@ namespace _04.Telephony
             string[] phoneNumbers = Console.ReadLine().Split();
             string[] sites = Console.ReadLine().Split();
 
-            ICall smartphone = new Smartphone();
+            Smartphone smartphone = new Smartphone();
 
-            foreach (var number in phoneNumbers)
-            {
-                Console.WriteLine(smartphone.Calling(number));
-            }
+            CallPhoneNumbers(phoneNumbers, smartphone);
+            BrowseSites(sites, smartphone);
+        }
 
+        private static void BrowseSites(string[] sites, Smartphone smartphone)
+        {
             foreach (var site in sites)
             {
                 Console.WriteLine(smartphone.Browsing(site));
+            }
+        }
+
+        private static void CallPhoneNumbers(string[] phoneNumbers, Smartphone smartphone)
+        {
+            foreach (var number in phoneNumbers)
+            {
+                Console.WriteLine(smartphone.Calling(number));
             }
         }
     }

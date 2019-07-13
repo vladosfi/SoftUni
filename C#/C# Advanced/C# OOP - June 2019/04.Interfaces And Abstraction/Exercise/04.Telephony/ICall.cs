@@ -1,4 +1,4 @@
-﻿namespace _04.Telephony
+﻿namespace Telephony
 {
     public interface ICall
     {

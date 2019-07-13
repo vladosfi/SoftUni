@@ -1,4 +1,7 @@
-﻿namespace _04.Telephony
+﻿using System;
+using System.Linq;
+
+namespace Telephony
 {
     public class Smartphone : ICall, IBrowse
     {
@@ -8,18 +11,18 @@
             {
                 if (char.IsDigit(symbol))
                 {
-                    return $"Invalid URL!";
+                    return "Invalid URL!";
                 }
             }
 
-            return $"Browsing: {site}!";            
+            return $"Browsing: {site}!";
         }
 
         public string Calling(string phoneNumber)
         {
             foreach (var symbol in phoneNumber)
             {
-                if (char.IsLetter(symbol))
+                if (!phoneNumber.All(c => char.IsNumber(c)))
                 {
                     return "Invalid number!";
                 }

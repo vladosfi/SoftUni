@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BirthdayCelebrations
+namespace FoodShortage
 {
     public class ConsoleDataReader : IDataReader
     {

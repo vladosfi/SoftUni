@@ -1,9 +1,9 @@
 ﻿namespace FoodShortage
 {
-    public interface IBirthdate
+    public interface ICitizen : IBuyer
     {
         string Name { get; }
 
-        string Birthdate { get; }
+        int Age { get; }
     }
 }

@@ -3,8 +3,12 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <RootNamespace>FoodShortage</RootNamespace>
-    <AssemblyName>FoodShortage</AssemblyName>
+    <RootNamespace>MilitaryElite</RootNamespace>
+    <AssemblyName>MilitaryElite</AssemblyName>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
 
 </Project>

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System;
 
-namespace BirthdayCelebrations
+namespace FoodShortage
 {
     public class Engine
     {

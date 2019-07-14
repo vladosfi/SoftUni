@@ -1,4 +1,4 @@
-﻿namespace BirthdayCelebrations
+﻿namespace FoodShortage
 {
     public class StartUp
     {

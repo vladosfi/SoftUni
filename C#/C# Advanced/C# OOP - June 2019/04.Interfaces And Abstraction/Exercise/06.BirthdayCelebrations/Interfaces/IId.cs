@@ -1,6 +1,6 @@
 ﻿namespace BirthdayCelebrations
 {
-    public interface IIdentifiable
+    public interface IId
     {
         string Id { get; }
     }

@@ -1,4 +1,4 @@
-﻿namespace PersonInfo
+﻿namespace BirthdayCelebrations
 {
     public interface IPerson
     {

@@ -1,7 +1,9 @@
 ﻿namespace BirthdayCelebrations
 {
-    public interface IBirthable
+    public interface IBirthdate
     {
+        string Name { get; }
+
         string Birthdate { get; }
     }
 }

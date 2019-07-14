@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PersonInfo
+namespace BirthdayCelebrations
 {
     public class StartUp
     {

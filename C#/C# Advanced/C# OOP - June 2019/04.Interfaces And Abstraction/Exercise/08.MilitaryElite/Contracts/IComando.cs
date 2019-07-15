@@ -6,6 +6,6 @@ namespace MilitaryElite
     {
         IReadOnlyCollection<IMission> Missions { get; }
 
-        void CompleteMission(IMission mission);
+        void AddMission(IMission mission);
     }
 }

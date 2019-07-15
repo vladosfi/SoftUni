@@ -6,6 +6,6 @@
 
         State State { get; }
 
-        void CompleteMission(IMission mission);
+        void CompleteMission();
     }
 }

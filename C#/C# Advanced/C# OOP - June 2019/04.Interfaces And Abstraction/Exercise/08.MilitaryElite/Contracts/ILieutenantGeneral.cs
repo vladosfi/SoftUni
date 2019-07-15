@@ -6,6 +6,6 @@ namespace MilitaryElite
     {
         IReadOnlyCollection<ISoldier> Privates { get; }
 
-        void AddPrivate(IPrivate @private);
+        void AddPrivate(ISoldier @private);
     }
 }

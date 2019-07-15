@@ -7,8 +7,4 @@
     <AssemblyName>MilitaryElite</AssemblyName>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
-
 </Project>

@@ -9,7 +9,7 @@ namespace MilitaryElite
             this.CodeName = codeName;
             ParseState(state);
         }
-        
+
         public string CodeName { get; private set; }
 
         public State State { get; private set; }
@@ -18,7 +18,7 @@ namespace MilitaryElite
         {
             if (this.State == State.Finished)
             {
-                throw new InvalidMissionCompletionException();    
+                throw new InvalidMissionCompletionException();
             }
 
             this.State = State.Finished;

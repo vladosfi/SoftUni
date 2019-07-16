@@ -16,7 +16,7 @@ namespace MilitaryElite
         {
             return base.ToString().TrimEnd()
                 + Environment.NewLine 
-                + $"Code Number {this.CodeNumber}";
+                + $"Code Number: {this.CodeNumber}";
         }
     }
 }

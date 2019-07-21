@@ -8,23 +8,30 @@
             this.FuelConsumptionLitersPerKm = fuelConsumptionLitersPerKm;
         }
 
-        public double FuelQuantity { get; set; }
-        public double FuelConsumptionLitersPerKm { get; set; }
-        public double ExtraFuelConsumption { get; set; }
+        public double FuelQuantity { get; private set; }
+        public double FuelConsumptionLitersPerKm { get; private  set; }
 
         public string Drive(double distance)
         {
-            bool canDrive = distance * (this.FuelConsumptionLitersPerKm + this.ExtraFuelConsumption) < this.FuelQuantity;
+            bool canDrive = distance * (this.FuelConsumptionLitersPerKm) < this.FuelQuantity;
 
             if (canDrive)
             {
-                this.FuelQuantity -= distance * (this.FuelConsumptionLitersPerKm + this.ExtraFuelConsumption);
+                this.FuelQuantity -= distance * (this.FuelConsumptionLitersPerKm);
                 return $"{this.GetType().Name} travelled {distance} km";
             }
 
             return $"{this.GetType().Name} needs refueling";
         }
 
-        public abstract void Refuel(double liters);
+        public virtual void Refuel(double liters)
+        {
+            this.FuelQuantity += liters;
+        }
+
+        public override string ToString()
+        {
+            return $"{this.GetType().Name}: {this.FuelQuantity:f2}";
+        }
     }
 }

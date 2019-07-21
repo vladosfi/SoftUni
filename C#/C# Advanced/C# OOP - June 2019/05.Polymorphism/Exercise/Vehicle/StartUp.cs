@@ -38,13 +38,12 @@ namespace Polymorphism
 
                     if (type == "Car")
                     {
-                        Console.WriteLine(car.Drive(distance)); 
+                        Console.WriteLine(car.Drive(distance));
                     }
                     else if (type == "Truck")
                     {
                         Console.WriteLine(truck.Drive(distance));
                     }
-
                 }
                 else if (command == "Refuel")
                 {
@@ -63,7 +62,7 @@ namespace Polymorphism
 
             foreach (var vehicle in vehicles)
             {
-                Console.WriteLine($"{vehicle.GetType().Name}: {vehicle.FuelQuantity:f2}");
+                Console.WriteLine(vehicle);
             }
         }
     }

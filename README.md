@@ -13,6 +13,6 @@
 
 |**Course**|**Link**| 
 |---|---|
-|<a href="https://softuni.bg/trainings/2073/programming-basics-with-csharp-september-2018" > Programming Basics with C# </a>   | <a href="https://softuni.bg/certificates/details/58918/418a4d61"> Link</a> |
-|<a href="https://softuni.bg/trainings/2237/technology-fundamentals-with-csharp-january-2019"> Technology Fundamentals with C# </a>| <a href="https://softuni.bg/certificates/details/65356/7a64d3ae"> Link</a> |
-|<a href="https://softuni.bg/trainings/2348/csharp-advanced-may-2019"> C# Advanced </a>| <a href="https://softuni.bg/certificates/details/67830/079fe45b"> Link</a> |
+|<a href="https://softuni.bg/trainings/2073/programming-basics-with-csharp-september-2018" > Programming Basics with C# </a>   | <a href="https://softuni.bg/certificates/details/59061/be83707c"> Link</a> |
+|<a href="https://softuni.bg/trainings/2237/technology-fundamentals-with-csharp-january-2019"> Technology Fundamentals with C# </a>| <a href="https://softuni.bg/certificates/details/65359/639804c1"> Link</a> |
+|<a href="https://softuni.bg/trainings/2348/csharp-advanced-may-2019"> C# Advanced </a>| <a href="https://softuni.bg/certificates/details/67794/8fa1c1ca"> Link</a> |

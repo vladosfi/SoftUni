@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace _01.StreamProgressInfo
+namespace P01._DrawingShape_After
 {
     class Program
     {

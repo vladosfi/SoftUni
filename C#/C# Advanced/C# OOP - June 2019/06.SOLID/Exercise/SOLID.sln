@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28306.52
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "01.StreamProgressInfo", "01.StreamProgressInfo\01.StreamProgressInfo.csproj", "{B5C73B28-BD20-433E-94A7-DAA97D0C44C6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logger", "Logger\Logger.csproj", "{E1FE748D-38C3-403B-BC64-FCB245868371}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B5C73B28-BD20-433E-94A7-DAA97D0C44C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B5C73B28-BD20-433E-94A7-DAA97D0C44C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B5C73B28-BD20-433E-94A7-DAA97D0C44C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B5C73B28-BD20-433E-94A7-DAA97D0C44C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1FE748D-38C3-403B-BC64-FCB245868371}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1FE748D-38C3-403B-BC64-FCB245868371}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1FE748D-38C3-403B-BC64-FCB245868371}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1FE748D-38C3-403B-BC64-FCB245868371}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {D6896C96-4604-46E1-8337-A8B1DD91DEAC}
+		SolutionGuid = {791D5401-2784-4FDF-84CD-8BEC401C1635}
 	EndGlobalSection
 EndGlobal

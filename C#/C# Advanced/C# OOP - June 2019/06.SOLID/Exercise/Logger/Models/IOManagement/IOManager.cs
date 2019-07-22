@@ -22,7 +22,7 @@ namespace LoggerTask.Models.IOManagement
             this.currentFile = currentFile;
         }
 
-        public string CurrentDirectoryPath => this.CurrentDirectoryPath + this.currentDirectory;
+        public string CurrentDirectoryPath => this.currentPath + this.currentDirectory;
 
         public string CurrnetFilePath => this.CurrentDirectoryPath + this.currentFile;
 
@@ -30,7 +30,7 @@ namespace LoggerTask.Models.IOManagement
 
         public void EnsuereDiretoryAndFileExist()
         {
-            if (Directory.Exists(this.CurrentDirectoryPath))
+            if (!Directory.Exists(this.CurrentDirectoryPath))
             {
                 Directory.CreateDirectory(this.CurrentDirectoryPath);
             }

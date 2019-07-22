@@ -13,7 +13,7 @@ namespace LoggerTask.Models.Files
     {
         private const string currentDirectory = "\\logs\\";
         private const string currentFile = "log.txt";
-        private const string dateFormat = "M/dd/yyyy H:mm:ss tt";
+        private const string dateFormat = "M/dd/yyyy h:mm:ss tt";
 
 
         private readonly string currentPath;
@@ -27,7 +27,7 @@ namespace LoggerTask.Models.Files
             this.Path = currentPath + currentDirectory + currentFile;
         }
 
-        public string Path { get; private set}
+        public string Path { get; private set; }
 
         public ulong Size => GetFileSize();
 

@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-
+using System.Text;
 using LoggerTask.Contracts;
 using LoggerTask.Models.Contracts;
 
@@ -7,7 +7,7 @@ namespace LoggerTask.Loggers
 {
     public class Logger : ILogger
     {
-        private ICollection<IAppender> appenders;
+        private readonly ICollection<IAppender> appenders;
 
         public Logger(ICollection<IAppender> appenders)
         {
@@ -26,6 +26,20 @@ namespace LoggerTask.Loggers
                     appender.Append(error);
                 }
             }
+        }
+
+        public override string ToString()
+        {
+            StringBuilder result = new StringBuilder();
+
+            result.AppendLine("Logger info");
+
+            foreach (IAppender appender in appenders)
+            {
+                result.AppendLine(appender.ToString());
+            }
+
+            return result.ToString().TrimEnd();
         }
     }
 }

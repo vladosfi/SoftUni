@@ -8,7 +8,7 @@ namespace LoggerTask.Models.Appenders
 {
     public class ConsoleAppender : IAppender
     {
-        private const string dateFormat = "M/dd/yyyy H:mm:ss tt";
+        private const string dateFormat = "M/dd/yyyy h:mm:ss tt";
 
         private int messagesAppended;
 
@@ -41,9 +41,15 @@ namespace LoggerTask.Models.Appenders
                 level.ToString(),
                 message);
 
-
             Console.WriteLine(formatedMessage);
+
             messagesAppended++;
+        }
+
+        public override string ToString()
+        {
+            return $"Appender type: {this.GetType().Name}, Layout type: {this.Layout.GetType().Name}, " +
+                $"Report level: {this.Level.GetType().Name}, Messages appended: {this.messagesAppended}";
         }
     }
 }

@@ -10,7 +10,7 @@ namespace LoggerTask.Factories
 {
     public class ErrorFactory
     {
-        private const string dateFormat = "M/dd/yyyy H:mm:ss tt";
+        private const string dateFormat = "M/dd/yyyy h:mm:ss tt";
 
         public IError GetError(string dateString, string levelString, string message)
         {
@@ -31,7 +31,7 @@ namespace LoggerTask.Factories
                     dateFormat,
                     CultureInfo.InvariantCulture);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw new InvalidDateFolrmatException();
             }

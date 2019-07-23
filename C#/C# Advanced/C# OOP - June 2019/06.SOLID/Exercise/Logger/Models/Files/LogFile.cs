@@ -38,7 +38,7 @@ namespace LoggerTask.Models.Files
             ulong size = (ulong)text
                 .ToCharArray()
                 .Where(c => char.IsLetter(c))
-                .Sum(c => c);
+                .Sum(c => (int)c);
 
             return size;
         }

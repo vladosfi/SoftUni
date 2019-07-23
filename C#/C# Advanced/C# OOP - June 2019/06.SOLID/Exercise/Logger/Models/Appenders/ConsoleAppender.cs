@@ -49,7 +49,7 @@ namespace LoggerTask.Models.Appenders
         public override string ToString()
         {
             return $"Appender type: {this.GetType().Name}, Layout type: {this.Layout.GetType().Name}, " +
-                $"Report level: {this.Level.GetType().Name}, Messages appended: {this.messagesAppended}";
+                $"Report level: {this.Level}, Messages appended: {this.messagesAppended}";
         }
     }
 }

@@ -19,7 +19,7 @@ namespace LoggerTask.Loggers
 
         public void Log(IError error)
         {
-            foreach (IAppender appender in this.appenders)
+            foreach (IAppender appender in this.Appenders)
             {
                 if (appender.Level <= error.Level)
                 {

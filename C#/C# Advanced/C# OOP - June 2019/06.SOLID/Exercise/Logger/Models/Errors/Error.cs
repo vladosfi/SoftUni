@@ -11,7 +11,7 @@ namespace LoggerTask.Models.Errors
         {
             this.DateTyme = dateTime;
             this.Message = message;
-            this.Level = Level;
+            this.Level = level;
         }
 
         public DateTime DateTyme { get; }

@@ -3,8 +3,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <RootNamespace>Stealer</RootNamespace>
-    <AssemblyName>Stealer</AssemblyName>
+    <RootNamespace>_02.HighQualityMistakes</RootNamespace>
   </PropertyGroup>
 
 </Project>

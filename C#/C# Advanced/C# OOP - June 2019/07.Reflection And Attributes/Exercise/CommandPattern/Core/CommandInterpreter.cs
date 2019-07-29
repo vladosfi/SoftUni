@@ -31,6 +31,10 @@ namespace CommandPattern.Core
             Type typeToCreate = types
                 .FirstOrDefault(t => t.Name == commandName);
 
+            if (typeToCreate == null)
+            {
+                return null;
+            }
 
             Object instance = (ICommand)Activator
                 .CreateInstance(typeToCreate);

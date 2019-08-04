@@ -13,11 +13,18 @@ namespace MXGP.Models.Races
     {
         private string name;
         private int laps;
-        private List<IRider> riders;
+        private readonly List<IRider> riders;
 
         public Race()
         {
             this.riders = new List<IRider>();
+        }
+
+        public Race(string name, int laps)
+            :this()
+        {
+            this.Name = name;
+            this.Laps = laps;
         }
 
         public string Name
@@ -28,7 +35,7 @@ namespace MXGP.Models.Races
             }
             set
             {
-                if (string.IsNullOrWhiteSpace(value) || value.Length < 5)
+                if (string.IsNullOrEmpty(value) || value.Length < 5)
                 {
                     throw new ArgumentException(string.Format(ExceptionMessages.InvalidName, value, 5));
                 }

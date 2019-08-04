@@ -90,9 +90,7 @@ namespace MXGP.Core
 
         public string CreateRace(string name, int laps)
         {
-            Race race = new Race();
-            race.Name = name;
-            race.Laps = laps;
+            Race race = new Race(name,laps);
 
             if (races.Any(r => r.Name == name))
             {

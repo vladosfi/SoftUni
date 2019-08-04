@@ -8,7 +8,7 @@ namespace MXGP.Models.Motorcycles
     {
         private string model;
         
-        public Motorcycle(string model, int horsePower, double cubicCentimeters)
+        protected Motorcycle(string model, int horsePower, double cubicCentimeters)
         {
             this.Model = model;
             this.HorsePower = horsePower;
@@ -32,7 +32,7 @@ namespace MXGP.Models.Motorcycles
             }
         }
 
-        public int HorsePower { get; }
+        public abstract int HorsePower { get; protected set; }
 
         public double CubicCentimeters { get; }
 

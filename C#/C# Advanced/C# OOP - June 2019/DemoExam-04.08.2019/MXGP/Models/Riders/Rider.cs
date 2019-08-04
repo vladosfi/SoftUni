@@ -12,7 +12,6 @@ namespace MXGP.Models.Riders
         public Rider(string name)
         {
             this.Name = name;
-            this.CanParticipate = false;
         }
 
         public string Name
@@ -23,7 +22,7 @@ namespace MXGP.Models.Riders
             }
             private set
             {
-                if (string.IsNullOrWhiteSpace(value) || value.Length < 5)
+                if (string.IsNullOrEmpty(value) || value.Length < 5)
                 {
                     throw new ArgumentException(string.Format(ExceptionMessages.InvalidName, value, 5));
                 }
@@ -36,17 +35,16 @@ namespace MXGP.Models.Riders
 
         public int NumberOfWins { get; private set; }
 
-        public bool CanParticipate { get; private set; }
+        public bool CanParticipate => this.Motorcycle != null;
 
         public void AddMotorcycle(IMotorcycle motorcycle)
         {
             if (motorcycle == null)
             {
-                throw new ArgumentNullException(ExceptionMessages.MotorcycleInvalid);
+                throw new ArgumentNullException(nameof(motorcycle),ExceptionMessages.MotorcycleInvalid);
             }
 
             this.Motorcycle = motorcycle;
-            this.CanParticipate = true;
         }
 
         public void WinRace()

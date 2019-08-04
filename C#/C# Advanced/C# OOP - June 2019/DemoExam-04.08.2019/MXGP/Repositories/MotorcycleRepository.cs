@@ -1,13 +1,38 @@
 ﻿using MXGP.Models.Motorcycles.Contracts;
+using MXGP.Repositories.Contracts;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace MXGP.Repositories
 {
-    public class MotorcycleRepository : Repository<IMotorcycle>
+    public class MotorcycleRepository : IRepository<IMotorcycle>
     {
-        public override IMotorcycle GetByName(string name)
+        private readonly IList<IMotorcycle> motorcycles;
+
+        public MotorcycleRepository()
         {
-            return Models.FirstOrDefault(m => m.Model == name);
+            this.motorcycles = new List<IMotorcycle>();
         }
+
+        public void Add(IMotorcycle model)
+        {
+            this.motorcycles.Add(model);
+        }
+
+        public IReadOnlyCollection<IMotorcycle> GetAll()
+        {
+            return this.motorcycles.ToList();
+        }
+
+        public IMotorcycle GetByName(string name)
+        {
+            return motorcycles.FirstOrDefault(m => m.Model == name);
+        }
+
+        public bool Remove(IMotorcycle model)
+        {
+            return this.motorcycles.Remove(model);
+        }
+
     }
 }

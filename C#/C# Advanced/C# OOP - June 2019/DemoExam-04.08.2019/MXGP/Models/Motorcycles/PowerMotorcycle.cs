@@ -5,14 +5,30 @@ namespace MXGP.Models.Motorcycles
 {
     public class PowerMotorcycle : Motorcycle
     {
-        public PowerMotorcycle(string model, int horsePower)
-            : base(model, horsePower, 450)
-        {
+        private const int PowerMotorcycleCubicCentimeters = 450;
+        private int horsePower;
 
-            if (this.HorsePower < 70 || this.HorsePower > 100 )
-            {
-                throw new ArgumentException(string.Format(ExceptionMessages.InvalidHorsePower, this.HorsePower));
-            }
+        public PowerMotorcycle(string model, int horsePower)
+            : base(model, horsePower, PowerMotorcycleCubicCentimeters)
+        {
         }
+
+        public override int HorsePower
+        {
+            get
+            {
+                return this.horsePower;
+            }
+            protected set
+            {
+                if (value < 70 || value  > 100)
+                {
+                    throw new ArgumentException(string.Format(ExceptionMessages.InvalidHorsePower, value));
+                }
+
+                this.horsePower = value;
+            }
+        }  
+
     }
 }

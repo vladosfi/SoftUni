@@ -1,9 +1,9 @@
-﻿using PlayersAndMonsters.Models.Players.Contracts;
-using PlayersAndMonsters.Repositories.Contracts;
-using System;
-
-namespace PlayersAndMonsters.Models.Players
+﻿namespace PlayersAndMonsters.Models.Players
 {
+    using System;
+    using PlayersAndMonsters.Models.Players.Contracts;
+    using PlayersAndMonsters.Repositories.Contracts;
+
     public abstract class Player : IPlayer
     {
         private string username;

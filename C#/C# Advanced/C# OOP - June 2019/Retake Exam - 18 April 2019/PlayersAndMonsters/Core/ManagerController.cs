@@ -1,63 +1,43 @@
 ﻿namespace PlayersAndMonsters.Core
 {
-    using System;
-    using System.Linq;
     using System.Text;
     using PlayersAndMonsters.Common;
     using PlayersAndMonsters.Core.Contracts;
+    using PlayersAndMonsters.Core.Factories.Contracts;
     using PlayersAndMonsters.Models.BattleFields;
-    using PlayersAndMonsters.Models.Cards;
     using PlayersAndMonsters.Models.Cards.Contracts;
-    using PlayersAndMonsters.Models.Players;
     using PlayersAndMonsters.Models.Players.Contracts;
     using PlayersAndMonsters.Repositories;
-    using PlayersAndMonsters.Repositories.Contracts;
 
     public class ManagerController : IManagerController
     {
-        private IPlayerRepository playersRepo;
-        private ICardRepository cardsRepo;
+        private PlayerRepository playersRepo;
+        private CardRepository cardsRepo;
+        private PlayerFactory playerFactory;
+        private CardFactory cardFactory;
 
         public ManagerController()
         {
             playersRepo = new PlayerRepository();
             cardsRepo = new CardRepository();
+            playerFactory = new PlayerFactory();
+            cardFactory = new CardFactory();
         }
 
         public string AddPlayer(string type, string username)
         {
-            IPlayer player = null;
-
-            if (type == nameof(Beginner))
-            {
-                player = new Beginner(new CardRepository(), username);
-            }
-            else if (type == nameof(Advanced))
-            {
-                player = new Advanced(new CardRepository(), username);
-            }
-
+            IPlayer player = playerFactory.CreatePlayer(type, username);
             playersRepo.Add(player);
 
-            return $"Successfully added player of type {type} with username: {username}";
+            return string.Format(ConstantMessages.SuccessfullyAddedPlayer, type, username);
         }
 
         public string AddCard(string type, string name)
         {
-            ICard card = null;
-
-            if (type == "Trap")
-            {
-                card = new TrapCard(name);
-            }
-            else if (type == "Magic")
-            {
-                card = new MagicCard(name);
-            }
-
+            ICard card = cardFactory.CreateCard(type, name);
             cardsRepo.Add(card);
 
-            return $"Successfully added card of type {type}Card with name: {name}";
+            return string.Format(ConstantMessages.SuccessfullyAddedCard, type, name);
         }
 
         public string AddPlayerCard(string username, string cardName)
@@ -67,7 +47,7 @@
 
             player.CardRepository.Add(card);
 
-            return $"Successfully added card: {cardName} to user: {username}";
+            return string.Format(ConstantMessages.SuccessfullyAddedPlayerWithCards, cardName, username);
         }
 
         public string Fight(string attackUser, string enemyUser)
@@ -78,7 +58,7 @@
             BattleField batle = new BattleField();
             batle.Fight(attackPlayer, enemyPlayer);
 
-            return $"Attack user health {attackPlayer.Health} - Enemy user health {enemyPlayer.Health}";
+            return string.Format(ConstantMessages.FightInfo, attackPlayer.Health, enemyPlayer.Health);
         }
 
         public string Report()

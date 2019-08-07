@@ -32,9 +32,7 @@ namespace ParkingSystem.Tests
         [Test]
         public void TestForExistingParkSpotException()
         {
-            string parkSpot = "D1";
-
-            Assert.Throws<ArgumentException>(() => park.ParkCar(parkSpot, car), "Parking spot doesn't exists!");
+            Assert.Throws<ArgumentException>(() => park.ParkCar("D1", car), "Parking spot doesn't exists!");
         }
 
         [Test]

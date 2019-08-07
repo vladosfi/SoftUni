@@ -15,15 +15,23 @@ namespace PlayersAndMonsters.Models.BattleFields
                 throw new ArgumentException("Player is dead!");
             }
 
-            IncreacePoints(attackPlayer);
-            IncreacePoints(enemyPlayer);
+            if (attackPlayer is Beginner)
+            {
+                IncreacePoints(attackPlayer);
+            }
+            if (enemyPlayer is Beginner)
+            {
+                IncreacePoints(enemyPlayer);
+            }
+            
+            
 
             attackPlayer.Health += attackPlayer.CardRepository.Cards.Sum(c => c.HealthPoints);
             enemyPlayer.Health += enemyPlayer.CardRepository.Cards.Sum(c => c.HealthPoints);
 
             int attackerDamage = attackPlayer.CardRepository.Cards.Sum(c => c.DamagePoints);
             int enemyDamage = enemyPlayer.CardRepository.Cards.Sum(c => c.DamagePoints);
-            
+
             while (true)
             {
 
@@ -45,14 +53,11 @@ namespace PlayersAndMonsters.Models.BattleFields
 
         private static void IncreacePoints(IPlayer player)
         {
-            if (player.GetType().Name == nameof(Beginner))
-            {
-                player.Health += 40;
+            player.Health += 40;
 
-                foreach (var card in player.CardRepository.Cards)
-                {
-                    card.DamagePoints += 30;
-                }
+            foreach (var card in player.CardRepository.Cards)
+            {
+                card.DamagePoints += 30;
             }
         }
     }

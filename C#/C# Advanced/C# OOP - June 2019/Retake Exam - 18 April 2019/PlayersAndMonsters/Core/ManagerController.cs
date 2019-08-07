@@ -3,6 +3,7 @@
     using System;
     using System.Linq;
     using System.Text;
+    using PlayersAndMonsters.Common;
     using PlayersAndMonsters.Core.Contracts;
     using PlayersAndMonsters.Models.BattleFields;
     using PlayersAndMonsters.Models.Cards;
@@ -27,11 +28,11 @@
         {
             IPlayer player = null;
 
-            if (type == "Beginner")
+            if (type == nameof(Beginner))
             {
                 player = new Beginner(new CardRepository(), username);
             }
-            else if (type == "Advanced")
+            else if (type == nameof(Advanced))
             {
                 player = new Advanced(new CardRepository(), username);
             }
@@ -84,20 +85,18 @@
         {
             StringBuilder report = new StringBuilder();
 
-            
-
             foreach (var player in playersRepo.Players)
             {
-                report.AppendLine($"Username: {player.Username} - Health: {player.Health} – Cards {player.CardRepository.Count}");
-
+                report.AppendLine(string.Format(ConstantMessages.PlayerReportInfo, player.Username, player.Health, player.CardRepository.Cards.Count));
                 foreach (var card in player.CardRepository.Cards)
                 {
-                    report.AppendLine($"Card: {card.Name} - Damage: {card.DamagePoints}");
-                }                
-                report.AppendLine("###");
-            }            
-
+                    report.AppendLine(string.Format(ConstantMessages.CardReportInfo, card.Name, card.DamagePoints));
+                }
+                report.AppendLine(string.Format(ConstantMessages.DefaultReportSeparator));
+            }
             return report.ToString().TrimEnd();
         }
+
+
     }
 }

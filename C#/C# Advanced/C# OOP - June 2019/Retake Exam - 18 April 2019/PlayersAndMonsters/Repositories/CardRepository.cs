@@ -15,9 +15,9 @@ namespace PlayersAndMonsters.Repositories
             this.cardsRepo = new List<ICard>();
         }
 
-        public int Count => cardsRepo.Count;
+        public int Count => this.cardsRepo.Count;
 
-        public IReadOnlyCollection<ICard> Cards => this.cardsRepo;
+        public IReadOnlyCollection<ICard> Cards => this.cardsRepo.AsReadOnly();
 
         public void Add(ICard card)
         {

@@ -1,4 +1,5 @@
 ﻿using PlayersAndMonsters.Models.BattleFields.Contracts;
+using PlayersAndMonsters.Models.Players;
 using PlayersAndMonsters.Models.Players.Contracts;
 using System;
 using System.Linq;
@@ -14,58 +15,44 @@ namespace PlayersAndMonsters.Models.BattleFields
                 throw new ArgumentException("Player is dead!");
             }
 
-            if (attackPlayer.GetType().Name == "Beginner")
+            IncreacePoints(attackPlayer);
+            IncreacePoints(enemyPlayer);
+
+            attackPlayer.Health += attackPlayer.CardRepository.Cards.Sum(c => c.HealthPoints);
+            enemyPlayer.Health += enemyPlayer.CardRepository.Cards.Sum(c => c.HealthPoints);
+
+            int attackerDamage = attackPlayer.CardRepository.Cards.Sum(c => c.DamagePoints);
+            int enemyDamage = enemyPlayer.CardRepository.Cards.Sum(c => c.DamagePoints);
+            
+            while (true)
             {
-                IncreacePoints(attackPlayer);
-            }
-            if (enemyPlayer.GetType().Name == "Beginner")
-            {
-                IncreacePoints(enemyPlayer);
-            }
 
-            attackPlayer.Health += attackPlayer.CardRepository.Cards.Select(c => c.HealthPoints).Sum();
-            enemyPlayer.Health += enemyPlayer.CardRepository.Cards.Select(c => c.HealthPoints).Sum();
+                enemyPlayer.TakeDamage(attackerDamage);
 
-            int attackerDamage = attackPlayer.CardRepository.Cards.Select(c => c.DamagePoints).Sum();
-            int enemyDamage = enemyPlayer.CardRepository.Cards.Select(c => c.DamagePoints).Sum();
-
-            bool OddFight = false; 
-
-            while (!attackPlayer.IsDead && !enemyPlayer.IsDead)
-            {
-                OddFight = !OddFight;
-
-                if (OddFight)
+                if (enemyPlayer.Health == 0)
                 {
-                    if (enemyPlayer.Health - attackerDamage < 0)
-                    {
-                        enemyPlayer.Health = 0;
-                    }
-                    else
-                    {
-                        enemyPlayer.Health -= attackerDamage;
-                    }
+                    break;
                 }
-                else
+
+                attackPlayer.TakeDamage(enemyDamage);
+
+                if (attackPlayer.Health == 0)
                 {
-                    if (attackPlayer.Health - enemyDamage < 0)
-                    {
-                        attackPlayer.Health = 0;
-                    }
-                    else
-                    {
-                        attackPlayer.Health -= enemyDamage;
-                    }
+                    break;
                 }
             }
         }
 
         private static void IncreacePoints(IPlayer player)
         {
-            player.Health += 40;
-            foreach (var card in player.CardRepository.Cards)
+            if (player.GetType().Name == nameof(Beginner))
             {
-                card.DamagePoints += 30;
+                player.Health += 40;
+
+                foreach (var card in player.CardRepository.Cards)
+                {
+                    card.DamagePoints += 30;
+                }
             }
         }
     }

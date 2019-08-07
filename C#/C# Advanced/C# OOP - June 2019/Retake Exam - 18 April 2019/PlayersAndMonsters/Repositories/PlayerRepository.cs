@@ -15,9 +15,9 @@ namespace PlayersAndMonsters.Repositories
             this.playerRepo = new List<IPlayer>();
         }
 
-        public int Count => playerRepo.Count;
+        public int Count => this.playerRepo.Count;
 
-        public IReadOnlyCollection<IPlayer> Players => this.playerRepo;
+        public IReadOnlyCollection<IPlayer> Players => this.playerRepo.AsReadOnly();
 
         public void Add(IPlayer player)
         {

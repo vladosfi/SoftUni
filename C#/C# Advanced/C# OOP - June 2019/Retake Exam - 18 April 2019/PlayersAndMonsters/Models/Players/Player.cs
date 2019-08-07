@@ -53,7 +53,7 @@ namespace PlayersAndMonsters.Models.Players
             }
         }
 
-        public bool IsDead => this.health == 0;
+        public bool IsDead => this.Health <= 0;
 
         public void TakeDamage(int damagePoints)
         {
@@ -66,7 +66,7 @@ namespace PlayersAndMonsters.Models.Players
 
             if (this.health < 0)
             {
-                this.health = 0;
+                this.Health = 0;
             }
         }
     }

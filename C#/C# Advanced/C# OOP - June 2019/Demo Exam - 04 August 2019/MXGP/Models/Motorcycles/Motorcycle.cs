@@ -1,13 +1,13 @@
-﻿using MXGP.Models.Motorcycles.Contracts;
-using MXGP.Utilities.Messages;
-using System;
-
-namespace MXGP.Models.Motorcycles
+﻿namespace MXGP.Models.Motorcycles
 {
+    using System;
+    using MXGP.Models.Motorcycles.Contracts;
+    using MXGP.Utilities.Messages;
+
     public abstract class Motorcycle : IMotorcycle
     {
         private string model;
-        
+
         protected Motorcycle(string model, int horsePower, double cubicCentimeters)
         {
             this.Model = model;
@@ -17,10 +17,8 @@ namespace MXGP.Models.Motorcycles
 
         public string Model
         {
-            get
-            {
-                return this.model;
-            }
+            get => this.model;
+
             private set
             {
                 if (string.IsNullOrWhiteSpace(value) || value.Length < 4)

@@ -1,25 +1,23 @@
-﻿using System;
-using MXGP.Models.Motorcycles.Contracts;
-using MXGP.Models.Riders.Contracts;
-using MXGP.Utilities.Messages;
-
-namespace MXGP.Models.Riders
+﻿namespace MXGP.Models.Riders
 {
+    using System;
+    using MXGP.Models.Motorcycles.Contracts;
+    using MXGP.Models.Riders.Contracts;
+    using MXGP.Utilities.Messages;
+
     public class Rider : IRider
     {
         private string name;
 
         public Rider(string name)
         {
-            this.Name = name;
+            Name = name;
         }
 
         public string Name
         {
-            get
-            {
-                return this.name;
-            }
+            get => this.name;
+
             private set
             {
                 if (string.IsNullOrEmpty(value) || value.Length < 5)
@@ -39,7 +37,7 @@ namespace MXGP.Models.Riders
 
         public void AddMotorcycle(IMotorcycle motorcycle)
         {
-            if (motorcycle == null)
+            if (motorcycle is null)
             {
                 throw new ArgumentNullException(nameof(motorcycle),ExceptionMessages.MotorcycleInvalid);
             }
@@ -47,9 +45,6 @@ namespace MXGP.Models.Riders
             this.Motorcycle = motorcycle;
         }
 
-        public void WinRace()
-        {
-            this.NumberOfWins++;
-        }
+        public void WinRace() => this.NumberOfWins++;
     }
 }

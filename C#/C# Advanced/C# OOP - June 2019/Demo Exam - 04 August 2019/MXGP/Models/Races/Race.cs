@@ -1,39 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using MXGP.Models.Races.Contracts;
-using MXGP.Models.Riders;
-using MXGP.Models.Riders.Contracts;
-using MXGP.Utilities.Messages;
-
-namespace MXGP.Models.Races
+﻿namespace MXGP.Models.Races
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using MXGP.Models.Races.Contracts;
+    using MXGP.Models.Riders.Contracts;
+    using MXGP.Utilities.Messages;
+
     public class Race : IRace
     {
         private string name;
         private int laps;
         private readonly List<IRider> riders;
-
-        public Race()
-        {
-            this.riders = new List<IRider>();
-        }
-
+        
         public Race(string name, int laps)
-            :this()
         {
             this.Name = name;
             this.Laps = laps;
+            this.riders = new List<IRider>();
         }
 
         public string Name
         {
-            get
-            {
-                return this.name;
-            }
-            set
+            get => this.name;
+
+            private set
             {
                 if (string.IsNullOrEmpty(value) || value.Length < 5)
                 {
@@ -46,11 +37,9 @@ namespace MXGP.Models.Races
 
         public int Laps
         {
-            get
-            {
-                return this.laps;
-            }
-            set
+            get => this.laps;
+
+            private set
             {
                 if (value < 1)
                 {
@@ -61,7 +50,7 @@ namespace MXGP.Models.Races
             }
         }
 
-        public IReadOnlyCollection<IRider> Riders => this.riders;
+        public IReadOnlyCollection<IRider> Riders => this.riders.AsReadOnly();
 
         public void AddRider(IRider rider)
         {
@@ -69,13 +58,15 @@ namespace MXGP.Models.Races
             {
                 throw new ArgumentNullException(ExceptionMessages.RiderInvalid);
             }
-            else if (rider.CanParticipate == false)
+
+            if (rider.CanParticipate == false)
             {
                 throw new ArgumentException(string.Format(ExceptionMessages.RiderNotParticipate, rider.Name));
             }
-            else if (this.riders.Any(r=>r.Name == rider.Name))
+
+            if (this.riders.Any(r=>r.Name == rider.Name))
             {
-                throw new ArgumentNullException(string.Format(ExceptionMessages.RiderAlreadyAdded, rider.Name, this.name));
+                throw new ArgumentNullException(string.Format(ExceptionMessages.RiderAlreadyAdded, rider.Name,this.name));
             }
 
             this.riders.Add(rider);

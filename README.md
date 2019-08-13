@@ -11,8 +11,9 @@
 
 <h2> Certificates </h2>
 
-|**Course**|
-|---|
-|<a href="https://softuni.bg/trainings/2073/programming-basics-with-csharp-september-2018" > Programming Basics with C# </a>   |
+|**Course**|**Link|
+|---|---|
+|<a href="https://softuni.bg/trainings/2073/programming-basics-with-csharp-september-2018" > Programming Basics with C# </a>   | Programming Basics with C# |
+
 |<a href="https://softuni.bg/trainings/2237/technology-fundamentals-with-csharp-january-2019"> Technology Fundamentals with C# </a>| 
 |<a href="https://softuni.bg/trainings/2348/csharp-advanced-may-2019"> C# Advanced </a>| 

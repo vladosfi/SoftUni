@@ -22,7 +22,7 @@ namespace ViceCity.Models.Neghbourhoods
                 }
             }
            
-            foreach (var civilPlayer in civilPlayers)
+            foreach (var civilPlayer in civilPlayers.Where(p => p.IsAlive))
             {
                 foreach (var gun in civilPlayer.GunRepository.Models)
                 {

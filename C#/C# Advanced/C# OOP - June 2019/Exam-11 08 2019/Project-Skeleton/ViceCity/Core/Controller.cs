@@ -58,36 +58,27 @@ namespace ViceCity.Core
 
             IGun firestGun = null;
 
-            foreach (var gun in this.gunsRepo.Models)
-            {
-                firestGun = gun;
-                break;
-            }
-
-
+            firestGun = this.gunsRepo.Models.FirstOrDefault();
+            
             if (name.Contains("Vercetti"))
             {
                 mainPlayer.GunRepository.Add(firestGun);
                 this.gunsRepo.Remove(firestGun);
                 return $"Successfully added {firestGun.Name} to the Main Player: Tommy Vercetti";
             }
-            else
+
+            if (!this.civilPlayers.Any(p => p.Name == name))
             {
-                if (!this.civilPlayers.Any(p => p.Name == name))
-                {
-                    return "Civil player with that name doesn't exists!";
-                }
-
-                foreach (var player in this.civilPlayers)
-                {
-                    player.GunRepository.Add(firestGun);
-                    break;
-                }
-
-                this.gunsRepo.Remove(firestGun);
-
-                return $"Successfully added {firestGun.Name} to the Civil Player: {name}";
+                return "Civil player with that name doesn't exists!";
             }
+
+            IPlayer player = this.civilPlayers.FirstOrDefault(p => p.Name == name);
+            player.GunRepository.Add(firestGun);
+
+            this.gunsRepo.Remove(firestGun);
+
+            return $"Successfully added {firestGun.Name} to the Civil Player: {name}";
+
         }
 
         public string AddPlayer(string name)

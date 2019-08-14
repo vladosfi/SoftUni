@@ -1,11 +1,8 @@
-﻿using ViceCity.Models.Guns.Contracts;
-using ViceCity.Repositories.Contracts;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ViceCity.Models.Players.Contracts
+﻿namespace ViceCity.Models.Players.Contracts
 {
+    using ViceCity.Models.Guns.Contracts;
+    using ViceCity.Repositories.Contracts;
+
     public interface IPlayer
     {
         string Name { get; }

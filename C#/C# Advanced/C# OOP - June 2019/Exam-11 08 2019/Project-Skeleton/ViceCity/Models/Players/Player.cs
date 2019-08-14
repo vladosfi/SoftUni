@@ -1,11 +1,11 @@
-﻿using System;
-using ViceCity.Models.Guns.Contracts;
-using ViceCity.Models.Players.Contracts;
-using ViceCity.Repositories;
-using ViceCity.Repositories.Contracts;
-
-namespace ViceCity.Models.Players
+﻿namespace ViceCity.Models.Players
 {
+    using System;
+    using ViceCity.Models.Guns.Contracts;
+    using ViceCity.Models.Players.Contracts;
+    using ViceCity.Repositories;
+    using ViceCity.Repositories.Contracts;
+
     public abstract class Player : IPlayer
     {
         private string name;

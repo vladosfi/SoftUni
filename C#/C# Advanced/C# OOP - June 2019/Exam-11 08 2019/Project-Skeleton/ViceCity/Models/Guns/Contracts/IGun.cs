@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ViceCity.Models.Guns.Contracts
+﻿namespace ViceCity.Models.Guns.Contracts
 {
     public interface IGun
     {

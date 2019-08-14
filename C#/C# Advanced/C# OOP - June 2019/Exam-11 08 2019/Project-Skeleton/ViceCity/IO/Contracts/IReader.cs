@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ViceCity.IO.Contracts
+﻿namespace ViceCity.IO.Contracts
 {
-    interface IReader
+    public interface IReader
     {
         string ReadLine();
     }

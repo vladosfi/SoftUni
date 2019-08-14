@@ -1,16 +1,16 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using ViceCity.Core.Contracts;
-using ViceCity.Models.Guns;
-using ViceCity.Models.Guns.Contracts;
-using ViceCity.Models.Neghbourhoods;
-using ViceCity.Models.Players;
-using ViceCity.Models.Players.Contracts;
-using ViceCity.Repositories;
-
-namespace ViceCity.Core
+﻿namespace ViceCity.Core
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using ViceCity.Core.Contracts;
+    using ViceCity.Models.Guns;
+    using ViceCity.Models.Guns.Contracts;
+    using ViceCity.Models.Neghbourhoods;
+    using ViceCity.Models.Players;
+    using ViceCity.Models.Players.Contracts;
+    using ViceCity.Repositories;
+
     public class Controller : IController
     {
         private readonly GunRepository gunsRepo;

@@ -1,8 +1,8 @@
-﻿using System;
-using ViceCity.Models.Guns.Contracts;
-
-namespace ViceCity.Models.Guns
+﻿namespace ViceCity.Models.Guns
 {
+    using System;
+    using ViceCity.Models.Guns.Contracts;
+
     public abstract class Gun : IGun
     {
         private string name;

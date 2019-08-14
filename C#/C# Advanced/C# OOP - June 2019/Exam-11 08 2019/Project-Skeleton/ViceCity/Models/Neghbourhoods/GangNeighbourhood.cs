@@ -1,12 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using ViceCity.Models.Guns.Contracts;
-using ViceCity.Models.Neghbourhoods.Contracts;
-using ViceCity.Models.Players;
-using ViceCity.Models.Players.Contracts;
-
-namespace ViceCity.Models.Neghbourhoods
+﻿namespace ViceCity.Models.Neghbourhoods
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using ViceCity.Models.Neghbourhoods.Contracts;
+    using ViceCity.Models.Players.Contracts;
+
     public class GangNeighbourhood : INeighbourhood
     {
         public void Action(IPlayer mainPlayer, ICollection<IPlayer> civilPlayers)

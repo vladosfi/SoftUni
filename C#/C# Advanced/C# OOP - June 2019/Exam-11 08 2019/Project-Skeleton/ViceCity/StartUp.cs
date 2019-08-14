@@ -1,9 +1,8 @@
-﻿using ViceCity.Core;
-using ViceCity.Core.Contracts;
-using System;
-
-namespace ViceCity
+﻿namespace ViceCity
 {
+    using ViceCity.Core;
+    using ViceCity.Core.Contracts;
+
     public class StartUp
     {
         static void Main(string[] args)

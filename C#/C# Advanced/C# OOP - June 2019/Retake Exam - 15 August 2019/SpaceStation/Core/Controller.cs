@@ -66,7 +66,7 @@ namespace SpaceStation.Core
             mission.Explore(planet, suitableAstronauts);
             this.exploredPlanetsCount++;
 
-            return string.Format(OutputMessages.PlanetExplored, planetName,suitableAstronauts.Select(a=>a.CanBreath == false).Count());
+            return string.Format(OutputMessages.PlanetExplored, planetName,suitableAstronauts.Where(a=>a.CanBreath == false).Count());
         }
 
         public string Report()
@@ -82,7 +82,7 @@ namespace SpaceStation.Core
                 report.AppendLine($"Oxygen: {astronaut.Oxygen}");
 
                 report.Append("Bag items: ");
-                if (astronaut.Bag.Items == 0)
+                if (astronaut.Bag.Items.Count == 0)
                 {
                     report.AppendLine("none");
                 }

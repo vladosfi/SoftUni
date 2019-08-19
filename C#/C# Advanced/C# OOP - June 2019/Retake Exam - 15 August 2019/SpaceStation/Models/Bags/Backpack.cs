@@ -2,7 +2,7 @@
 
 namespace SpaceStation.Models.Bags
 {
-    public abstract class Backpack : IBag
+    public class Backpack : IBag
     {
         private readonly IList<string> items;
 

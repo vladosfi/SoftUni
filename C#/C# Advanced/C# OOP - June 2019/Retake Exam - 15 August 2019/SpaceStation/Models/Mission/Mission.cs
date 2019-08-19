@@ -21,10 +21,10 @@ namespace SpaceStation.Models.Mission
                     }
 
                     astronaut.Breath();
-                    //var planetItems = planet.Items.ToArray();
-                    //astronaut.Bag.Items.Add(planetItems[i]);
-                    //planet.Items.Remove(planetItems[i]);
-                    //i--;
+                    var planetItems = planet.Items.ToArray();
+                    astronaut.Bag.Items.Add(planetItems[i]);
+                    planet.Items.Remove(planetItems[i]);
+                    i--;
                 }
             }
         }

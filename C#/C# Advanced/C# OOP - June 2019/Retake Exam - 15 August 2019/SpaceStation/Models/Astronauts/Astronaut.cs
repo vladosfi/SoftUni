@@ -9,12 +9,12 @@ namespace SpaceStation.Models.Astronauts
     {
         private string name;
         private double oxygen;
-        private readonly IBag bag;
 
         protected Astronaut(string name, double oxygen)
         {
-            this.Name= name;
+            this.Name = name;
             this.Oxygen = oxygen;
+            this.Bag = new Backpack();
         }
 
         public string Name
@@ -53,7 +53,7 @@ namespace SpaceStation.Models.Astronauts
 
         public bool CanBreath => this.oxygen > 0;
 
-        public IBag Bag => this.Bag;
+        public IBag Bag { get;}
 
         public virtual void Breath()
         {

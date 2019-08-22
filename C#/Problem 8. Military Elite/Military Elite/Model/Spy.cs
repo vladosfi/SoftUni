@@ -1,10 +1,11 @@
-﻿using Military_Elite.Model.Spys.Contracts;
+﻿using Military_Elite.Contracts;
 
-namespace Military_Elite.Model.Spys
+namespace Military_Elite.Model
 {
-    public class Spy : ISpy
+    public class Spy : Soldier, ISpy
     {
-        public Spy(int codeNumber)
+        public Spy(int id, string firstName, string lastName, int codeNumber)  
+            : base(id, firstName, lastName)
         {
             this.CodeNumber = codeNumber;
         }

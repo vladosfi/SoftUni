@@ -2,8 +2,8 @@
 
 namespace Military_Elite.Contacts
 {
-    public interface ILieutenantGeneral
+    public interface IEngineer
     {
-        ICollection<ISoldier> Privates { get; }
+        IReadOnlyCollection<IRepair> Repairs { get; }
     }
 }

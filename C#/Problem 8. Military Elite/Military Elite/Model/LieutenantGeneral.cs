@@ -1,17 +1,16 @@
 ﻿using Military_Elite.Contacts;
 using System.Collections.Generic;
 
-namespace Military_Elite.Model.Privates
+namespace Military_Elite.Model
 {
     public class LieutenantGeneral : Private, ILieutenantGeneral
     {
-        public LieutenantGeneral(int id, string firstName, string lastName, decimal salary)
+        public LieutenantGeneral(int id, string firstName, string lastName, decimal salary, ICollection<ISoldier> privates)
             : base(id, firstName, lastName, salary)
         {
-            this.Privates = new List<IPrivate>();
+            this.Privates = privates;
         }
-
-        public List<IPrivate> Privates { get; }
         
+        public ICollection<ISoldier> Privates { get; }
     }
 }

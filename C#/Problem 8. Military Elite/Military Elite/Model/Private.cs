@@ -1,6 +1,6 @@
 ﻿using Military_Elite.Contacts;
 
-namespace Military_Elite.Model.Privates
+namespace Military_Elite.Model
 {
     public class Private : Soldier, IPrivate
     {
@@ -11,5 +11,10 @@ namespace Military_Elite.Model.Privates
         }
 
         public decimal Salary { get; }
+
+        public override string ToString()
+        {
+            return $"Name: {this.FirstName} {this.LastName} Id: {this.Id} Salary: {this.Salary}";
+        }
     }
 }

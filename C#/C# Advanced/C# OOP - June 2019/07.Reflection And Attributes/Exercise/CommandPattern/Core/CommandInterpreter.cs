@@ -20,6 +20,9 @@ namespace CommandPattern.Core
                 .ToArray();
 
             //Assembly assembly = Assembly.GetExecutingAssembly();
+			
+			
+			
 
             Assembly assembly = Assembly
                 .GetCallingAssembly();

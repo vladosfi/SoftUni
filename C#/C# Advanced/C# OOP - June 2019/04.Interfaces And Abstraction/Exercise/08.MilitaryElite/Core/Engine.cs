@@ -126,11 +126,12 @@ namespace MilitaryElite
         {
             foreach (var soldier in this.army)
             {
-                Type type = soldier.GetType();
+                //Type type = soldier.GetType();
 
-                Object actual = Convert.ChangeType(soldier, type);
+                //Object actual = Convert.ChangeType(soldier, type);
 
-                Console.WriteLine(actual.ToString());
+                //Console.WriteLine(actual.ToString());
+                Console.WriteLine(soldier.ToString());
             }
         }
 

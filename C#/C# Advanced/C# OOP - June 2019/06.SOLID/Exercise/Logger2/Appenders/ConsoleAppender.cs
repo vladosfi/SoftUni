@@ -4,23 +4,20 @@ using Logger2.Loggers.Enums;
 
 namespace Logger2.Appenders
 {
-    public class ConsoleAppender : IAppender
+    public class ConsoleAppender : Appender
     {
-        private ILayout layout;
-
         public ConsoleAppender(ILayout layout)
+            :base (layout)
         {
-            this.layout = layout;
         }
-
-        public ReportLevel ReportLevel { get; set; }
-
-        public void Append(string dateTime, ReportLevel reportLevel, string message)
+        
+        public override void Append(string dateTime, ReportLevel reportLevel, string message)
         {
             if (this.ReportLevel <= reportLevel)
             {
-                Console.WriteLine(string.Format(layout.Format, dateTime, reportLevel, message));
-            }   
+                Console.WriteLine(string.Format(this.Layout.Format, dateTime, reportLevel, message));
+                this.Count++;
+            }
         }
     }
 }

@@ -6,28 +6,33 @@ using System.IO;
 
 namespace Logger2.Appenders
 {
-    public class FileAppender : IAppender
+    public class FileAppender : Appender
     {
         private const string Path = @"..\..\..\log.txt";
-        private readonly ILayout layout;
-        private readonly ILogFile logFile;
 
         public FileAppender(ILayout layout, ILogFile logFile)
+            :base(layout)
         {
-            this.layout = layout;
-            this.logFile = logFile;
+            this.LogFile = logFile;
         }
 
-        public ReportLevel ReportLevel { get; set; }
+        public ILogFile LogFile { get; set; }
 
-        public void Append(string dateTime, ReportLevel reportLevel, string message)
+        public override void Append(string dateTime, ReportLevel reportLevel, string message)
         {
             if (this.ReportLevel <= reportLevel)
             {
-                string content = string.Format(this.layout.Format, dateTime, reportLevel, message) + Environment.NewLine;
+                string content = string.Format(this.Layout.Format, dateTime, reportLevel, message) + Environment.NewLine;
 
                 File.AppendAllText(Path, content);
+                this.LogFile.Write(content);
+                this.Count++;
             }
+        }
+
+        public override string ToString()
+        {
+            return base.ToString() + ", File size: " + this.LogFile.Size;
         }
     }
 }

@@ -20,29 +20,30 @@ namespace Logger2.Loggers
             this.fileAppender = fileAppender;
         }
 
-        public void Warning(string dateTime, string criticalMessage)
-        {
-            this.Append(dateTime, ReportLevel.Info, criticalMessage);
-        }
 
         public void Info(string dateTime, string infoMessage)
         {
-            this.Append(dateTime, ReportLevel.Info, infoMessage);
+            this.Append(dateTime, ReportLevel.INFO, infoMessage);
+        }
+
+        public void Warning(string dateTime, string criticalMessage)
+        {
+            this.Append(dateTime, ReportLevel.WARNING, criticalMessage);
         }
 
         public void Error(string dateTime, string errorMessage)
         {
-            this.Append(dateTime, ReportLevel.Error, errorMessage);
+            this.Append(dateTime, ReportLevel.ERROR, errorMessage);
         }
 
         public void Fatal(string dateTime, string fatalMessage)
         {
-            this.Append(dateTime, ReportLevel.Fatal, fatalMessage);
+            this.Append(dateTime, ReportLevel.FATAL, fatalMessage);
         }
 
         public void Critical(string dateTime, string criticalMessage)
         {
-            this.Append(dateTime, ReportLevel.Critical, criticalMessage);
+            this.Append(dateTime, ReportLevel.CRITICAL, criticalMessage);
         }
 
 

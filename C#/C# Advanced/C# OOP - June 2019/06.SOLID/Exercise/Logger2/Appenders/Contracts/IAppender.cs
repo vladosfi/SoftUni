@@ -1,4 +1,5 @@
-﻿using Logger2.Loggers.Enums;
+﻿using Logger2.Layouts.Contracts;
+using Logger2.Loggers.Enums;
 
 namespace Logger2.Appenders
 {

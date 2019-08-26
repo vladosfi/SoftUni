@@ -9,7 +9,7 @@ namespace Logger2.Loggers
 
         public void Write(string message)
         {
-            this.Size += message.Where(c => char.IsLetter(c)).Count();
+            this.Size += message.Where(char.IsLetter).Sum(c=>c);
         }
     }
 }

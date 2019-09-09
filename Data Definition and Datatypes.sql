@@ -368,7 +368,7 @@ VALUES (1, 1, 1, 50, 100234,null,null, '1988-03-13', null, null, 10, 50.30, 'Sta
 --	 BedTypes (BedType, Notes)
 --	 Rooms (RoomNumber, RoomType, BedType, Rate, RoomStatus, Notes)
 --	 Payments (Id, EmployeeId, PaymentDate, AccountNumber, FirstDateOccupied, LastDateOccupied,
---	TotalDays, AmountCharged, TaxRate, TaxAmount, PaymentTotal, Notes)
+-- TotalDays, AmountCharged, TaxRate, TaxAmount, PaymentTotal, Notes)
 --	 Occupancies (Id, EmployeeId, DateOccupied, AccountNumber, RoomNumber, RateApplied, PhoneCharge,Notes)
 -- Set most appropriate data types for each column. Set primary key to each table. Populate each table with only 3
 -- records. Make sure the columns that are present in 2 tables would be of the same data type. Consider which fields
@@ -381,7 +381,6 @@ USE Hotel
 
 
 --	 Employees (Id, FirstName, LastName, Title, Notes)
-
 CREATE TABLE Employees (
 Id INT PRIMARY KEY IDENTITY, 
 FirstName NVARCHAR(20), 
@@ -415,14 +414,37 @@ VALUES (123, 'Pesho1', 'Peshev1', '0888 888 565', 'EmergencyName', 12312, 'Note'
 
 --	 RoomStatus (RoomStatus, Notes)
 CREATE TABLE RoomStatus(
-RoomStatus NVARCHAR(20),
+RoomStatus NVARCHAR(20) PRIMARY KEY,
 Notes NTEXT
 )
 
 INSERT INTO RoomStatus(RoomStatus, Notes)
 VALUES ('Reserve', 'Note1'),
-	('Reserve', 'Note2'),
-	('Reserve', 'Note3')
+	('Free', 'Note2'),
+	('Opened', 'Note3')
+
+--	 RoomTypes (RoomType, Notes)
+CREATE TABLE RoomTypes(
+RoomType NVARCHAR(20) PRIMARY KEY,
+Notes NTEXT
+)
+
+INSERT INTO RoomTypes(RoomType, Notes)
+VALUES ('Apartment', 'Note1'),
+	('Single room', 'Note2'),
+	('double room', 'Note3')
+
+--	 BedTypes (BedType, Notes)
+CREATE TABLE BedTypes(
+BedType NVARCHAR(20) PRIMARY KEY,
+Notes NTEXT
+)
+
+INSERT INTO BedTypes(BedType, Notes)
+VALUES ('One', 'Note1'),
+	('Two', 'Note2'),
+	('One + One', 'Note3')
+
 
 --  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -509,3 +531,68 @@ VALUES ('Ivan Ivanov Ivanov' , '.NET Developer' ,4, '1988-03-13',  3500.00),
 	('Maria Petrova Ivanova' , 'Intern' ,4, '1988-03-13',  3500.00),
 	('Georgi Teziev Ivanov' , 'CEO' ,2, '1988-03-13',  3000.00),
 	('Peter Pan Pan ' , 'Intern' ,3, '1988-03-13',  599.88)
+
+
+-- Problem 19. Basic Select All Fields
+-- Use the SoftUni database and first select all records from the Towns, then from Departments and finally from
+-- Employees table. Use SQL queries and submit them to Judge at once. Submit your query statements as Prepare DB
+-- &amp; Run queries.
+
+SELECT * FROM Towns
+SELECT * FROM Departments
+SELECT * FROM Employees
+
+-- Problem 20. Basic Select All Fields and Order Them
+-- Modify queries from previous problem by sorting:
+--  Towns - alphabetically by name
+--  Departments - alphabetically by name
+--  Employees - descending by salary
+-- Submit your query statements as Prepare DB &amp; Run queries.
+
+SELECT * FROM Towns
+ORDER BY Name ASC
+
+SELECT * FROM Departments
+ORDER BY Name ASC
+
+SELECT * FROM Employees
+ORDER BY Salary DESC
+
+
+
+-- Problem 21. Basic Select Some Fields
+-- Modify queries from previous problem to show only some of the columns. For table:
+--  Towns – Name
+--  Departments – Name
+--  Employees – FirstName, LastName, JobTitle, Salary
+-- Keep the ordering from the previous problem. Submit your query statements as Prepare DB &amp; Run queries.
+
+SELECT Name FROM Towns
+ORDER BY Name ASC
+
+SELECT Name FROM Departments
+ORDER BY Name ASC
+
+SELECT FirstName, LastName, JobTitle, Salary FROM Employees
+ORDER BY Salary DESC
+
+-- Problem 22. Increase Employees Salary
+-- Use SoftUni database and increase the salary of all employees by 10%. Then show only Salary column for all in the
+-- Employees table. Submit your query statements as Prepare DB &amp; Run queries.
+
+UPDATE Employees
+SET Salary = Salary * 1.1
+SELECT Salary FROM Employees
+
+-- Problem 23. Decrease Tax Rate
+-- Use Hotel database and decrease tax rate by 3% to all payments. Then select only TaxRate column from the
+--  Payments table. Submit your query statements as Prepare DB &amp; Run queries.
+
+UPDATE Payments
+SET TaxRate = TaxRate - (TaxRate * 0.03)
+SELECT TaxRate FROM Payments
+
+-- Problem 24. Delete All Records
+-- Use Hotel database and delete all records from the Occupancies table. Use SQL query. Submit your query
+-- statements as Run skeleton, run queries &amp; check DB.
+TRUNCATE TABLE Occupancies

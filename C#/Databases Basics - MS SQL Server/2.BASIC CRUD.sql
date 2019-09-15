@@ -154,6 +154,6 @@ ORDER BY CountryName
 -- Display all characters in alphabetical order.
 
 SELECT [Name]
-	FROM Diablo
+	FROM Characters
 	ORDER BY [Name]
 	

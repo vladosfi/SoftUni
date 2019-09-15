@@ -98,3 +98,62 @@ SELECT TOP (10) *
 
 -- 20. Last 7 Hired Employees
 -- Write a SQL query to find last 7 hired employees. Select their first, last name and their hire date.
+
+SELECT TOP(7) FirstName, LastName, HireDate
+	FROM Employees
+	ORDER BY HireDate DESC
+
+
+-- 21. Increase Salaries
+-- Write a SQL query to increase salaries of all employees that are in the Engineering, Tool Design, Marketing or
+-- Information Services department by 12%. Then select Salaries column from the Employees table. After that
+-- exercise restore your database to revert those changes.
+
+UPDATE Employees 
+	SET Salary = Salary * 1.12
+	WHERE DepartmentId IN (1,2,4,11)
+	SELECT Salary FROM Employees
+-- WHERE DepartmentId IN (SELECT DepartmentID FROM Departments WHERE Name IN (Engineering, Tool Design, Marketing ,Information))
+
+-- 22. All Mountain Peaks
+-- Display all mountain peaks in alphabetical order.
+
+USE Geographi
+SELECT PeakName
+	FROM Peaks
+	ORDER BY PeakName
+
+-- 23. Biggest Countries by Population
+-- Find the 30 biggest countries by population from Europe. Display the country name and population. 
+-- Sort the results by population (from biggest to smallest), then by country alphabetically.
+
+SELECT TOP(30) CountryName, [Population] 
+	FROM Countries
+	WHERE ContinentCode = 'EU'
+	ORDER BY 
+		[Population] DESC,
+		CountryName
+
+
+-- 24. *Countries and Currency (Euro / Not Euro)
+-- Find all countries along with information about their currency. Display the country name, country code and
+-- information about its currency: either &quot;Euro&quot; or &quot;Not Euro&quot;. 
+-- Sort the results by country name alphabetically.
+-- *Hint: Use CASE … WHEN.
+
+SELECT CountryName, CountryCode,
+	CASE 
+	WHEN CurrencyCode = 'EUR' THEN 'Euro'
+    ELSE 'Not Euro'
+	END AS Currency
+FROM Countries
+ORDER BY CountryName
+
+
+-- 25. All Diablo Characters
+-- Display all characters in alphabetical order.
+
+SELECT [Name]
+	FROM Diablo
+	ORDER BY [Name]
+	

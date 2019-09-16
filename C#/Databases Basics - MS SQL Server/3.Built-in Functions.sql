@@ -93,3 +93,36 @@ SELECT *
 	WHERE SubTable.Rank = 2 
 	ORDER BY Salary DESC
 
+-- Problem 12. Countries Holding ‘A’ 3 or More Times
+-- Find all countries that holds the letter &#39;A&#39; in their name at least 3 times (case insensitively), sorted by ISO code. Display the country name and ISO code.
+
+SELECT CountryName, ISOCode
+	FROM Countries
+	WHERE CountryName LIKE '%a%a%a%'
+	ORDER BY ISOCode
+
+
+-- Problem 13. Mix of Peak and River Names
+-- Combine all peak names with all river names, so that the last letter of each peak name is the same as the first letter of its corresponding river name. 
+-- Display the peak names, river names, and the obtained mix (mix should be in lowercase). Sort the results by the obtained mix.
+
+--SELECT PeakName , RiverName
+--	FROM (
+--		SELECT PeakName + ' ' + RiverName	
+--		FROM Countries
+--		WHERE RIGHT(PeakName,1) = LEFT(RiverName,1)
+--		) AS mix
+--	ORDER BY mix
+
+SELECT PeakName, RiverName, LOWER(SUBSTRING(PeakName,1,LEN(PeakName)-1) + RiverName) AS Mix
+	FROM Peaks, Rivers
+	WHERE RIGHT(PeakName,1) = LEFT(RiverName,1)
+	ORDER BY Mix
+
+-- Problem 14. Games from 2011 and 2012 year
+-- Find the top 50 games ordered by start date, then by name of the game. Display only games from 2011 and 2012 year. Display start date in the format “yyyy-MM-dd”.
+
+SELECT TOP(50) [Name], FORMAT ([Start], 'yyyy-MM-dd') AS [Start]
+	FROM Games
+	WHERE YEAR([Start]) IN (2011,2012)
+	ORDER BY [Start], [Name]

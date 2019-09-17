@@ -175,3 +175,35 @@ FROM
 	Games
 ORDER BY 
 	[Name],Duration, [Part of the Day]
+
+
+-- Problem 18. Orders Table
+-- You are given a table Orders(Id, ProductName, OrderDate) filled with data. Consider that the payment for that order must be accomplished within 3 days after the order date. Also the delivery date is up to 1 month. Write a query to show each product’s name, order date, pay and deliver due dates.
+
+SELECT 
+	ProductName, OrderDate, DATEADD(DAY, 3, OrderDate) AS [Pay Due], DATEADD(MONTH, 1, OrderDate) AS [Deliver Due]
+FROM 
+	Orders
+
+-- Problem 19. People Table
+-- Create a table People(Id, Name, Birthdate). Write a query to find age in years, months, days and minutes for each person for the current time of executing the query.
+
+CREATE TABLE People (
+	Id INT PRIMARY KEY IDENTITY,
+	[Name] NVARCHAR(20) NOT NULL,
+	Birthdate DATETIME
+)
+
+INSERT INTO People([Name], Birthdate)
+     VALUES('Name One', '1/1/2006'),
+	 ('Name Two', '1/1/2007')
+
+SELECT 
+	Id, [Name], Birthdate
+	, DATEDIFF(YEAR,Birthdate,GETDATE()) AS [Year]
+	, DATEDIFF(MONTH,Birthdate,GETDATE()) AS [Month]
+	, DATEDIFF(DAY,Birthdate,GETDATE()) AS [DAY]
+	, DATEDIFF(MINUTE,Birthdate,GETDATE()) AS [Minutes]
+FROM 
+	PEOPLE
+

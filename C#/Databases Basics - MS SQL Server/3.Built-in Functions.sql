@@ -6,23 +6,27 @@ WHERE FirstName LIKE 'sa%'
 
 -- Problem 2. Find Names of All employees by Last Name
 -- Write a SQL query to find first and last names of all employees whose last name contains “ei”.
-SELECT	FirstName, LastName
-	FROM Employees
+SELECT FirstName
+	,LastName
+FROM Employees
 WHERE LastName LIKE '%ei%'
+
 
 -- Problem 3. Find First Names of All Employees
 -- Write a SQL query to find the first names of all employees in the departments with ID 3 or 10 and whose hire year is
 -- between 1995 and 2005 inclusive.
 SELECT FirstName
 	FROM Employees
-	WHERE DepartmentId IN (3,10) AND DATEPART(YEAR, HireDate) BETWEEN 1975 AND 2005
+	WHERE DepartmentId IN (3,10) AND DATEPART(YEAR, HireDate) BETWEEN 1975 AND 2005 
 
 
 -- Problem 4. Find All Employees Except Engineers
 -- Write a SQL query to find the first and last names of all employees whose job titles does not contain “engineer”.
-SELECT FirstName,LastName
-	FROM Employees
-WHERE JobTitle NOT LIKE('%engineer%')
+SELECT FirstName
+	,LastName
+FROM Employees
+WHERE JobTitle NOT LIKE ('%engineer%')
+
 
 -- Problem 5. Find Towns with Name Length
 -- Write a SQL query to find town names that are 5 or 6 symbols long and order them alphabetically by town name.
@@ -126,3 +130,48 @@ SELECT TOP(50) [Name], FORMAT ([Start], 'yyyy-MM-dd') AS [Start]
 	FROM Games
 	WHERE YEAR([Start]) IN (2011,2012)
 	ORDER BY [Start], [Name]
+
+-- Problem 15. User Email Providers
+-- Find all users along with information about their email providers. Display the username and email provider. Sort the results by email provider alphabetically, then by username.
+SELECT 
+	Username, RIGHT(Email,Len(Email) - CHARINDEX('@', Email)) AS [Email Provider]
+FROM 
+	Users
+ORDER BY 
+	[Email Provider],
+	Username
+
+-- Problem 16. Get Users with IPAdress Like Pattern
+-- Find all users along with their IP addresses sorted by username alphabetically. Display only rows that IP address matches the pattern: “***.1^.^.***”. 
+-- Legend: * - one symbol, ^ - one or more symbols
+
+SELECT 
+	Username, IpAddress
+FROM
+	Users
+WHERE IpAddress LIKE '___.1%.%.___'
+ORDER BY
+	Username
+
+-- Problem 17. Show All Games with Duration and Part of the Day
+-- Find all games with part of the day and duration sorted by game name alphabetically then by duration
+-- (alphabetically, not by the timespan) and part of the day (all ascending). Parts of the day should be Morning (time is
+-- >= 0 and < 12), Afternoon (time is >= 12 and < 18), Evening (time is >= 18 and < 24). Duration should be Extra Short
+-- (smaller or equal to 3), Short (between 4 and 6 including), Long (greater than 6) and Extra Long (without duration).
+
+SELECT Name,
+CASE 
+	WHEN DATEPART(HOUR, [Start]) >= 0 AND DATEPART(HOUR, [Start]) < 12 THEN 'Morning' 
+	WHEN DATEPART(HOUR, [Start]) >= 12 AND DATEPART(HOUR, [Start]) < 18 THEN 'Afternoon'
+	WHEN DATEPART(HOUR, [Start]) >= 18 AND DATEPART(HOUR, [Start]) < 24 THEN 'Evening'
+END AS [Part of the Day],
+CASE 
+	WHEN Duration IS NULL THEN 'Extra Long' 
+	WHEN Duration <= 3 THEN 'Extra Short' 
+	WHEN Duration >= 4 AND Duration <= 6  THEN 'Short' 
+	WHEN Duration > 6  THEN 'Long' 
+END AS Duration
+FROM
+	Games
+ORDER BY 
+	[Name],Duration, [Part of the Day]

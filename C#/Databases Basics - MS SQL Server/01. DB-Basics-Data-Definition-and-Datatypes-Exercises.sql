@@ -102,7 +102,7 @@ Make Id primary key. Populate the table with exactly 5 records. Submit your CREA
 */
 
 CREATE TABLE Users(
-Id INT PRIMARY KEY IDENTITY,
+Id BIGINT PRIMARY KEY IDENTITY,
 Username NVARCHAR(30) NOT NULL,
 [Password] NVARCHAR(26) NOT NULL,
 ProfilePicture VARBINARY (MAX),

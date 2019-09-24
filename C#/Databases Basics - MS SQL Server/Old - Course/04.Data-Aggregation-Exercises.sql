@@ -191,7 +191,7 @@ WHERE ManagerID IS NULL
 
 --Problem 18.	*3rd Highest Salary
 --Find the third highest salary in each department if there is such. 
-SELECT DISTINCT DepartmentID, Salary 
+SELECT DISTINCT DepartmentID, Salary
 	FROM(
 		SELECT DepartmentID, Salary,
 			DENSE_RANK() OVER (PARTITION BY DepartmentID ORDER BY Salary DESC) AS SalaryRank
@@ -206,10 +206,7 @@ WHERE t.SalaryRank = 3
 --•	LastName
 --•	DepartmentID
 --Select all employees who have salary higher than the average salary of their respective departments. Select only the first 10 rows. Order by DepartmentID.
-SELECT *
-FROM (
-		SELECT DepartmentID, AVG(Salary) AS AvgSalary
-		FROM  Employees
-		GROUP BY DepartmentID
-	) AS AvgSalaryByID
-	
+SELECT TOP(10) FirstName,LastName, DepartmentID
+	FROM Employees AS e 
+   WHERE Salary > (SELECT AVG(Salary) FROM Employees AS em WHERE em.DepartmentID = e.DepartmentID)
+ORDER BY DepartmentID

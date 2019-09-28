@@ -111,4 +111,76 @@ INSERT INTO StudentsExams(StudentID, ExamID)
 	(2,103)
 
 	
+--	Problem 4.	Self-Referencing 
+--Create a single table as follows. Use appropriate data types.
+CREATE TABLE Teachers(
+TeacherID INT PRIMARY KEY,
+[Name] VARCHAR (20) NOT NULL,
+ManagerID INT
+)
 
+ALTER TABLE Teachers
+ADD FOREIGN KEY (ManagerID) REFERENCES Teachers(TeacherID)
+
+
+--Problem 5.	Online Store Database
+--Create a new database and design the following structure:
+
+CREATE DATABASE OnlineStore 
+GO
+USE OnlineStore
+
+CREATE TABLE Orders(
+OrderID INT PRIMARY KEY,
+CustomerID INT)
+
+CREATE TABLE Customers(
+CustomerID INT PRIMARY KEY,
+[Name] VARCHAR(50),
+Birthday DATE,
+CityID INT)
+
+CREATE TABLE Cities(
+CityID INT PRIMARY KEY,
+[Name] VARCHAR(50))
+
+
+CREATE TABLE OrderItems(
+OrderID INT NOT NULL,
+ItemID INT NOT NULL,
+CONSTRAINT PK_Orderitems PRIMARY KEY (OrderID,ItemID)
+)
+
+CREATE TABLE Items(
+ItemID INT PRIMARY KEY,
+[Name] VARCHAR(50),
+ItemTypeID INT)
+
+CREATE TABLE ItemTypes(
+ItemTypeID INT PRIMARY KEY,
+[Name] VARCHAR(50))
+
+ALTER TABLE Items
+ADD FOREIGN KEY (ItemTypeID) REFERENCES ItemTypes(ItemTypeID)
+
+
+ALTER TABLE OrderItems
+ADD FOREIGN KEY (ItemID) REFERENCES Items(ItemID)
+
+
+ALTER TABLE OrderItems
+ADD FOREIGN KEY (OrderID) REFERENCES Orders(OrderID)
+
+
+ALTER TABLE Orders
+ADD FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)
+
+ALTER TABLE Customers
+ADD FOREIGN KEY (CityID) REFERENCES Cities(CityID)
+
+
+TRUNCATE TABLE Cities
+TRUNCATE TABLE Customers
+TRUNCATE TABLE ItemTypes
+TRUNCATE TABLE Items
+TRUNCATE TABLE Orders

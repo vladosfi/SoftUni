@@ -221,3 +221,16 @@ ADD FOREIGN KEY (MajorID) REFERENCES Majors(MajorID)
 ALTER TABLE Payments
 ADD FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
 
+--Problem 9.	*Peaks in Rila
+--Display all peaks for "Rila" mountain. Include:
+--•	MountainRange
+--•	PeakName
+--•	Elevation
+--Peaks should be sorted by elevation descending.
+
+SELECT MountainRange, PeakName, Elevation 
+FROM Mountains AS m
+	JOIN Peaks AS p  ON m.id = p.MountainId
+	WHERE MountainRange = 'Rila'WHERE MountainRange = 'Rila'
+
+

@@ -148,7 +148,7 @@ CityID INT PRIMARY KEY,
 CREATE TABLE OrderItems(
 OrderID INT NOT NULL,
 ItemID INT NOT NULL,
-CONSTRAINT PK_Orderitems PRIMARY KEY (OrderID,ItemID)
+CONSTRAINT PK_OrderItems PRIMARY KEY (OrderID,ItemID)
 )
 
 CREATE TABLE Items(
@@ -179,8 +179,31 @@ ALTER TABLE Customers
 ADD FOREIGN KEY (CityID) REFERENCES Cities(CityID)
 
 
-TRUNCATE TABLE Cities
-TRUNCATE TABLE Customers
-TRUNCATE TABLE ItemTypes
-TRUNCATE TABLE Items
-TRUNCATE TABLE Orders
+--Problem 6.	University Database
+--Create a new database and design the following structure:
+CREATE TABLE Majors(
+MajorID INT PRIMARY KEY,
+[Name] VARCHAR(50))
+
+CREATE TABLE Students(
+StudentID INT PRIMARY KEY,
+StudentNumber INT,
+StudentName VARCHAR(50),
+MajorID INT)
+
+CREATE TABLE Payments(
+PaymentID INT PRIMARY KEY,
+PaymentDate DATE,
+PaymentAmount DECIMAL(18,2),
+StudentID INT)
+
+CREATE TABLE Subjects(
+SubjectID INT PRIMARY KEY,
+SubbjectName VARCHAR(50))
+
+CREATE TABLE Agenda(
+StudentID INT NOT NULL,
+SubjectID INT NOT NULL,
+CONSTRAINT PK_Agenda PRIMARY KEY (StudentID,SubjectID))
+
+ 

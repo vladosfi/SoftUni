@@ -118,6 +118,14 @@ SELECT SUM(Diff) AS SumDifference FROM(
 			FROM   WizzardDeposits) AS w
 
 
+
+SELECT SUM(dif.[Difference]) AS SumDifference FROM(
+	SELECT wd.DepositAmount ,
+		(SELECT wd.DepositAmount - w.DepositAmount FROM WizzardDeposits AS w WHERE w.Id = wd.Id+1) AS [Difference] 
+	FROM WizzardDeposits AS wd
+) AS dif
+
+
 --Problem 13.	Departments Total Salaries
 --That’s it! You no longer work for Mr. Bodrog. You have decided to find a proper job as an analyst in SoftUni. 
 --It’s not a surprise that you will use the SoftUni database. Things get more exciting here!

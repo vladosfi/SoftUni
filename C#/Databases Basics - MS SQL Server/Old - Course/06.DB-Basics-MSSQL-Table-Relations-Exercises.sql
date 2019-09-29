@@ -197,13 +197,27 @@ PaymentDate DATE,
 PaymentAmount DECIMAL(18,2),
 StudentID INT)
 
-CREATE TABLE Subjects(
-SubjectID INT PRIMARY KEY,
-SubbjectName VARCHAR(50))
-
 CREATE TABLE Agenda(
 StudentID INT NOT NULL,
 SubjectID INT NOT NULL,
 CONSTRAINT PK_Agenda PRIMARY KEY (StudentID,SubjectID))
 
- 
+CREATE TABLE Subjects(
+SubjectID INT PRIMARY KEY,
+SubjectName VARCHAR(50)
+)
+
+ALTER TABLE Agenda
+ADD FOREIGN KEY (SubjectID) REFERENCES Subjects(SubjectID)
+
+
+ALTER TABLE Agenda
+ADD FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+
+
+ALTER TABLE Students
+ADD FOREIGN KEY (MajorID) REFERENCES Majors(MajorID)
+
+ALTER TABLE Payments
+ADD FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
+

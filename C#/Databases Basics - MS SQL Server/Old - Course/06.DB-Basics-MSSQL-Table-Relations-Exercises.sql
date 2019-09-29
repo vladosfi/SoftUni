@@ -231,6 +231,6 @@ ADD FOREIGN KEY (StudentID) REFERENCES Students(StudentID)
 SELECT MountainRange, PeakName, Elevation 
 FROM Mountains AS m
 	JOIN Peaks AS p  ON m.id = p.MountainId
-	WHERE MountainRange = 'Rila'WHERE MountainRange = 'Rila'
-
+	WHERE MountainRange = 'Rila'
+	ORDER BY Elevation DESC
 

@@ -301,16 +301,20 @@ ORDER BY HighestPeakElevation DESC, LongestRiverLength DESC, c.CountryName
 --Problem 18.	* Highest Peak Name and Elevation by Country
 --For each country, find the name and elevation of the highest peak, along with its mountain. When no peaks are available in some country, display elevation 0, "(no highest peak)" as peak name and "(no mountain)" as mountain name. When multiple peaks in some country have the same elevation, display all of them. Sort the results by country name alphabetically, then by highest peak name alphabetically. Limit only the first 5 rows.
 
-SELECT TOP 100 c.CountryName,
+SELECT TOP 5 t.CountryName,[Highest Peak Name], [Highest Peak Elevation],Mountain  FROM (
+SELECT c.CountryName,
 	COALESCE(CAST(p.Elevation AS VARCHAR), '(no highest peak)') AS [Highest Peak Name],
 	COALESCE(CAST(p.PeakName AS VARCHAR), '0') AS [Highest Peak Elevation],
-	COALESCE(CAST(m.MountainRange AS VARCHAR), '(no mountain)') AS Mountain
+	COALESCE(CAST(m.MountainRange AS VARCHAR), '(no mountain)') AS Mountain,
+	DENSE_RANK() OVER (PARTITION BY c.CountryName ORDER BY p.Elevation DESC) AS Row_Nunmer
 FROM Countries AS c
 	LEFT JOIN MountainsCountries as mc
 	ON c.CountryCode = mc.CountryCode
 	LEFT JOIN Mountains as m
 	ON mc.MountainId = m.Id
 	LEFT JOIN Peaks AS p
-	ON m.Id = p.MountainId
---GROUP BY c.CountryName	
+	ON m.Id = p.MountainId) AS t
+	WHERE Row_Nunmer = 1
+ORDER BY t.CountryName, t.[Highest Peak Name]
+
 

@@ -182,6 +182,59 @@ ORDER BY s.FirstName, s.LastName
 EXEC usp_GetHoldersWithBalanceHigherThan 50000
 
 
+--Problem 11.	Future Value Function
+--Your task is to create a function ufn_CalculateFutureValue that accepts as parameters – sum (decimal), yearly interest rate (float) and number of years(int). It should calculate and return the future value of the initial sum. Using the following formula:
+
+CREATE OR ALTER FUNCTION ufn_CalculateFutureValue(@InitialSum DECIMAL(15,4), @YearlyInterestRate FLOAT(53), @NumberOfYears INT)
+RETURNS DECIMAL(15, 4)
+BEGIN
+	DECLARE @FV AS DECIMAL(15, 4) = @InitialSum * POWER((1 + @YearlyInterestRate), @NumberOfYears)
+	RETURN @FV
+END
+
+SELECT dbo.ufn_CalculateFutureValue (1000, 0.1, 5)
+
+
+--Problem 12.	Calculating Interest
+--Your task is to create a stored procedure usp_CalculateFutureValueForAccount that uses the function from the previous problem to give an interest to a person's account for 5 years, along with information about his/her account id, first name, last name and current balance as it is shown in the example below. It should take the AccountId and the interest rate as parameters. Again you are provided with “dbo.ufn_CalculateFutureValue” function which was part of the previous task.
+
+
+CREATE OR ALTER PROC usp_CalculateFutureValueForAccount(@AccountId INT, @InterestRate AS FLOAT)
+AS
+SELECT *, dbo.ufn_CalculateFutureValue([Current Balance], @InterestRate, 5)  AS [Balance in 5 years] FROM(
+	SELECT a.AccountHolderId AS [Account Id] 
+		,ah.FirstName AS [First Name]
+		,ah.LastName AS [Last Name]
+		, SUM(a.Balance) AS [Current Balance]
+		FROM AccountHolders AS ah
+		JOIN Accounts AS a
+		ON ah.Id = a.AccountHolderId
+		WHERE a.Id = 1 
+	GROUP BY a.AccountHolderId, ah.FirstName, ah.LastName
+	) as d
+
+
+EXEC usp_CalculateFutureValueForAccount 1,0.1
 
 
 
+--Problem 13.	*Scalar Function: Cash in User Games Odd Rows
+--Create a function ufn_CashInUsersGames that sums the cash of odd rows. Rows must be ordered by cash in descending order. The function should take a game name as a parameter and return the result as table. Submit only your function in.
+--Execute the function over the following game names, ordered exactly like: “Lily Stargazer”, “Love in a mist”.
+
+CREATE OR ALTER FUNCTION ufn_CashInUsersGames(@GameName NVARCHAR(50))
+RETURNS TABLE 
+RETURN
+	(SELECT SUM(gs.Cash) AS [SumCash]
+	FROM (SELECT g.[Name] 
+				,ug.[Cash]
+				,ROW_NUMBER() OVER (ORDER BY Cash DESC) AS RowNumber
+			FROM [UsersGames] AS ug
+			JOIN Games AS g
+			ON g.Id = ug.GameID
+			WHERE g.[Name] = @GameName
+			) AS gs
+		WHERE gs.RowNumber % 2 <> 0)
+
+
+SELECT * FROM dbo.ufn_CashInUsersGames('Lily Stargazer')

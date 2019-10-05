@@ -262,7 +262,7 @@ ORDER BY HighestPeakElevation DESC, LongestRiverLength DESC, c.CountryName
 
 --Problem 18.	* Highest Peak Name and Elevation by Country
 --For each country, find the name and elevation of the highest peak, along with its mountain. When no peaks are available in some country, display elevation 0, "(no highest peak)" as peak name and "(no mountain)" as mountain name. When multiple peaks in some country have the same elevation, display all of them. Sort the results by country name alphabetically, then by highest peak name alphabetically. Limit only the first 5 rows.
-SELECT c.CountryName
+SELECT TOP 5 c.CountryName
 	,CASE 
 		 WHEN p.PeakName IS NULL THEN '(no highest peak)'
 		 ELSE p.PeakName

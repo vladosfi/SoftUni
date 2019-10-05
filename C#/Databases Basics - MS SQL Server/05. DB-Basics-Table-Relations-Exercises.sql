@@ -108,3 +108,133 @@ ADD FOREIGN KEY (ExamID) REFERENCES Exams(ExamID)
 
 --Problem 4.	Self-Referencing 
 --Create a single table as follows. Use appropriate data types.
+CREATE TABLE Teachers(
+TeacherID INT PRIMARY KEY IDENTITY(101,1),
+[Name] NVARCHAR(30) NOT NULL,
+ManagerID INT)
+
+
+INSERT INTO Teachers([Name],ManagerID)
+	VALUES('John',NULL),
+('Maya',106),
+('Silvia',106),
+('Ted',105),
+('Mark',101),
+('Greta',101)
+
+ALTER TABLE Teachers
+ADD FOREIGN KEY (ManagerID) REFERENCES Teachers(TeacherID)
+
+
+--Problem 5.	Online Store Database
+--Create a new database and design the following structure:
+CREATE DATABASE OnlineStore 
+GO
+USE OnlineStore
+
+CREATE TABLE Orders(
+OrderID INT PRIMARY KEY,
+CustomerID INT)
+
+CREATE TABLE Customers(
+CustomerID INT PRIMARY KEY,
+[Name] VARCHAR(50),
+Birthday DATE,
+CityID INT)
+
+CREATE TABLE Cities(
+CityID INT PRIMARY KEY,
+[Name] VARCHAR(50))
+
+
+CREATE TABLE OrderItems(
+OrderID INT NOT NULL,
+ItemID INT NOT NULL,
+CONSTRAINT PK_OrderItems PRIMARY KEY (OrderID,ItemID)
+)
+
+CREATE TABLE Items(
+ItemID INT PRIMARY KEY,
+[Name] VARCHAR(50),
+ItemTypeID INT)
+
+CREATE TABLE ItemTypes(
+ItemTypeID INT PRIMARY KEY,
+[Name] VARCHAR(50))
+
+ALTER TABLE Items
+ADD FOREIGN KEY (ItemTypeID) REFERENCES ItemTypes(ItemTypeID)
+
+ALTER TABLE OrderItems
+ADD FOREIGN KEY (ItemID) REFERENCES Items(ItemID)
+
+ALTER TABLE OrderItems
+ADD FOREIGN KEY (OrderID) REFERENCES Orders(OrderID)
+
+ALTER TABLE Orders
+ADD FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)
+
+ALTER TABLE Customers
+ADD FOREIGN KEY (CityID) REFERENCES Cities(CityID)
+
+
+--Problem 6.	University Database
+--Create a new database and design the following structure:
+CREATE DATABASE University
+GO
+USE University
+
+CREATE TABLE Subjects(
+SubjectID INT PRIMARY KEY,
+SubjectName NVARCHAR(50))
+
+CREATE TABLE Students(
+StudentID INT PRIMARY KEY,
+StudentNumber INT,
+StudentName NVARCHAR(50),
+MajorID INT)
+
+CREATE TABLE Agenda(
+StudentID INT,
+SubjectID INT,
+CONSTRAINT PK_Agenda
+PRIMARY KEY(StudentID, SubjectID),
+CONSTRAINT FK_Agenda_Subjects
+FOREIGN KEY(SubjectID)
+REFERENCES Subjects(SubjectID),
+CONSTRAINT FK_Agenda_Students
+FOREIGN KEY(StudentID)
+REFERENCES Students(StudentID)
+)
+
+
+CREATE TABLE Majors(
+MajorID INT PRIMARY KEY,
+[Name] NVARCHAR(50))
+
+ALTER TABLE Students
+ADD FOREIGN KEY (MajorID) REFERENCES Majors(MajorID)
+
+CREATE TABLE Payments(
+PaymentID INT PRIMARY KEY,
+PaymentDate DATE,
+PaymentAmount DECIMAL(15,2),
+StudentID INT,
+CONSTRAINT FK_Payments_Students
+FOREIGN KEY(StudentID)
+REFERENCES Students(StudentID)
+)
+
+
+--Problem 9.	*Peaks in Rila
+--Display all peaks for "Rila" mountain. Include:
+--•	MountainRange
+--•	PeakName
+--•	Elevation
+--Peaks should be sorted by elevation descending.
+
+SELECT MountainRange, PeakName, Elevation 
+FROM Mountains AS m
+	JOIN Peaks AS p  ON m.id = p.MountainId
+	WHERE MountainRange = 'Rila'
+	ORDER BY Elevation DESC

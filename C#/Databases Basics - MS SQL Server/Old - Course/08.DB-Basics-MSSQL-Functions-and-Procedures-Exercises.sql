@@ -238,3 +238,28 @@ RETURN
 
 
 SELECT * FROM dbo.ufn_CashInUsersGames('Lily Stargazer')
+
+
+-- 14. Create Table Logs
+SELECT * FROM Accounts AS a JOIN AccountHolders AS ah ON a.AccountHolderID = ah.Id
+
+CREATE TABLE Logs(
+LogId INT PRIMARY KEY IDENTITY,
+AccountId INT FOREIGN KEY REFERENCES Accounts(Id),
+OldSum MONEY,
+NewSum MONEY)
+
+
+CREATE TRIGGER tr_InsertAccountInfo ON Accounts FOR UPDATE
+AS
+DECLARE @NewSum MONEY = (SELECT Balance FROM inserted)
+DECLARE @OldSum MONEY = (SELECT Balance FROM deleted)
+DECLARE @AccountId INT = (SELECT Id FROM inserted)
+INSERT INTO Logs (AccountId, NewSum, OldSum)
+VALUES(@AccountId,@NewSum, @OldSum)
+
+UPDATE Accounts SET Balance += 10 WHERE Id = 1
+
+SELECT * FROM Logs
+
+

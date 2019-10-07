@@ -263,3 +263,9 @@ UPDATE Accounts SET Balance += 10 WHERE Id = 1
 SELECT * FROM Logs
 
 
+-- 15.Create Table e-mails
+CREATE TABLE NotificationEmails(
+Id INT PRIMARY KEY IDENTITY,
+Recipient INT NOT NULL FOREIGN KEY REFERENCES AccountId(Id),
+[Subject] NVARCHAR(100) NOT NULL,
+Body NTEXT NOT NULL)

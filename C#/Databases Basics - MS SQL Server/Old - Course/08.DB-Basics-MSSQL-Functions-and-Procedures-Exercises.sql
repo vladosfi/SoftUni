@@ -325,3 +325,70 @@ COMMIT
 SELECT * FROM Accounts 
 EXEC usp_DepositMoney 1, 12.1212
 
+
+--Problem 17. Withdraw Money
+--Add stored procedure usp_WithdrawMoney (AccountId, MoneyAmount) that withdraws money from an existing account. Make sure to guarantee valid positive MoneyAmount with precision up to fourth sign after decimal point. The procedure should produce exact results working with the specified precision.
+--Example
+--Here is the result for AccountId = 5 and MoneyAmount = 25.
+CREATE PROC usp_WithdrawMoney(@AccountId INT, @MoneyAmount DECIMAL(18,4))
+AS
+BEGIN TRANSACTION
+IF (@MoneyAmount < 0)
+BEGIN 
+	ROLLBACK
+	RAISERROR('Negative money!', 16, 1)
+	RETURN
+END
+UPDATE Accounts
+SET Balance -= @MoneyAmount
+WHERE Id = @AccountId
+COMMIT
+
+SELECT * FROM Accounts
+EXEC usp_WithdrawMoney 5, 25
+
+
+--Problem 18. Money Transfer
+--Write stored procedure usp_TransferMoney(SenderId, ReceiverId, Amount) that transfers money from one account to another. Make sure to guarantee valid positive MoneyAmount with precision up to fourth sign after decimal point. Make sure that the whole procedure passes without errors and if error occurs make no change in the database. You can use both: “usp_DepositMoney”, “usp_WithdrawMoney” (look at previous two problems about those procedures). 
+--Example
+--Here is the result for SenderId = 5, ReceiverId = 1 and MoneyAmount = 5000
+CREATE OR ALTER PROC usp_TransferMoney(@SenderId INT, @ReceiverId INT, @Amount DECIMAL(18,4))
+AS
+BEGIN TRANSACTION
+DECLARE @SenderMoneyAmount DECIMAL(18,2) = (SELECT SUM(Balance) FROM Accounts WHERE Id = @SenderId)
+IF (@Amount < 0)
+BEGIN
+	ROLLBACK
+	RAISERROR('Negative money!',16,1)
+	RETURN
+END
+	
+IF (@SenderMoneyAmount < @Amount)
+BEGIN 
+	ROLLBACK
+	RAISERROR('Not enough money to send!',16,1)
+	RETURN
+END
+
+BEGIN TRY
+	UPDATE Accounts
+	SET Balance -= @Amount
+	WHERE Id = @SenderId  
+	UPDATE Accounts
+	SET Balance += @Amount
+	WHERE Id = @ReceiverId  
+END TRY
+BEGIN CATCH
+SELECT
+ERROR_NUMBER() AS ErrorNumber
+,ERROR_SEVERITY() AS ErrorSeverity
+,ERROR_STATE() AS ErrorState
+,ERROR_PROCEDURE() AS ErrorProcedure
+,ERROR_LINE() AS ErrorLine
+,ERROR_MESSAGE() AS ErrorMessage;
+END CATCH
+COMMIT
+
+SELECT * FROM Accounts 
+EXEC usp_TransferMoney 5,1,5000
+SELECT * FROM Accounts 

@@ -240,7 +240,9 @@ RETURN
 SELECT * FROM dbo.ufn_CashInUsersGames('Lily Stargazer')
 
 
--- 14. Create Table Logs
+--Problem 14. Create Table Logs
+--Create a table – Logs (LogId, AccountId, OldSum, NewSum). Add a trigger to the Accounts table that enters a new entry into the Logs table every time the sum on an account changes. Submit only the query that creates the trigger.
+
 SELECT * FROM Accounts AS a JOIN AccountHolders AS ah ON a.AccountHolderID = ah.Id
 
 CREATE TABLE Logs(
@@ -263,9 +265,63 @@ UPDATE Accounts SET Balance += 10 WHERE Id = 1
 SELECT * FROM Logs
 
 
--- 15.Create Table e-mails
+--Problem 15. Create Table Emails
+--Create another table – NotificationEmails(Id, Recipient, Subject, Body). Add a trigger to logs table and create new email whenever new record is inserted in logs table. The following data is required to be filled for each email:
+--•	Recipient – AccountId
+--•	Subject – “Balance change for account: {AccountId}”
+--•	Body - “On {date} your balance was changed from {old} to {new}.”
+--Submit your query only for the trigger action.
+
 CREATE TABLE NotificationEmails(
 Id INT PRIMARY KEY IDENTITY,
-Recipient INT NOT NULL FOREIGN KEY REFERENCES AccountId(Id),
-[Subject] NVARCHAR(100) NOT NULL,
-Body NTEXT NOT NULL)
+Recipient INT NOT NULL FOREIGN KEY REFERENCES Accounts(Id),
+[Subject] NVARCHAR(100),
+Body NVARCHAR(MAX))
+
+ALTER TRIGGER tr_LogEmail ON Logs 
+FOR INSERT
+AS
+DECLARE @Recipient INT = (SELECT TOP 1 AccountId FROM inserted)
+DECLARE @NewSum DECIMAL(15,2) = (SELECT TOP 1 NewSum FROM inserted)
+DECLARE @OldSum DECIMAL(15,2) = (SELECT TOP 1 OldSum FROM inserted)
+DECLARE @date VARCHAR(50) = CONVERT(VARCHAR(50),GETDATE(),103)
+DECLARE @Body NVARCHAR(MAX) = 'On ' + @date + ' your balance was changed from ' + CAST(@OldSum AS VARCHAR(20)) + ' to ' + CAST(@NewSum AS VARCHAR(20)) + '.'
+INSERT INTO NotificationEmails (Recipient, [Subject],Body)
+VALUES(@Recipient,'Balance change for account: ' +  CAST(@Recipient AS VARCHAR(10)), @Body)
+	
+UPDATE Accounts SET Balance += 10 WHERE Id = 1
+SELECT * FROM NotificationEmails
+SELECT * FROM Logs
+
+
+--Problem 16. Deposit Money
+--Add stored procedure usp_DepositMoney (AccountId, MoneyAmount) that deposits money to an existing account. Make sure to guarantee valid positive MoneyAmount with precision up to fourth sign after decimal point. The procedure should produce exact results working with the specified precision.
+--Example
+--Here is the result for AccountId = 1 and MoneyAmount = 10.
+
+CREATE OR ALTER PROC usp_DepositMoney(@AccountId INT, @MoneyAmount DECIMAL(18,4))
+AS
+BEGIN TRANSACTION
+DECLARE @account INT = (SELECT Id FROM Accounts WHERE Id = @AccountId )
+
+IF(@account IS NULL)
+BEGIN
+	ROLLBACK
+	RAISERROR('Invalid account!', 16, 1)
+	RETURN
+END
+
+IF(@MoneyAmount < 0)
+BEGIN
+	ROLLBACK
+	RAISERROR('Invalid money value!', 16, 1)
+	RETURN
+END
+
+UPDATE Accounts SET Balance = Balance + @MoneyAmount
+	WHERE Id = @AccountId
+COMMIT
+
+SELECT * FROM Accounts 
+EXEC usp_DepositMoney 1, 12.1212
+

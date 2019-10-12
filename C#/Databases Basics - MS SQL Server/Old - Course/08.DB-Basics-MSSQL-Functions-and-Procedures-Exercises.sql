@@ -391,4 +391,126 @@ COMMIT
 
 SELECT * FROM Accounts 
 EXEC usp_TransferMoney 5,1,5000
-SELECT * FROM Accounts 
+SELECT * FROM Accounts;
+
+
+
+--Problem 19. Trigger
+--1. Users should not be allowed to buy items with higher level than their level. Create a trigger that restricts that. The trigger should prevent inserting items that are above specified level while allowing all others to be inserted.
+--2. Add bonus cash of 50000 to users: baleremuda, loosenoise, inguinalself, buildingdeltoid, monoxidecos in the game “Bali”.
+--3. There are two groups of items that you must buy for the above users. The first are items with id between 251 and 299 including. Second group are items with id between 501 and 539 including.
+--Take off cash from each user for the bought items.
+--4. Select all users in the current game (“Bali”) with their items. Display username, game name, cash and item name. Sort the result by username alphabetically, then by item name alphabetically. 
+
+--PART 1-----------------------------------------------------------------------------------
+SELECT * 
+	FROM Users AS u 
+	JOIN UsersGames AS ug
+	ON ug.Id = u.Id
+	
+SELECT * FROM Items 
+
+SELECT * FROM UserGameItems WHERE UserGameId = 38 AND ItemId = 2
+
+INSERT INTO UserGameItems(ItemId,UserGameId)
+	VALUES(2,38)
+
+
+GO
+CREATE TRIGGER tr_RestrictItems ON UserGameItems
+INSTEAD OF INSERT
+AS
+DECLARE @itemId INT = (SELECT ItemId FROM inserted)
+DECLARE @userGameId INT = (SELECT UserGameId FROM inserted)
+
+DECLARE @ItemLevel INT = (SELECT MinLevel FROM Items WHERE Id = @itemId)
+DECLARE @userGameLeve INT = (SELECT [Level] FROM UsersGames WHERE Id = @userGameId)
+
+IF(@userGameLeve >= @ItemLevel)
+BEGIN
+	INSERT INTO UserGameItems(ItemId,UserGameId)
+	VALUES(@itemId,@userGameId)
+END
+
+
+--PART 2-----------------------------------------------------------------------------------
+--SELECT Username, g.[Name], Cash, i.Name 
+SELECT *
+	FROM Users AS u
+	JOIN UsersGames AS ug ON u.Id = ug.Id
+	JOIN Games AS g ON g.Id = ug.GameId
+	JOIN UserGameItems AS ugi ON ugi.UserGameId = g.Id
+	JOIN Items AS i ON i.Id = ugi.ItemId
+	WHERE UserName IN ('baleremuda', 'loosenoise', 'inguinalself', 'buildingdeltoid', 'monoxidecos')
+		AND g.Name = 'Tracelium'
+
+UPDATE UsersGames 
+	SET Cash += 50000
+	WHERE GameId = (SELECT Id FROM Games WHERE Name = 'Tracelium') 
+	AND UserId IN (SELECT Id FROM Users WHERE Username IN ('baleremuda', 'loosenoise', 'inguinalself', 'buildingdeltoid', 'monoxidecos'))
+
+
+	SELECT * FROM UsersGames
+	WHERE GameId = (SELECT g.Id FROM Games AS g WHERE Name = 'Tracelium') 
+	AND UserId IN (SELECT u.Id FROM Users AS u WHERE Username IN ('baleremuda', 'loosenoise', 'inguinalself', 'buildingdeltoid', 'monoxidecos'))
+
+--Problem 20. *Massive Shopping
+--1.	User Stamat in Safflower game wants to buy some items. He likes all items from Level 11 to 12 as well as all items from Level 19 to 21. As it is a bulk operation you have to use transactions. 
+--2.	A transaction is the operation of taking out the cash from the user in the current game as well as adding up the items. 
+--3.	Write transactions for each level range. If anything goes wrong turn back the changes inside of the transaction.
+--4.	Extract all of Stamat’s item names in the given game sorted by name alphabetically
+SELECT * FROM USERS WHERE Username = 'Stamat'
+
+CREATE PROC usp_UserBuyItems(@userName AS NVARCHAR, @itemId )
+AS 
+IF @@ROWCOUNT <> 1 -- Didn’t affect exactly one row
+BEGIN
+ROLLBACK
+RAISERROR('Invalid account!', 16, 1)
+RETURN
+BEGIN TRANSACTION
+COMMIT
+
+--Problem 21. Employees with Three Projects
+--Create a procedure usp_AssignProject(@emloyeeId, @projectID) that assigns projects to employee. If the employee has more than 3 project throw exception and rollback the changes. The exception message must be: "The employee has too many projects!" with Severity = 16, State = 1.
+USE SoftUni
+
+CREATE PROC usp_AssignProject(@emloyeeId INT, @projectID INT) 
+AS 
+BEGIN TRANSACTION
+INSERT INTO EmployeesProjects (EmployeeID, ProjectID)
+	VALUES(@emloyeeId,@projectID)
+
+DECLARE @employeeProjectCount INT 
+SET @employeeProjectCount = (SELECT COUNT(*) FROM EmployeesProjects WHERE EmployeeID = @emloyeeId)
+IF(@employeeProjectCount > 3)
+BEGIN
+	ROLLBACK
+	RAISERROR('The employee has too many projects!', 16, 1)
+	RETURN
+END
+COMMIT
+
+EXEC usp_AssignProject 46, 3
+
+
+--Problem 22. Delete Employees
+--Create a table Deleted_Employees(EmployeeId PK, FirstName, LastName, MiddleName, JobTitle, DepartmentId, Salary) that will hold information about fired (deleted) employees from the Employees table. Add a trigger to Employees table that inserts the corresponding information about the deleted records in Deleted_Employees.
+CREATE TABLE Deleted_Employees(
+EmployeeId INT PRIMARY KEY, 
+FirstName varchar(50) NOT NULL, 
+LastName varchar(50) NOT NULL, 
+MiddleName varchar(50), 
+JobTitle varchar(50) NOT NULL, 
+DepartmentId INT NOT NULL, 
+Salary MONEY NOT NULL) 
+
+CREATE TRIGGER tr_OnDeleteEmployee ON Employees
+FOR DELETE
+AS
+INSERT INTO 
+	Deleted_Employees (FirstName, LastName, MiddleName, JobTitle, DepartmentId, Salary)
+SELECT FirstName, LastName, MiddleName, JobTitle, DepartmentId, Salary FROM deleted 
+
+
+

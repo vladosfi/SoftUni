@@ -220,6 +220,7 @@ DECLARE @studentExistance INT = (SELECT TOP 1 Id FROM Students WHERE Id = @Stude
 IF(@studentExistance IS NULL)
 BEGIN
 	RAISERROR('This school has no student with the provided id!', 16, 1)
+	RETURN
 END
 DELETE FROM StudentsSubjects
 	WHERE StudentId = @StudentId
@@ -233,4 +234,4 @@ DELETE FROM Students
 EXEC usp_ExcludeFromSchool 1
 SELECT COUNT(*) FROM Students
 
-
+EXEC usp_ExcludeFromSchool 301

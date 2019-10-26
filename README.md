@@ -18,6 +18,6 @@
 |<a href="https://softuni.bg/trainings/2348/csharp-advanced-may-2019"> C# Advanced </a>| <a href="https://softuni.bg/trainings/2243/csharp-advanced-january-2019" target="_blank"> Link</a> |
 |<a href="https://softuni.bg/trainings/2349/csharp-oop-june-2019"> C# OOP </a>| <a href="https://softuni.bg/trainings/2244/csharp-oop-february-2019/" target="_blank"> Link</a> |
 |<a href="https://softuni.bg/trainings/2495/databases-basics-ms-sql-server-september-2019" > Databases Basics - MS SQL Server - септември 2019 </a>   | <a href="https://softuni.bg/trainings/2495/databases-basics-ms-sql-server-september-2019" target="_blank"> Link</a> |
-|<a href="https://softuni.bg/trainings/2457/entity-framework-core-october-2019" > Databases Basics - Entity Framework Core - октомври 2019 </a>   | <a href="https://softuni.bg/trainings/2457/entity-framework-core-october-2019" target="_blank"> Link</a> |
+|<a href="https://softuni.bg/trainings/2457/entity-framework-core-october-2019" > C# Databases Advanced - Entity Framework Core - октомври 2019 </a>   | <a href="https://softuni.bg/trainings/2457/entity-framework-core-october-2019" target="_blank"> Link</a> |
 
 

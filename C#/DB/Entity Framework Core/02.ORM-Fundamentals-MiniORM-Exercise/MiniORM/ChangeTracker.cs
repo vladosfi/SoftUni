@@ -6,8 +6,6 @@ using System.Reflection;
 
 namespace MiniORM
 {
-	// TODO: Create your ChangeTracker class here.
-
     internal class ChangeTracker<T>
         where T: class, new()
     {
@@ -72,7 +70,7 @@ namespace MiniORM
                 .ToArray();
 
             var modifiedPropertyes = monitoredPropertyes
-                .Where(x => !Equals(x.GetValue(proxyEntity), x.GetValue(entity)))
+                .Where(pi => !Equals(pi.GetValue(proxyEntity), pi.GetValue(entity)))
                 .ToArray();
 
             var isModified = modifiedPropertyes.Any();
@@ -80,7 +78,7 @@ namespace MiniORM
             return isModified;
         }
 
-        private IEnumerable<Object> GetPrimaryKeyValues(PropertyInfo[] primaryKeys, T entity)
+        private static IEnumerable<Object> GetPrimaryKeyValues(PropertyInfo[] primaryKeys, T entity)
         {
             return primaryKeys.Select(pk => pk.GetValue(entity));
         }

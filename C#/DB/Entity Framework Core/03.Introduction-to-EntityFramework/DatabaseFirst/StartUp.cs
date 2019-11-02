@@ -13,20 +13,48 @@
             SoftUniContext context = new SoftUniContext();
 
             string result;
-            
+
             //result = GetEmployeesFullInformation(context);
-            //Console.WriteLine(result);
 
             //result = GetEmployeesWithSalaryOver50000(context);
-            //Console.WriteLine(result);
 
             //result = GetEmployeesFromResearchAndDevelopment(context);
-            //Console.WriteLine(result);
 
-            result = AddNewAddressToEmployee(context);
+            //result = AddNewAddressToEmployee(context);
+
+            result = GetEmployeesInPeriod(context);
             Console.WriteLine(result);
-
         }
+
+        //07.Employees and Projects
+        public static string GetEmployeesInPeriod(SoftUniContext context)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            var employees = context
+                .Employees
+                .Take(10)
+                .Select(e => new
+                {
+                    employeeFirstName = e.FirstName,
+                    employeeLastName = e.LastName,
+                    managerFirstName = e.Manager.FirstName,
+                    managerLastName = e.Manager.LastName,
+                    projectName = e.EmployeesProjects.Select(p => p.Project.Name),
+                    projectEndDate = e.EmployeesProjects.Select(p => p.Project.EndDate),
+                    projectStartDate = e.EmployeesProjects.Select( p=> p.Project.StartDate)
+                        .Where(p => p.Year >= 2001 && p.Year <= 2003)
+                 });
+
+
+            foreach (var employee in employees)
+            {
+                sb.AppendLine($"-- {employee.projectName} - {employee.projectStartDate} - {employee.projectEndDate}");
+            }
+
+            return sb.ToString().TrimEnd();
+        }
+
 
         //06.Adding a New Address and Updating Employee
         public static string AddNewAddressToEmployee(SoftUniContext context)
@@ -40,7 +68,7 @@
             };
 
             context.Addresses.Add(address);
-            
+
             Employee nakov = context
                 .Employees
                 .First(e => e.LastName == "Nakov");
@@ -49,18 +77,18 @@
 
             context.SaveChanges();
 
-            var employees = context
+            var addressesText = context
                 .Employees
-                .OrderByDescending(e=>e.AddressId)
+                .OrderByDescending(e => e.AddressId)
                 .Take(10)
                 .Select(e => new
                 {
                     e.Address
                 });
 
-            foreach (var employee in employees)
+            foreach (var addressText in addressesText)
             {
-                sb.AppendLine($"{employee.Address.AddressText}");
+                sb.AppendLine($"{addressText.Address.AddressText}");
             }
 
             return sb.ToString().TrimEnd();

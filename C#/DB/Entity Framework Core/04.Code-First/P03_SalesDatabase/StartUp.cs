@@ -6,7 +6,7 @@
     {
         public static void Main()
         {
-            var db = new HospitalContext();
+            var db = new SalesContext();
         }
     }
 }

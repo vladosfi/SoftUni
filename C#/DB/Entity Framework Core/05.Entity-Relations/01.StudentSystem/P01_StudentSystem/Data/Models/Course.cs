@@ -23,7 +23,7 @@
 
         public decimal Price { get; set; }
 
-        public ICollection<Resource> Resource { get; set; }
+        public ICollection<Resource> Resources { get; set; }
 
         public ICollection<Homework> HomeworkSubmissions { get; set; }
 

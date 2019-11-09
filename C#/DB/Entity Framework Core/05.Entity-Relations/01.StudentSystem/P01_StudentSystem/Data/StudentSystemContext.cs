@@ -1,5 +1,6 @@
 ﻿namespace P01_StudentSystem.Data
 {
+    using System;
     using Microsoft.EntityFrameworkCore;
     using P01_StudentSystem.Data.Models;
 
@@ -27,7 +28,60 @@
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             OnConfiguringStuden(modelBuilder);
+            OnConfiguringCourse(modelBuilder);
+            OnConfiguringResource(modelBuilder);
+        }
 
+        private void OnConfiguringResource(ModelBuilder modelBuilder)
+        {
+            modelBuilder
+                .Entity<Resource>(entity =>
+                {
+                    entity
+                        .HasKey(r => r.ResourceId);
+
+                    entity
+                        .Property(r => r.Name)
+                        .HasMaxLength(50)
+                        .IsUnicode()
+                        .IsRequired();
+
+                    entity
+                        .Property(r => r.Url)
+                        .IsUnicode(false);
+                });
+        }
+
+        private void OnConfiguringCourse(ModelBuilder modelBuilder)
+        {
+            modelBuilder
+                .Entity<Course>(entity =>
+                {
+                    entity
+                        .HasKey(c => c.CourseId);
+
+                    entity
+                        .HasMany(c => c.StudentsEnrolled)
+                        .WithOne(c => c.Course);
+
+                    entity
+                        .HasMany(c => c.Resources)
+                        .WithOne(c => c.Course);
+
+                    entity
+                        .HasMany(c => c.StudentsEnrolled)
+                        .WithOne(c => c.Course);
+
+                    entity
+                        .Property(c => c.Name)
+                        .HasMaxLength(80)
+                        .IsRequired()
+                        .IsUnicode();
+
+                    entity
+                        .Property(c => c.Description)
+                        .IsUnicode();
+                });
         }
 
         private static void OnConfiguringStuden(ModelBuilder modelBuilder)
@@ -36,6 +90,14 @@
                 .Entity<Student>(entity =>
                 {
                     entity.HasKey(s => s.StudentId);
+
+                    entity
+                        .HasMany(s=>s.CourseEnrollments)
+                        .WithOne(s => s.Student);
+
+                    entity
+                        .HasMany(s => s.HomeworkSubmissions)
+                        .WithOne(s => s.Student);
 
                     entity
                         .Property(p => p.Name)

@@ -30,7 +30,7 @@
 
         public double AwayTeamBetRate { get; set; }
 
-        public int DrawBetRate { get; set; }
+        public double DrawBetRate { get; set; }
 
         public string Result { get; set; }
 

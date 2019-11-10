@@ -16,6 +16,6 @@
         public int CountryId { get; set; }
         public Country Country { get; set; }
 
-        public ICollection<Team> Teams;
+        public ICollection<Team> Teams { get; set; }
     }
 }

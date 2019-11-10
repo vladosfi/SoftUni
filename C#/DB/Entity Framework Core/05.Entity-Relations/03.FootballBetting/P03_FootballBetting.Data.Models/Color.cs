@@ -14,8 +14,8 @@
 
         public string Name { get; set; }
 
-        public ICollection<Team> PrimaryKitTeams;
+        public ICollection<Team> PrimaryKitTeams { get; set; }
 
-        public ICollection<Team> SecondaryKitTeams;
+        public ICollection<Team> SecondaryKitTeams { get; set; }
     }
 }

@@ -8,8 +8,7 @@
         public Student()
         {
             this.HomeworkSubmissions = new HashSet<Homework>();
-
-            this.CourseEnrollments = new HashSet<StudentCourse>();
+            this.CourseEnrollments= new HashSet<StudentCourse>();
         }
 
         public int StudentId { get; set; }

@@ -7,8 +7,10 @@
     {
         public Course()
         {
-            this.Resource = new HashSet<Resource>();
+            this.Resources = new HashSet<Resource>();
+
             this.HomeworkSubmissions = new HashSet<Homework>();
+
             this.StudentsEnrolled = new HashSet<StudentCourse>();
         }
         public int CourseId { get; set; }

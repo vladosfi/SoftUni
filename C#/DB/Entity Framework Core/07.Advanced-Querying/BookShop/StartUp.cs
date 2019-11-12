@@ -20,7 +20,15 @@
                 //DbInitializer.ResetDatabase(db);
                 
                 Console.WriteLine(GetBooksByAgeRestriction(db, Console.ReadLine()));
+
+
             }
+        }
+
+        //2.	Golden Books
+        public static string GetGoldenBooks(BookShopContext context)
+        {
+
         }
 
         //1.	Age Restriction

@@ -36,8 +36,47 @@
 
                 //Console.WriteLine(GetBookTitlesContaining(db, Console.ReadLine()));
 
-                Console.WriteLine(GetBooksByAuthor(db, Console.ReadLine()));
+                //Console.WriteLine(GetBooksByAuthor(db, Console.ReadLine()));
+
+                //Console.WriteLine(CountBooks(db, int.Parse(Console.ReadLine())));
+
+                Console.WriteLine(CountCopiesByAuthor(db));
             }
+        }
+
+        //11. Total Book Copies
+        public static string CountCopiesByAuthor(BookShopContext context)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            var booksByAuthor = context
+                .Authors
+                .Select(a => new
+                {
+                    FullName = a.FirstName + " " + a.LastName,
+                    BookCopiesCount = a.Books.Select(b=>b.Copies)
+                })
+                .OrderByDescending(b=>b.BookCopiesCount)
+                .ToList();
+
+            foreach (var author in booksByAuthor)
+            {
+                sb.AppendLine($"{author.FullName} - {author.BookCopiesCount}");
+            }
+
+            return sb.ToString().TrimEnd();
+        }
+
+
+        //10.	Count Books
+        public static int CountBooks(BookShopContext context, int lengthCheck)
+        {
+
+            var count = context
+                .Books
+                .Where(b => b.Title.Length > lengthCheck).Count();
+            
+            return count;
         }
 
         //9.	Book Search by Author

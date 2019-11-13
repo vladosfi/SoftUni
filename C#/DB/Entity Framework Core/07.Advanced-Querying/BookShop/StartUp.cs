@@ -54,7 +54,7 @@
                 .Select(a => new
                 {
                     FullName = a.FirstName + " " + a.LastName,
-                    BookCopiesCount = a.Books.Select(b=>b.Copies)
+                    BookCopiesCount = a.Books.Select(b=>b.Copies).Sum()
                 })
                 .OrderByDescending(b=>b.BookCopiesCount)
                 .ToList();

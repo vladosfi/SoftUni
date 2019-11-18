@@ -12,16 +12,46 @@
         public static void Main(string[] args)
         {
             var context = new ProductShopContext();
-            context.Database.EnsureDeleted();
-            context.Database.EnsureCreated();
-
-
+            //context.Database.EnsureDeleted();
+            //context.Database.EnsureCreated();
             //var usersJson = File.ReadAllText("./../../../Datasets/users.json");
             //Console.WriteLine(usersJson);
             //var results = ImportUsers(context, usersJson);
 
-            var productsJson = File.ReadAllText("./../../../Datasets/products.json");
-            Console.WriteLine(ImportProducts(context, productsJson));
+            //var productsJson = File.ReadAllText("./../../../Datasets/products.json");
+            //Console.WriteLine(ImportProducts(context, productsJson));
+
+            //var categoriesJson = File.ReadAllText("./../../../Datasets/categories.json");
+            //Console.WriteLine(ImportCategories(context, categoriesJson));
+
+
+            var categoriesProductsJson = File.ReadAllText("./../../../Datasets/categories-products.json");
+            Console.WriteLine(ImportCategoryProducts(context, categoriesProductsJson));
+        }
+
+        //Query 4. Import Categories and Products
+        public static string ImportCategoryProducts(ProductShopContext context, string inputJson)
+        {
+            var categoriesProducts = JsonConvert.DeserializeObject<CategoryProduct[]>(inputJson)
+                .ToArray();
+
+            context.AddRange(categoriesProducts);
+            context.SaveChanges();
+
+            return $"Successfully imported {categoriesProducts.Length}";
+        }
+
+        //Query 3. Import Categories
+        public static string ImportCategories(ProductShopContext context, string inputJson)
+        {
+            var categories = JsonConvert.DeserializeObject<Category[]>(inputJson)
+                .Where(c => c.Name != null && c.Name.Trim().Length >= 3 && c.Name.Trim().Length <= 15)
+                .ToArray();
+
+            context.AddRange(categories);
+            context.SaveChanges();
+
+            return $"Successfully imported {categories.Length}";
         }
 
         //Query 2.Import Products

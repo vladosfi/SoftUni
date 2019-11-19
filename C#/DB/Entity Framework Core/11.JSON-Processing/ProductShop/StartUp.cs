@@ -31,32 +31,117 @@
             //var categoriesProductsJson = File.ReadAllText("./../../../Datasets/categories-products.json");
             //Console.WriteLine(ImportCategoryProducts(context, categoriesProductsJson));
 
-            //Console.WriteLine(GetProductsInRange(context));
-            Console.WriteLine(GetSoldProducts(context));
+            //Console.WriteLine(GetProductsInRange(context)) 
+            //Console.WriteLine(GetSoldProducts(context));
+            //Console.WriteLine(GetCategoriesByProductsCount(context));
+            Console.WriteLine(GetUsersWithProducts(context));
+
         }
+
+        //Query 8. Export Users and Products
+        public static string GetUsersWithProducts(ProductShopContext context)
+        {
+            var filtredUsers = context
+                .Users
+                .Where(u => u.ProductsSold.Any(ps => ps.Buyer != null))
+                .OrderByDescending(u => u.ProductsSold.Count(ps => ps.Buyer != null))
+                .Select(u => new
+                {
+
+                    FirstName = u.FirstName,
+                    LastName = u.LastName,
+                    Age = u.Age,
+                    SoldProducts = new
+                    {
+                        Count = u.ProductsSold
+                            .Count(ps => ps.Buyer != null),
+                        Products = u.ProductsSold
+                            .Where(ps => ps.Buyer != null)
+                            .Select(ps => new
+                            {
+                                Name = ps.Name,
+                                Price = ps.Price
+                            })
+                            .ToArray()
+                    }
+                })
+                .ToArray();
+
+            var result = new
+            {
+                UsersCount = filtredUsers.Length,
+                Users = filtredUsers
+            };
+
+
+            DefaultContractResolver contractResolver = new DefaultContractResolver()
+            {
+                NamingStrategy = new CamelCaseNamingStrategy()
+            };
+
+            var json = JsonConvert.SerializeObject(result, new JsonSerializerSettings()
+            {
+                ContractResolver = contractResolver,
+                Formatting = Formatting.Indented,
+                NullValueHandling = NullValueHandling.Ignore
+            });
+
+            return json;
+        }
+
+        //Query 7. Export Categories By Products Count
+        public static string GetCategoriesByProductsCount(ProductShopContext context)
+        {
+            var filtredCategories = context
+                .Categories
+                .Select(c => new
+                {
+                    Category = c.Name,
+                    productsCount = c.CategoryProducts.Count(),
+                    averagePrice = String.Format("{0:f2}", c.CategoryProducts.Average(p => p.Product.Price)),
+                    totalRevenue = $"{c.CategoryProducts.Sum(p => p.Product.Price):f2}"
+                })
+                .OrderByDescending(c => c.productsCount)
+                .ToList();
+
+
+            DefaultContractResolver contractResolver = new DefaultContractResolver()
+            {
+                NamingStrategy = new CamelCaseNamingStrategy()
+            };
+
+            var json = JsonConvert.SerializeObject(filtredCategories, new JsonSerializerSettings()
+            {
+                ContractResolver = contractResolver,
+                Formatting = Formatting.Indented
+            });
+
+            return json;
+        }
+
 
         //Query 6. Export Successfully Sold Products
         public static string GetSoldProducts(ProductShopContext context)
         {
             var filteredUsers = context
                 .Users
-                .Where(u=>u.ProductsSold.Any(ps => ps.Buyer!= null))
+                .Where(u => u.ProductsSold.Any(ps => ps.Buyer != null))
                 .OrderBy(u => u.LastName)
                 .ThenBy(u => u.FirstName)
-                .Select(u => 
-                    new 
+                .Select(u =>
+                    new
                     {
                         FirstName = u.FirstName,
                         LastName = u.LastName,
                         SoldProducts = u.ProductsSold
-                            .Select(ps => new 
+                            .Select(ps => new
                             {
                                 Name = ps.Name,
                                 Price = ps.Price,
                                 BuyerFirstName = ps.Buyer.FirstName,
                                 BuyerLastName = ps.Buyer.LastName,
                             })
-                          .ToArray()  
+                          .ToArray()
                     })
                 .ToArray();
 

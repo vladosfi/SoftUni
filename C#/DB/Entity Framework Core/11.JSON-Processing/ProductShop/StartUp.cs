@@ -1,8 +1,11 @@
 ﻿namespace ProductShop
 {
+    using AutoMapper;
+    using AutoMapper.QueryableExtensions;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Serialization;
     using ProductShop.Data;
+    using ProductShop.Dtos;
     using ProductShop.Dtos.Export;
     using ProductShop.Models;
     using System;
@@ -15,6 +18,9 @@
         public static void Main(string[] args)
         {
             var context = new ProductShopContext();
+
+            Mapper.Initialize(cfg => cfg.AddProfile<ProductShopProfile>());
+
             //context.Database.EnsureDeleted();
             //context.Database.EnsureCreated();
             //var usersJson = File.ReadAllText("./../../../Datasets/users.json");
@@ -41,30 +47,37 @@
         //Query 8. Export Users and Products
         public static string GetUsersWithProducts(ProductShopContext context)
         {
+            //var filtredUsers = context
+            //    .Users
+            //    .Where(u => u.ProductsSold.Any(ps => ps.Buyer != null))
+            //    .OrderByDescending(u => u.ProductsSold.Count(ps => ps.Buyer != null))
+            //    .Select(u => new
+            //    {
+
+            //        FirstName = u.FirstName,
+            //        LastName = u.LastName,
+            //        Age = u.Age,
+            //        SoldProducts = new
+            //        {
+            //            Count = u.ProductsSold
+            //                .Count(ps => ps.Buyer != null),
+            //            Products = u.ProductsSold
+            //                .Where(ps => ps.Buyer != null)
+            //                .Select(ps => new
+            //                {
+            //                    Name = ps.Name,
+            //                    Price = ps.Price
+            //                })
+            //                .ToArray()
+            //        }
+            //    })
+            //    .ToArray();
+
             var filtredUsers = context
                 .Users
                 .Where(u => u.ProductsSold.Any(ps => ps.Buyer != null))
-                .OrderByDescending(u => u.ProductsSold.Count(ps => ps.Buyer != null))
-                .Select(u => new
-                {
-
-                    FirstName = u.FirstName,
-                    LastName = u.LastName,
-                    Age = u.Age,
-                    SoldProducts = new
-                    {
-                        Count = u.ProductsSold
-                            .Count(ps => ps.Buyer != null),
-                        Products = u.ProductsSold
-                            .Where(ps => ps.Buyer != null)
-                            .Select(ps => new
-                            {
-                                Name = ps.Name,
-                                Price = ps.Price
-                            })
-                            .ToArray()
-                    }
-                })
+                .ProjectTo<UserDetailsDto>()
+                .OrderByDescending(u => u.SoldProducts.Count)
                 .ToArray();
 
             var result = new

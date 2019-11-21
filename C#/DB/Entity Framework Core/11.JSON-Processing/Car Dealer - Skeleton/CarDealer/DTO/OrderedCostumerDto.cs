@@ -1,7 +1,5 @@
 ﻿namespace CarDealer.DTO
 {
-    using System;
-
     public class OrderedCostumerDto
     {
         public string Name { get; set; }

@@ -28,8 +28,8 @@
 
             //19. Export Sales with Applied Discount
             this.CreateMap<Sale, SalseDto>()
-                .ForMember(x => x.Price, y => y.MapFrom(c => c.Car.PartCars.Sum(s => s.Part.Price)))
-                .ForMember(x => x.PriceWithDiscount,
+                .ForMember(x => x.Price, y => y.MapFrom(c => $"{c.Car.PartCars.Sum(s => s.Part.Price):F2}"))
+                .ForMember(x =>x.PriceWithDiscount,
                 y => y.MapFrom(c => $"{c.Car.PartCars.Sum(s => s.Part.Price) - (c.Car.PartCars.Sum(s => s.Part.Price) * (c.Discount) / 100):f2}"));
         }
     }

@@ -37,8 +37,124 @@ namespace ProductShop
                 //var categoriesProductsXml = File.ReadAllText(@"Datasets\categories-products.xml");
                 //Console.WriteLine(ImportCategoryProducts(context, categoriesProductsXml));
 
-                Console.WriteLine(GetProductsInRange(context));
+                //Console.WriteLine(GetProductsInRange(context));
+
+                //Console.WriteLine(GetSoldProducts(context));
+
+                //Console.WriteLine(GetCategoriesByProductsCount(context));
+
+                Console.WriteLine(GetUsersWithProducts(context));
             }
+        }
+        //Query 8. Users and Products
+        public static string GetUsersWithProducts(ProductShopContext context)
+        {
+            var userWithProducts = context
+                .Users
+                .Where(u => u.ProductsSold.Any())
+                .OrderByDescending(u => u.ProductsSold.Count)
+                .Select(u => new ExportUsersAndProductsDto
+                {
+                    FirstName = u.FirstName,
+                    LastName = u.LastName,
+                    Age = u.Age,
+                    SoldProductsDto = new SoldProductDto
+                    {
+                        Count = u.ProductsSold.Count,
+                        ProductDto = u.ProductsSold
+                        .Select(p => new ExportProductDto
+                        {
+                            Name = p.Name,
+                            Price = p.Price
+                        })
+                        .OrderByDescending(p => p.Price)
+                        .ToArray()
+                    }
+                })
+                .Take(10)
+                .ToArray();
+
+            var customExport = new ExportCustomProductDto
+            {
+                Count = context.Users.Count(u => u.ProductsSold.Any()),
+                ExportUsersAndProductsDto = userWithProducts
+            };
+
+
+            ////Serialize XML
+            XmlSerializer serializer = new XmlSerializer(typeof(ExportCustomProductDto), new XmlRootAttribute("Users"));
+
+            var sb = new StringBuilder();
+
+            var namespaces = new XmlSerializerNamespaces(new[] { XmlQualifiedName.Empty });
+              
+            serializer.Serialize(new StringWriter(sb), customExport, namespaces);
+
+            return sb.ToString().TrimEnd();
+        }
+
+        //Query 7. Categories By Products Count
+        public static string GetCategoriesByProductsCount(ProductShopContext context)
+        {
+            var categories = context
+                .Categories
+                .Select(c => new ExportCategoriesByProductsCountDto
+                {
+                    Name = c.Name,
+                    Count = c.CategoryProducts.Count(),
+                    AveragePrice = c.CategoryProducts.Average(p => p.Product.Price),
+                    TotalRevenue = c.CategoryProducts.Sum(p => p.Product.Price)
+                })
+                .OrderByDescending(c => c.Count)
+                .ThenBy(c => c.TotalRevenue)
+                .ToArray();
+
+            //Serialize XML
+            XmlSerializer serializer = new XmlSerializer(typeof(ExportCategoriesByProductsCountDto[]), new XmlRootAttribute("Categories"));
+
+            var sb = new StringBuilder();
+
+            var namespaces = new XmlSerializerNamespaces(new[] { XmlQualifiedName.Empty });
+
+            serializer.Serialize(new StringWriter(sb), categories, namespaces);
+
+            return sb.ToString().TrimEnd();
+
+        }
+
+        //Query 6. Sold Products
+        public static string GetSoldProducts(ProductShopContext context)
+        {
+            var users = context
+                .Users
+                .Where(u => u.ProductsSold.Count > 0)
+                .Select(u => new ExportUserSoldProductsDto
+                {
+                    FirstName = u.FirstName,
+                    LastName = u.LastName,
+                    ProductDto = u.ProductsSold
+                                .Select(p => new ExportProductDto
+                                {
+                                    Name = p.Name,
+                                    Price = p.Price
+                                })
+                                .ToArray()
+                })
+                .OrderBy(u => u.LastName)
+                .ThenBy(u => u.FirstName)
+                .Take(5)
+                .ToArray();
+
+            //Serialize XML
+            XmlSerializer serializer = new XmlSerializer(typeof(ExportUserSoldProductsDto[]), new XmlRootAttribute("Users"));
+
+            var sb = new StringBuilder();
+
+            var namespaces = new XmlSerializerNamespaces(new[] { XmlQualifiedName.Empty });
+
+            serializer.Serialize(new StringWriter(sb), users, namespaces);
+
+            return sb.ToString().TrimEnd();
         }
 
         //Query 5. Products In Range
@@ -46,15 +162,15 @@ namespace ProductShop
         {
             var products = context
                 .Products
-                .Take(10)
                 .Where(p => p.Price >= 500 && p.Price <= 1000)
+                .OrderBy(p => p.Price)
                 .Select(p => new ExportProductInRangeDto
                 {
                     Name = p.Name,
                     Price = p.Price,
-                    Buyer = p.Buyer.FirstName + " " + p.Buyer.LastName
+                    Buyer = $"{p.Buyer.FirstName} {p.Buyer.LastName}"
                 })
-                .OrderBy(p => p.Price)
+                .Take(10)
                 .ToArray();
 
             //Serialize XML
@@ -62,10 +178,11 @@ namespace ProductShop
 
             var sb = new StringBuilder();
 
-            var namespaces = new XmlSerializerNamespaces(new[]
-            {
-                new XmlQualifiedName("","")
-            });
+            //var namespaces = new XmlSerializerNamespaces(new[]
+            //{
+            //    new XmlQualifiedName("","")
+            //});
+            var namespaces = new XmlSerializerNamespaces(new[] { XmlQualifiedName.Empty });
 
             serializer.Serialize(new StringWriter(sb), products, namespaces);
 

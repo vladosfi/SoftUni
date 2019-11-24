@@ -3,12 +3,15 @@ namespace ProductShop
 {
     using AutoMapper;
     using ProductShop.Data;
+    using ProductShop.Dtos.Export;
     using ProductShop.Dtos.Import;
     using ProductShop.Models;
     using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using System.Text;
+    using System.Xml;
     using System.Xml.Serialization;
 
     public class StartUp
@@ -34,14 +37,39 @@ namespace ProductShop
                 //var categoriesProductsXml = File.ReadAllText(@"Datasets\categories-products.xml");
                 //Console.WriteLine(ImportCategoryProducts(context, categoriesProductsXml));
 
-                Console.WriteLine(GetProductsInRange(context)); 
+                Console.WriteLine(GetProductsInRange(context));
             }
         }
 
         //Query 5. Products In Range
         public static string GetProductsInRange(ProductShopContext context)
         {
+            var products = context
+                .Products
+                .Take(10)
+                .Where(p => p.Price >= 500 && p.Price <= 1000)
+                .Select(p => new ExportProductInRangeDto
+                {
+                    Name = p.Name,
+                    Price = p.Price,
+                    Buyer = p.Buyer.FirstName + " " + p.Buyer.LastName
+                })
+                .OrderBy(p => p.Price)
+                .ToArray();
 
+            //Serialize XML
+            XmlSerializer serializer = new XmlSerializer(typeof(ExportProductInRangeDto[]), new XmlRootAttribute("Products"));
+
+            var sb = new StringBuilder();
+
+            var namespaces = new XmlSerializerNamespaces(new[]
+            {
+                new XmlQualifiedName("","")
+            });
+
+            serializer.Serialize(new StringWriter(sb), products, namespaces);
+
+            return sb.ToString().TrimEnd();
         }
 
         //Query 4. Import Categories and Products
@@ -78,7 +106,7 @@ namespace ProductShop
                     var categoryProduct = Mapper.Map<CategoryProduct>(categoryProductDto);
 
                     categoriesProducts.Add(categoryProduct);
-                }   
+                }
             }
 
             context.CategoryProducts.AddRange(categoriesProducts);
@@ -97,7 +125,7 @@ namespace ProductShop
 
             var categories = new List<Category>();
 
-            foreach (var categoryDto in categoriesDto.Where(c=>c.Name != null))
+            foreach (var categoryDto in categoriesDto.Where(c => c.Name != null))
             {
                 var category = Mapper.Map<Category>(categoryDto);
 

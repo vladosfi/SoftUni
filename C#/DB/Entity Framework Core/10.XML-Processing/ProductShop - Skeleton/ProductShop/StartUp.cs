@@ -297,7 +297,7 @@ namespace ProductShop
             context.Users.AddRange(users);
             context.SaveChanges();
 
-            return $"Successfully imported {users.Count}"; ;
+            return $"Successfully imported {users.Count}";
         }
     }
 }

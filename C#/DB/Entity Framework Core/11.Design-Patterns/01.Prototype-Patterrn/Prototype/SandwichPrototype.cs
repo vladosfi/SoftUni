@@ -1,4 +1,4 @@
-﻿namespace Prototype.Prototype
+﻿namespace PrototypePattern
 {
     public abstract class SandwichPrototype
     {

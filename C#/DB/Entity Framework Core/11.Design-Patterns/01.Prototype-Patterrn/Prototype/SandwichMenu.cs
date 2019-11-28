@@ -1,5 +1,5 @@
 ﻿
-namespace Prototype.Prototype
+namespace PrototypePattern
 {
     using System.Collections.Generic;
 

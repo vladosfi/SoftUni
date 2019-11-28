@@ -1,4 +1,4 @@
-﻿namespace Prototype.Prototype
+﻿namespace PrototypePattern
 {
     using System;
 
@@ -21,7 +21,7 @@
         {
             string ingredientList = GetIngredientList();
             Console.WriteLine($"Cloning sandwich with ingredients: {ingredientList}");
-
+             
             return MemberwiseClone() as SandwichPrototype;
         }
 

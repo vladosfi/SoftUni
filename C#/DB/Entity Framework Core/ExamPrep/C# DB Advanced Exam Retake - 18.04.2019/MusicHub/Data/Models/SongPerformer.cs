@@ -1,6 +1,16 @@
-﻿namespace MusicHub.Data.Models
+﻿
+namespace MusicHub.Data.Models
 {
-    public class SongPerformers
+    using System.ComponentModel.DataAnnotations;
+
+    public class SongPerformer
     {
+        [Required]
+        public int SongId { get; set; }
+        public Song Song { get; set; }
+
+        [Required]
+        public int PerformerId { get; set; }
+        public Song Performer { get; set; }
     }
 }

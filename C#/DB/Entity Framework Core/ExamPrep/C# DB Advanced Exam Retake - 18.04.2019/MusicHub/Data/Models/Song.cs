@@ -31,9 +31,9 @@
         public Writer Writer { get; set; }
 
         [Required]
-        [Range(typeof(Decimal), "0.0", "79228162514264337593543950335"]
+        [Range(typeof(Decimal), "0.0", "79228162514264337593543950335")]
         public decimal Price { get; set; }
 
-        public ICollection<SongPerformers> SongPerformers { get; set; } = new HashSet<SongPerformers>();
+        public ICollection<SongPerformer> SongPerformers { get; set; } = new HashSet<SongPerformer>();
     }
 }

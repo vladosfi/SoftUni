@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MusicHub.Data;
 
 namespace MusicHub.Migrations
 {
     [DbContext(typeof(MusicHubDbContext))]
-    partial class MusicHubDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191201105719_Complete5")]
+    partial class Complete5
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -88,7 +90,7 @@ namespace MusicHub.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("AlbumId");
+                    b.Property<int>("AlbumId");
 
                     b.Property<DateTime>("CreatedOn");
 
@@ -154,7 +156,8 @@ namespace MusicHub.Migrations
                 {
                     b.HasOne("MusicHub.Data.Models.Album", "Album")
                         .WithMany("Songs")
-                        .HasForeignKey("AlbumId");
+                        .HasForeignKey("AlbumId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("MusicHub.Data.Models.Writer", "Writer")
                         .WithMany("Songs")

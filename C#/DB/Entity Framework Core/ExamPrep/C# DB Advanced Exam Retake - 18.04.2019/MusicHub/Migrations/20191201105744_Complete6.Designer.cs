@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MusicHub.Data;
 
 namespace MusicHub.Migrations
 {
     [DbContext(typeof(MusicHubDbContext))]
-    partial class MusicHubDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191201105744_Complete6")]
+    partial class Complete6
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

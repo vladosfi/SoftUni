@@ -23,7 +23,7 @@
         [Required]
         public Genre Genre { get; set; }
 
-        public int AlbumId { get; set; }
+        public int? AlbumId { get; set; }
         public Album Album { get; set; }
 
         [Required]
@@ -31,7 +31,7 @@
         public Writer Writer { get; set; }
 
         [Required]
-        [Range(typeof(Decimal), "0.0", "79228162514264337593543950335")]
+        [Range(typeof(Decimal), "0", "79228162514264337593543950335")]
         public decimal Price { get; set; }
 
         public ICollection<SongPerformer> SongPerformers { get; set; } = new HashSet<SongPerformer>();

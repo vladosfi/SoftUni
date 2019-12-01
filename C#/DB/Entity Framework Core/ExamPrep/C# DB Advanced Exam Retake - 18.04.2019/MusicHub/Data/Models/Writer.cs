@@ -15,6 +15,6 @@ namespace MusicHub.Data.Models
         [RegularExpression(@"^[A-Z][a-z]+[\s][A-Z][a-z]+$")]
         public string Pseudonym { get; set; }
 
-        public ICollection<Song> Songs { get; set; }
+        public ICollection<Song> Songs { get; set; } = new HashSet<Song>();
     }
 }

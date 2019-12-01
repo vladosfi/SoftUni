@@ -15,10 +15,10 @@
         public string Name { get; set; }
 
         [Required]
-        public TimestampAttribute Duration { get; set; }
+        public TimeSpan Duration { get; set; }
 
         [Required]
-        public DateTime Date { get; set; }
+        public DateTime CreatedOn { get; set; }
 
         [Required]
         public Genre Genre { get; set; }
@@ -35,5 +35,6 @@
         public decimal Price { get; set; }
 
         public ICollection<SongPerformer> SongPerformers { get; set; } = new HashSet<SongPerformer>();
+
     }
 }

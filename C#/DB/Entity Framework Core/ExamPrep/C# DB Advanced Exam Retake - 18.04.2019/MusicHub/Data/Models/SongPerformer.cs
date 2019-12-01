@@ -11,6 +11,6 @@ namespace MusicHub.Data.Models
 
         [Required]
         public int PerformerId { get; set; }
-        public Song Performer { get; set; }
+        public Performer Performer { get; set; }
     }
 }

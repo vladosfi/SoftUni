@@ -3,6 +3,6 @@
    public static class Configuration
     {
         public static string ConnectionString =
-            @"Server=.\\SQLEXPRESS;Database=MusicHub;Trusted_Connection=True";
+            @"Server=.\SQLEXPRESS;Database=MusicHub;Trusted_Connection=True;";
     }
 }

@@ -31,7 +31,7 @@
 
 		private static void BonusTask(VaporStoreDbContext context)
 		{
-			var bonusOutput = Bonus.UpdateEmail(context, "atobin", "amontobin@gmail.com");
+			var bonusOutput = Bonus.UpdateEmail(context, "atobin", "lsilbert@yahoo.com");
 			Console.WriteLine(bonusOutput);
 		}
 

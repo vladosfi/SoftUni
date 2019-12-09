@@ -67,8 +67,13 @@
                         bool isValidOpentaskDate = taskOpenDate > project.OpenDate;
                         bool isValidDuetaskDate = taskDueDate < project.DueDate || project.DueDate == null;
 
-                        if (!isValidTask || !isValidOpentaskDate || !isValidDuetaskDate || !isValidExecutionType || isValidLabelTypeType
-                            || isValidTaskOpenDate || isValidTaskDueDate)
+                        if (!isValidTask || 
+                            !isValidOpentaskDate || 
+                            !isValidDuetaskDate || 
+                            !isValidExecutionType || 
+                            !isValidLabelTypeType || 
+                            !isValidTaskOpenDate || 
+                            !isValidTaskDueDate)
                         {
                             sb.AppendLine(ErrorMessage);
                             continue;

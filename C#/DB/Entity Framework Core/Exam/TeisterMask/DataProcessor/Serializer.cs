@@ -70,10 +70,12 @@
                         .OrderByDescending(t=>DateTime.Parse(t.DueDate,CultureInfo.InvariantCulture))
                         .ThenBy(t=>t.TaskName)
                         .ToArray()
+                        .ToArray()
                 })
                 .OrderByDescending(e => e.Tasks.Count())
                 .ThenBy(u=>u.Username)
                 .Take(10)
+                .ToArray()
                 .ToArray();
 
             return JsonConvert.SerializeObject(projects, Formatting.Indented);

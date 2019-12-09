@@ -27,6 +27,7 @@
         private const string SuccessfullyImportedEmployee
             = "Successfully imported employee - {0} with {1} tasks.";
 
+
         public static string ImportProjects(TeisterMaskContext context, string xmlString)
         {
             XmlSerializer xmlSerializer = new XmlSerializer(typeof(ImportProjectsDto[]), new XmlRootAttribute("Projects"));
@@ -47,20 +48,27 @@
                     {
                         Name = projectDto.Name,
                         OpenDate = DateTime.ParseExact(projectDto.OpenDate, @"dd/MM/yyyy", CultureInfo.InvariantCulture),
-                        DueDate = projectDto.DueDate == null || projectDto.DueDate == "" ? (DateTime?)null : DateTime.ParseExact(projectDto.DueDate, @"dd/MM/yyyy", CultureInfo.InvariantCulture)
+                        DueDate = projectDto.DueDate == null || projectDto.DueDate == string.Empty ? (DateTime?)null : DateTime.ParseExact(projectDto.DueDate, @"dd/MM/yyyy", CultureInfo.InvariantCulture)
                     };
 
                     //Validate tasks 
                     foreach (var task in projectDto.Tasks)
                     {
                         bool isValidTask = IsValid(task);
-                        DateTime taskOpenDate = DateTime.ParseExact(task.OpenDate, @"dd/MM/yyyy", CultureInfo.InvariantCulture);
-                        DateTime taskDueDate = DateTime.ParseExact(task.DueDate, @"dd/MM/yyyy", CultureInfo.InvariantCulture);
+                        bool isValidExecutionType = Enum.TryParse<ExecutionType>(task.ExecutionType, out ExecutionType executionType);
+                        bool isValidLabelTypeType = Enum.TryParse<LabelType>(task.LabelType, out LabelType labelType);
+
+                        //DateTime taskOpenDate = DateTime.ParseExact(task.OpenDate, @"dd/MM/yyyy", CultureInfo.InvariantCulture);
+                        //DateTime taskDueDate = DateTime.ParseExact(task.DueDate, @"dd/MM/yyyy", CultureInfo.InvariantCulture);
+                        bool isValidTaskOpenDate = DateTime.TryParseExact(task.OpenDate, @"dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime taskOpenDate);
+                        bool isValidTaskDueDate = DateTime.TryParseExact(task.DueDate, @"dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime taskDueDate);
+                        
 
                         bool isValidOpentaskDate = taskOpenDate > project.OpenDate;
                         bool isValidDuetaskDate = taskDueDate < project.DueDate || project.DueDate == null;
 
-                        if (!isValidTask || !isValidOpentaskDate || !isValidDuetaskDate)
+                        if (!isValidTask || !isValidOpentaskDate || !isValidDuetaskDate || !isValidExecutionType || isValidLabelTypeType
+                            || isValidTaskOpenDate || isValidTaskDueDate)
                         {
                             sb.AppendLine(ErrorMessage);
                             continue;
@@ -71,8 +79,8 @@
                             Name = task.Name,
                             OpenDate = taskOpenDate,
                             DueDate = taskDueDate,
-                            ExecutionType = (ExecutionType)Enum.Parse(typeof(ExecutionType), task.ExecutionType),
-                            LabelType = (LabelType)Enum.Parse(typeof(LabelType), task.LabelType)
+                            ExecutionType = executionType,
+                            LabelType = labelType
                         });
                     };
 

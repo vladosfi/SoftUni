@@ -29,10 +29,10 @@
                         Name = t.Name,
                         Label = t.LabelType.ToString()
                     })
-                    .OrderBy(t=>t.Name)
+                    .OrderBy(t => t.Name)
                     .ToArray()
                 })
-                .OrderByDescending(p=>p.TasksCount)
+                .OrderByDescending(p => p.TasksCount)
                 .ThenBy(p => p.ProjectName)
                 .ToArray();
 
@@ -53,12 +53,12 @@
             var projects = context
                 .Employees
                 .Where(p => p.EmployeesTasks.Any(t => t.Task.OpenDate >= date))
-                   // && p.v.All(t => t.OpenDate > date))
+                // && p.v.All(t => t.OpenDate > date))
                 .Select(x => new
                 {
                     Username = x.Username,
                     Tasks = x.EmployeesTasks
-                        .Where(t=>t.Task.OpenDate >= date)
+                        .Where(t => t.Task.OpenDate >= date)
                         .Select(t => new
                         {
                             TaskName = t.Task.Name,
@@ -67,15 +67,14 @@
                             LabelType = t.Task.LabelType.ToString(),
                             ExecutionType = t.Task.ExecutionType.ToString()
                         })
-                        .OrderByDescending(t=>DateTime.Parse(t.DueDate,CultureInfo.InvariantCulture))
-                        .ThenBy(t=>t.TaskName)
-                        .ToArray()
+                        .OrderByDescending(t => DateTime.Parse(t.DueDate, CultureInfo.InvariantCulture))
+                        .ThenBy(t => t.TaskName)
                         .ToArray()
                 })
-                .OrderByDescending(e => e.Tasks.Count())
-                .ThenBy(u=>u.Username)
-                .Take(10)
                 .ToArray()
+                .OrderByDescending(e => e.Tasks.Count())
+                .ThenBy(u => u.Username)
+                .Take(10)
                 .ToArray();
 
             return JsonConvert.SerializeObject(projects, Formatting.Indented);

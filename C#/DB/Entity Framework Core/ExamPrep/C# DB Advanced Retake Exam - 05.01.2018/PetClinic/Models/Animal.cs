@@ -20,7 +20,6 @@ namespace PetClinic.Models
 
         [ForeignKey("SerialNumber")]
         public string PassportSerialNumber { get; set; }
-
         [Required]
         public Passport Passport { get; set; }
 

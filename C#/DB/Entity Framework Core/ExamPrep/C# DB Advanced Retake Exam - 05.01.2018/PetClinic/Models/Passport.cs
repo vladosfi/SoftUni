@@ -3,13 +3,14 @@ namespace PetClinic.Models
 {
     using System;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     public class Passport
     {
-        public int Id { get; set; }
-
+        
         [Required]
         [RegularExpression(@"^[A-Za-z]{7}[\d]{3}$")]
+        [Key]
         public string SerialNumber { get; set; }
         public Animal Animal { get; set; }
 

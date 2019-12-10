@@ -33,6 +33,12 @@
                     k.AnimalAidId,
                     k.ProcedureId
                 });
+
+
+            builder.Entity<Animal>()
+        .HasOne(a => a.Passport)
+        .WithOne(p => p.Animal)
+        .HasForeignKey<Animal>(p => p.PassportSerialNumber);
         }
     }
 }

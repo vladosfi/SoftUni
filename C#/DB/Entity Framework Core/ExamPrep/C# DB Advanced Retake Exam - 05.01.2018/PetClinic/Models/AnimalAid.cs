@@ -10,7 +10,7 @@ namespace PetClinic.Models
         public int Id { get; set; }
 
         [Required]
-        [MinLength(3),MaxLength(30)]
+        [MinLength(3), MaxLength(30)]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string Name { get; set; }
 

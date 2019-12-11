@@ -15,7 +15,9 @@
 
     public class Deserializer
     {
-        private static string ErrorMessage = "Error: Invalid data.";
+        private const string ErrorMessage = "Error: Invalid data.";
+        private const string SuccessfullyImportedProcedure = "Record successfully imported.";
+
 
         public static string ImportAnimalAids(PetClinicContext context, string jsonString)
         {
@@ -26,8 +28,8 @@
 
             foreach (var animalAid in animalAids)
             {
-                
-                if (!IsValid(animalAid) || validAnimalAids.Any(a=>a.Name == animalAid.Name))
+
+                if (!IsValid(animalAid) || validAnimalAids.Any(a => a.Name == animalAid.Name))
                 {
                     sb.AppendLine(ErrorMessage);
                     continue;
@@ -53,8 +55,9 @@
 
             foreach (var animalDto in animalsDtos)
             {
-
-                if (!IsValid(animalDto) || !IsValid(animalDto.Passport) || validAnimals.Any(a=>a.Passport.SerialNumber == animalDto.Passport.SerialNumber))
+                if (!IsValid(animalDto) || 
+                    !IsValid(animalDto.Passport) || 
+                    validAnimals.Any(a => a.Passport.SerialNumber == animalDto.Passport.SerialNumber))
                 {
                     sb.AppendLine(ErrorMessage);
                     continue;
@@ -97,7 +100,8 @@
 
             foreach (var vetDto in vetsDtos)
             {
-                if (IsValid(vetDto) && !vets.Any(p=>p.PhoneNumber == vetDto.PhoneNumber))
+                if (IsValid(vetDto) && 
+                    !vets.Any(p => p.PhoneNumber == vetDto.PhoneNumber || vetDto.PhoneNumber == null))
                 {
                     var vet = new Vet
                     {
@@ -124,7 +128,59 @@
 
         public static string ImportProcedures(PetClinicContext context, string xmlString)
         {
-            throw new NotImplementedException();
+            XmlSerializer xmlSerializer = new XmlSerializer(typeof(ImportProceduresDto[]), new XmlRootAttribute("Procedures"));
+
+            var proceduresDtos = (ImportProceduresDto[])xmlSerializer.Deserialize(new StringReader(xmlString));
+
+            var procedures = new List<Procedure>();
+
+            StringBuilder sb = new StringBuilder();
+
+            var existingVets = context.Vets.ToArray();
+            var existingAnimals = context.Animals.ToArray();
+            var existingAnimalAids = context.AnimalAids.ToArray();
+
+            Console.WriteLine("-------------------------------------------------------------------------------------");
+            foreach (var procedureDto in proceduresDtos)
+            {
+
+                if (IsValid(procedureDto) &&
+                    procedureDto.AnimalAids.All(IsValid) &&
+                    existingVets.Any(v => v.Name == procedureDto.Vet) &&
+                    existingAnimals.Any(a => a.PassportSerialNumber == procedureDto.Animal) &&
+                    procedureDto.AnimalAids.Any(p => existingAnimalAids.Any(a => a.Name == p.Name)) &&
+                    !procedureDto.AnimalAids.Any(p => procedureDto.AnimalAids.Count(pr => pr.Name == p.Name) > 1)
+                    )
+                {
+                    var procedure = new Procedure
+                    {
+                        Vet = existingVets.Where(v => v.Name == procedureDto.Vet).First(),
+                        Animal = existingAnimals.Where(a => a.PassportSerialNumber == procedureDto.Animal).First(),
+                        DateTime = DateTime.ParseExact(procedureDto.DateTime, @"dd-MM-yyyy", CultureInfo.InvariantCulture)
+                    };
+
+                    foreach (var aidDto in procedureDto.AnimalAids)
+                    {
+                        var aid = existingAnimalAids.Where(a => a.Name == aidDto.Name).First();
+                        procedure.ProcedureAnimalAids.Add(new ProcedureAnimalAid
+                        {
+                            AnimalAidId = aid.Id
+                        });
+                    }
+
+                    procedures.Add(procedure);
+                    sb.AppendLine(SuccessfullyImportedProcedure);
+                }
+                else
+                {
+                    sb.AppendLine(ErrorMessage);
+                }
+            }
+
+            context.Procedures.AddRange(procedures);
+            context.SaveChanges();
+
+            return sb.ToString().TrimEnd();
         }
 
         private static bool IsValid(object entity)

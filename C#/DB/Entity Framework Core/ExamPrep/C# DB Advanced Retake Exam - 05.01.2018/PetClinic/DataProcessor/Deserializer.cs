@@ -140,7 +140,6 @@
             var existingAnimals = context.Animals.ToArray();
             var existingAnimalAids = context.AnimalAids.ToArray();
 
-            Console.WriteLine("-------------------------------------------------------------------------------------");
             foreach (var procedureDto in proceduresDtos)
             {
 

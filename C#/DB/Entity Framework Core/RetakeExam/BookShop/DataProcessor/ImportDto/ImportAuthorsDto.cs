@@ -28,6 +28,6 @@ namespace BookShop.DataProcessor.ImportDto
     public class BookIdsDto
     {
         [Required]
-        public string Id { get; set; }
+        public int? Id { get; set; }
     }
 }

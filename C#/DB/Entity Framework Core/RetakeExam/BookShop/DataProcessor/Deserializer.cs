@@ -36,14 +36,10 @@
             StringBuilder sb = new StringBuilder();
 
 
-            List<string> validVals = new List<string>();
-            validVals.Add("1");
-            validVals.Add("2");
-            validVals.Add("3");
+            List<string> validVals = new List<string>() { "1", "2", "3" };
 
             foreach (var bookDto in booksDtos)
             {
-
                 bool isValidEnum = Enum.TryParse<Genre>(bookDto.Genre, out Genre genre);
 
                 if (!isValidEnum)
@@ -94,12 +90,12 @@
             var sb = new StringBuilder();
             var validAuthors = new List<Author>();
             var existingEmails = context.Authors.Select(a => a.Email).ToHashSet();
-            var existingBooksIds = context.Books.Select(b => b.Id).ToHashSet();
+            var existingBooksIds = context.Books.ToHashSet();
 
             foreach (var authorDto in authorsDtos)
             {
-                if (!IsValid(authorDto) || 
-                    validAuthors.Any(e=>e.Email == authorDto.Email) || 
+                if (!IsValid(authorDto) ||
+                    validAuthors.Any(e => e.Email == authorDto.Email) ||
                     existingEmails.Contains(authorDto.Email))
                 {
                     sb.AppendLine(ErrorMessage);
@@ -114,29 +110,27 @@
                     Email = authorDto.Email
                 };
 
-                int bookCount = 0;
                 foreach (var bookIdDto in authorDto.Books)
                 {
-                    if (int.TryParse(bookIdDto.Id, out int curId))
-                    {
-                        if (existingBooksIds.Contains(curId))
-                        {
-                            var authorsBooks = new AuthorBook
-                            {
-                                BookId = curId
-                            };
+                    var curBook = existingBooksIds.FirstOrDefault(x => x.Id == bookIdDto.Id);
 
-                            existingBooksIds.Add(curId);
-                            author.AuthorsBooks.Add(authorsBooks);
-                            bookCount++;
-                        }
+                    if (curBook != null)
+                    {
+                        var authorsBooks = new AuthorBook
+                        {
+                            BookId = curBook.Id
+                        };
+
+                        existingBooksIds.Add(curBook);
+                        author.AuthorsBooks.Add(authorsBooks);
                     }
                 }
 
-                if (bookCount > 0)
+
+                if (author.AuthorsBooks.Count > 0)
                 {
                     validAuthors.Add(author);
-                    sb.AppendLine(string.Format(SuccessfullyImportedAuthor, author.FirstName + " " + author.LastName, bookCount));
+                    sb.AppendLine(string.Format(SuccessfullyImportedAuthor, author.FirstName + " " + author.LastName, author.AuthorsBooks.Count));
                 }
                 else
                 {

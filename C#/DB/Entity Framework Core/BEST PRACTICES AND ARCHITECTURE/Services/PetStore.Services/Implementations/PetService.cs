@@ -1,11 +1,13 @@
 ﻿namespace PetStore.Services.Implementations
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
 
     using Data;
     using Data.Models;
     using Data.Models.Enums;
+    using Services.Models.Pet;
 
     public class PetService : IPetService
     {
@@ -20,6 +22,19 @@
             this.breedService = breedService;
             this.categoryService = categoryService;
             this.userService = userService;
+        }
+
+        public IEnumerable<PetListingServiceModel> All()
+        {
+            return this.data
+                .Pets
+                .Select(p => new PetListingServiceModel
+                {
+                    Id = p.Id,
+                    Price = p.Price,
+                    Breed = p.Breed.Name,
+                    Category = p.Category.Name
+                });
         }
 
         public void BuyPet(Gender gender, DateTime dateOfBirth, decimal price, string description, int breedId, int categoryId)

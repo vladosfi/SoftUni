@@ -25,6 +25,9 @@ namespace PetStore.Data
 
         public DbSet<User> Users { get; set; }
 
+        public DbSet<FoodOrder> FoodOrders { get; set; }
+
+        public DbSet<ToyOrder> ToyOrders { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder builder)

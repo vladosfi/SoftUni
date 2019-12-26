@@ -9,5 +9,8 @@
 
         void BuyFromDistributor(AddingFoodServiceModel model);
 
+        void SellFoodToUser(int foodId, int userId);
+
+        bool Exists(int foodId);
     }
 }

@@ -2,13 +2,13 @@
 namespace PetStore.Services.Implementations
 {
     using System;
+    using System.Linq;
     using System.Collections.Generic;
 
-    using PetStore.Data;
-    using PetStore.Services.Models.Brand;
-    using PetStore.Data.Models;
-    using System.Linq;
-    using PetStore.Services.Models.Toy;
+    using Data;
+    using Services.Models.Brand;
+    using Data.Models;
+    using Services.Models.Toy;
 
     public class BrandService : IBrandServices
     {

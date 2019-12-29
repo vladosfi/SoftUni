@@ -2,20 +2,23 @@
 namespace PetStore.Web.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
-    using PetStore.Services;
+    using System.Collections.Generic;
+
+    using Services;
+    using Services.Models.Pet;
 
     public class PetsController : Controller
     {
-        private readonly IPetService pet;
+        private readonly IPetService pets;
 
-        public PetsController(IPetService pet)
+        public PetsController(IPetService pets)
         {
-            this.pet = pet;
+            this.pets = pets;
         }
 
-        public void All()
+        public IEnumerable<PetListingServiceModel> All()
         {
-            return View();
+            return pets.All();
         }
     }
 }

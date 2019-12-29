@@ -5,7 +5,7 @@ namespace PetStore.Web
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
-
+    using PetStore.Data;
     using Services;
     using Services.Implementations;
 
@@ -21,7 +21,13 @@ namespace PetStore.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<PetStoreDbContext>();
+
             services.AddTransient<IPetService, PetService>();
+            services.AddTransient<IBreedService, BreedService>();
+            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<ICategoryService, CategoryService>();
+
             services.AddControllersWithViews();
         }
 

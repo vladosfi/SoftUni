@@ -16,9 +16,11 @@ namespace PetStore.Web.Controllers
             this.pets = pets;
         }
 
-        public IEnumerable<PetListingServiceModel> All()
+        public IActionResult All()
         {
-            return pets.All();
+            var allPets = this.pets.All();
+
+            return View(allPets);
         }
     }
 }

@@ -1,8 +1,11 @@
 ﻿namespace PetStore.Services.Implementations
 {
+    using System.Collections.Generic;
     using System.Linq;
 
     using Data;
+    using PetStore.Data.Models;
+    using PetStore.Services.Models.Category;
 
     public class CategoryService : ICategoryService
     {
@@ -11,6 +14,30 @@
         public CategoryService(PetStoreDbContext data)
         {
             this.data = data;
+        }
+
+        public IEnumerable<AllCategoriesServiceModel> All()
+        {
+            return this.data.Categories.Select(c => new AllCategoriesServiceModel
+                {
+                    Id = c.Id,
+                    Name = c.Name,
+                    Description = c.Description
+                })
+                .ToArray();
+        }
+
+        public void Create(CreateCategoryServicesModel model)
+        {
+            var category = new Category() 
+            {
+                Name = model.Name,
+                Description = model.Description
+            };
+
+            this.data.Categories.Add(category);
+            this.data.SaveChanges();
+
         }
 
         public bool Exists(int categoryId)

@@ -4,6 +4,7 @@
     using Services;
     using Web.Models.Category;
     using System.Linq;
+    using PetStore.Services.Models.Category;
 
     public class CategoriesController : Controller
     {
@@ -17,6 +18,7 @@
         public IActionResult All()
         {
             var categories = categoryService.All()
+
                 .Select(c => new CategoryListViewModel
                 {
                     Id = c.Id,
@@ -41,7 +43,13 @@
                 return this.RedirectToAction("Error", "Home");
             }
 
-            
+            var categoryServiceModel = new CreateCategoryServicesModel()
+            {
+                Name = model.Name,
+                Description = model.Description
+            };
+
+            this.categoryService.Create(categoryServiceModel);
 
             return this.RedirectToAction("All","Categories");
         }

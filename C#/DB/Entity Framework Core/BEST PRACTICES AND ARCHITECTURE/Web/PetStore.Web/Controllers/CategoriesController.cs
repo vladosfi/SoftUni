@@ -112,6 +112,44 @@
             return this.RedirectToAction("Details", "Categories", new { id = ecsm.Id });
         }
 
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            var category = this.categoryService.GetById(id);
+
+            if (category == null)
+            {
+                return BadRequest();
+            }
+
+            if (category.Description == null)
+            {
+                category.Description = "No description.";
+            }
+
+            var cdvm = new DeleteCategoryViewModew()
+            {
+                Id = category.Id.Value,
+                Name = category.Name,
+                Description = category.Description
+            };
+
+            return this.View(cdvm);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(DeleteCategoryViewModew model)
+        {
+            bool success = this.categoryService.Remove(model.Id);
+
+            if (success == false)
+            {
+                return this.RedirectToAction("Error", "Home");
+            }
+
+            return this.RedirectToAction("All", "Categories");
+        }
+
         public IActionResult All()
         {
             var categories = categoryService.All()

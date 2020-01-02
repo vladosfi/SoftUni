@@ -19,17 +19,17 @@
         public IEnumerable<AllCategoriesServiceModel> All()
         {
             return this.data.Categories.Select(c => new AllCategoriesServiceModel
-                {
-                    Id = c.Id,
-                    Name = c.Name,
-                    Description = c.Description
-                })
+            {
+                Id = c.Id,
+                Name = c.Name,
+                Description = c.Description
+            })
                 .ToArray();
         }
 
         public void Create(CreateCategoryServicesModel model)
         {
-            var category = new Category() 
+            var category = new Category()
             {
                 Name = model.Name,
                 Description = model.Description
@@ -67,6 +67,26 @@
             };
 
             return dcsm;
+        }
+
+        public bool Remove(int id)
+        {
+            var category = this.data.Categories.Find(id);
+
+            if (category == null)
+            {
+                return false;
+            }
+
+            this.data.Remove(category);
+            var deletedEntitiesCount = this.data.SaveChanges();
+
+            if (deletedEntitiesCount == 0)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

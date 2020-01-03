@@ -10,5 +10,11 @@
         IEnumerable<AllCategoriesServiceModel> All();
 
         void Create(CreateCategoryServicesModel model);
+
+        DetailsCategoryServiceModel GetById(int id);
+
+        void Edit(EditCategoryServiceModel model);
+
+        bool Remove(int id);
     }
 }

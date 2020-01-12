@@ -32,6 +32,7 @@
         public void AddUnit(IUnit unit)
         {
             string unitType = unit.GetType().Name;
+
             if (!this.amountOfUnits.ContainsKey(unitType))
             {
                 this.amountOfUnits.Add(unitType, 0);
@@ -42,8 +43,12 @@
 
         public void RemoveUnit(string unitType)
         {
-            //TODO: implement for Problem 4
-            throw new NotImplementedException();
+            if (!this.amountOfUnits.ContainsKey(unitType))
+            {
+                throw new ArgumentException("No such units in repository.");
+            }
+            
+            this.amountOfUnits[unitType]--;
         }
     }
 }

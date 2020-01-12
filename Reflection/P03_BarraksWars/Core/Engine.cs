@@ -1,6 +1,8 @@
 ﻿namespace _03BarracksFactory.Core
 {
     using System;
+    using System.Linq;
+    using System.Reflection;
     using Contracts;
 
     class Engine : IRunnable
@@ -13,7 +15,7 @@
             this.repository = repository;
             this.unitFactory = unitFactory;
         }
-        
+
         public void Run()
         {
             while (true)
@@ -33,42 +35,34 @@
             }
         }
 
-        // TODO: refactor for Problem 4
         private string InterpredCommand(string[] data, string commandName)
         {
-            string result = string.Empty;
-            switch (commandName)
-            {
-                case "add":
-                    result = this.AddUnitCommand(data);
-                    break;
-                case "report":
-                    result = this.ReportCommand(data);
-                    break;
-                case "fight":
-                    Environment.Exit(0);
-                    break;
-                default:
-                    throw new InvalidOperationException("Invalid command!");
-            }
-            return result;
+            //Type type = Assembly
+            //    .GetExecutingAssembly()
+            //    .GetTypes()
+            //    .FirstOrDefault(t => t.Name.ToLower() == commandName + "command");
+
+            //if (type == null)
+            //{
+            //    throw new ArgumentException("Invalid Command!");
+            //}
+
+            //var instance = Activator.CreateInstance(type, new object[] { data, unitFactory, repository });
+
+            //var method = type.GetMethod("Execute");
+
+            //try
+            //{
+            //    string result = method.Invoke(instance, null) as string;
+            //    return result;
+            //}
+            //catch (Exception ex)
+            //{
+            //    return ex.InnerException.Message;
+            //}
+
+            
         }
 
-
-        private string ReportCommand(string[] data)
-        {
-            string output = this.repository.Statistics;
-            return output;
-        }
-
-
-        private string AddUnitCommand(string[] data)
-        {
-            string unitType = data[1];
-            IUnit unitToAdd = this.unitFactory.CreateUnit(unitType);
-            this.repository.AddUnit(unitToAdd);
-            string output = unitType + " added!";
-            return output;
-        }
     }
 }

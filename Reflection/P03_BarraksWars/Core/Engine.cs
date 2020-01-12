@@ -37,31 +37,29 @@
 
         private string InterpredCommand(string[] data, string commandName)
         {
-            //Type type = Assembly
-            //    .GetExecutingAssembly()
-            //    .GetTypes()
-            //    .FirstOrDefault(t => t.Name.ToLower() == commandName + "command");
+            Type type = Assembly
+                .GetExecutingAssembly()
+                .GetTypes()
+                .FirstOrDefault(t => t.Name.ToLower() == commandName + "command");
 
-            //if (type == null)
-            //{
-            //    throw new ArgumentException("Invalid Command!");
-            //}
+            if (type == null)
+            {
+                throw new ArgumentException("Invalid Command!");
+            }
 
-            //var instance = Activator.CreateInstance(type, new object[] { data, unitFactory, repository });
+            var instance = Activator.CreateInstance(type, new object[] { data, unitFactory, repository });
 
-            //var method = type.GetMethod("Execute");
+            var method = type.GetMethod("Execute");
 
-            //try
-            //{
-            //    string result = method.Invoke(instance, null) as string;
-            //    return result;
-            //}
-            //catch (Exception ex)
-            //{
-            //    return ex.InnerException.Message;
-            //}
-
-            
+            try
+            {
+                string result = method.Invoke(instance, null) as string;
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return ex.InnerException.Message;
+            }
         }
 
     }

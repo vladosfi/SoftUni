@@ -7,7 +7,7 @@ namespace Villain_Names
     {
         static void Main()
         {
-            const string CONNECTION_STRING = "Server=B5400\\SQLEXPRESS;Database=MinionsDB;Integrated Security = true";
+            const string CONNECTION_STRING = "Server=.;Database=MinionsDB;Integrated Security = true";
 
             using (SqlConnection connection = new SqlConnection(CONNECTION_STRING))
             {

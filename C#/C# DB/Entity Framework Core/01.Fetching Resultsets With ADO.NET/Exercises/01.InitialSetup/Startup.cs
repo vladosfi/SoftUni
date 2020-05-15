@@ -7,7 +7,7 @@ namespace _01.InitialSetup
     {
         static void Main()
         {
-            string connectionString = "Server=B5400\\SQLEXPRESS;;Integrated Security = true";
+            string connectionString = "Server=.;;Integrated Security = true";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -24,7 +24,7 @@ namespace _01.InitialSetup
             }
 
 
-            connectionString = "Server=B5400\\SQLEXPRESS;Database=MinionsDB;Integrated Security = true";
+            connectionString = "Server=.;Database=MinionsDB;Integrated Security = true";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {

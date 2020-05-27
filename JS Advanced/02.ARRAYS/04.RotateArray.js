@@ -1,5 +1,5 @@
 function rotate(arr) {
-    const rotations = Number(arr.pop());
+    const rotations = Number(arr.pop()) % arr.length;
 
     for (let index = 0; index < rotations; index++) {
         arr.unshift(arr.pop());

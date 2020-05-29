@@ -9,31 +9,47 @@
 //     console.log();
 // }
 
-const magicMatrices = (
+isMagicMatrices(
     [[4, 5, 6],
     [6, 5, 4],
     [5, 5, 5]]
 );
 
-isMagicMatrices(magicMatrices);
+isMagicMatrices(
+    [[11, 32, 45],
+    [21, 0, 1],
+    [21, 1, 1]]
+);
+
+isMagicMatrices(
+    [[1, 0, 0],
+    [0, 0, 1],
+    [0, 1, 0]]
+);
 
 function isMagicMatrices(matrix) {
     let isMagicMatrix = true;
-    const sum = matrix[0].reduce((acc, element) => acc += element, 0);
+    const sum = matrix[0].reduce((acc, element) => acc += Number(element), 0);
 
-    const arrayRow = [0, 0, 0];
+    const arrayRow = new Array(matrix.length).fill(0);
 
-    matrix.reduce((acc1, row) => {
+    matrix.reduce((acc, row) => {
+        let arrayColSum = 0;
         row.reduce((acc, element, indexCol) => {
-            acc += element, 0 === sum ? true : isMagicMatrix = false;
-            arrayRow[indexCol] += element;
-        });
-    });
-    console.log(arrayRow);
-    // matrix.forEach(row => {
-    //     row.reduce((acc, element) => acc += element) === sum ? true : isMagicMatrix = false;
-    // });
+            arrayColSum += Number(element);
+            arrayRow[indexCol] += Number(element);
+        }, 0);
+        if (arrayColSum !== sum) {
+            isMagicMatrix = false;
+        }
+    }, 0);
 
+    arrayRow.reduce((acc, element) => {
+        if (element !== sum) {
+            isMagicMatrix = false;
+        }
+    }, 0);
+    
     console.log(isMagicMatrix);
 }
 

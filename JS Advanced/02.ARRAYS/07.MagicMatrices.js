@@ -21,15 +21,12 @@ function isMagicMatrices(matrix) {
     let isMagicMatrix = true;
     const sum = matrix[0].reduce((acc, element) => acc += element, 0);
 
-    const arrayRow = [0, 0, 0];
+    const array1 = [0, 0, 0];
 
-    matrix.reduce((acc1, row) => {
-        row.reduce((acc, element, indexCol) => {
-            acc += element, 0 === sum ? true : isMagicMatrix = false;
-            arrayRow[indexCol] += element;
-        });
+    matrix.reduce((acc1, row, index) => {
+        row.reduce((acc, element, indexCol) => acc += element, 0) === sum ? arrayRow[indexCol] += element : isMagicMatrix = false;
     });
-    console.log(arrayRow);
+
     // matrix.forEach(row => {
     //     row.reduce((acc, element) => acc += element) === sum ? true : isMagicMatrix = false;
     // });

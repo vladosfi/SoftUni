@@ -30,12 +30,6 @@ isMagicMatrices(
 function isMagicMatrices(matrix) {
     let isMagicMatrix = true;
     const sum = matrix[0].reduce((acc, element) => acc += Number(element), 0);
-	
-    const array1 = [0, 0, 0];
-
-    matrix.reduce((acc1, row, index) => {
-        row.reduce((acc, element, indexCol) => acc += element, 0) === sum ? arrayRow[indexCol] += element : isMagicMatrix = false;
-    });
 
     const arrayRow = new Array(matrix.length).fill(0);
 
@@ -55,7 +49,7 @@ function isMagicMatrices(matrix) {
             isMagicMatrix = false;
         }
     }, 0);
-    
+
     console.log(isMagicMatrix);
 }
 

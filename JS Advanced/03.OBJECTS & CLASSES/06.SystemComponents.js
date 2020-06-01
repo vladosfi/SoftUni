@@ -1,7 +1,35 @@
 "use strict";
 
 function solve(input) {
-    
+    const catalog = {};
+
+    for (const line of input) {
+        const [systemName, componentName, subcomponentName] = line.split(' | ');
+
+        if (catalog.hasOwnProperty(systemName) === false) {
+            catalog[systemName] = {};
+        }
+        if (catalog[systemName].hasOwnProperty(componentName) === false) {
+            catalog[systemName][componentName] = [];
+        }
+        catalog[systemName][componentName].push(subcomponentName);
+    }
+
+    const sortedCatalog = Object.entries(catalog).sort((a, b) => {
+        return Object.keys(b[1]).length - Object.keys(a[1]).length || a[0].localeCompare(b[0]);
+    }).forEach(([system, component]) => {
+        console.log(system);
+        Object.entries(component)
+            .sort((a,b) => b[1].length - a[1].length)
+            .forEach(([name, sub])=>{
+                console.log(`|||${name}`);
+                sub.forEach(s=>{
+                    console.log('||||||' + s);
+                })
+            })
+    });
+
+    console.log(sortedCatalog);
 }
 
 solve([

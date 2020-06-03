@@ -8,6 +8,7 @@ function solve(tickets, criteria) {
         price: () = {},
         status: () = {}
     }
+    
     class Ticket {
         constructor(descriptor) {
             const [destinationName, price, status] = descriptor.split('|');

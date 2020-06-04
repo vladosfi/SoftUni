@@ -1,28 +1,37 @@
 "use strict";
 
 function solve(tickets, criteria) {
-    tickets.map(t => new Ticket(t)).sort(COMPARATOR[criteria]);
-
-    const comparator = {
-        destination: () = {},
-        price: () = {},
-        status: () = {}
-    }
-    
     class Ticket {
         constructor(descriptor) {
-            const [destinationName, price, status] = descriptor.split('|');
-            this.destinationName = destinationName;
-            this.price = price;
+            const [destination, price, status] = descriptor.split('|');
+            this.destination = destination;
+            this.price = Number(price);
             this.status = status;
+        }
+    }
+
+    return tickets.map(t => new Ticket(t)).sort(comparator[criteria]);
+
+    function comparator(a, b) {
+        try {
+            return a[criteria].localeCompare(b[criteria]);
+        } catch (e) {
+            return a[criteria] - b[criteria];
         }
     }
 }
 
 
-solve(['Philadelphia|94.20|available',
+console.log(solve(['Philadelphia|94.20|available',
     'New York City|95.99|available',
     'New York City|95.99|sold',
     'Boston|126.20|departed'],
     'destination'
-)
+));
+
+console.log(solve(['Philadelphia|94.20|available',
+    'New York City|95.99|available',
+    'New York City|95.99|sold',
+    'Boston|126.20|departed'],
+    'status'
+));

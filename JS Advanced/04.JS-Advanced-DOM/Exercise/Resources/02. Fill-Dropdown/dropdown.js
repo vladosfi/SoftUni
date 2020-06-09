@@ -5,12 +5,11 @@ function addItem() {
     const itemValue = textValue.value;
 
     const option = document.createElement('option');
-    option.textContent = itemText;
     option.value = itemValue;
+    option.textContent = itemText;
 
     document.querySelector('#menu').appendChild(option);
 
     textInput.value = '';
     textValue.value = '';
-
 }

@@ -13,7 +13,6 @@ class Company {
             throw new Error('Invalid input!');
         }
 
-
         let current = this.departments.find(d => d.name === department)
         if (current === undefined) {
             current = {

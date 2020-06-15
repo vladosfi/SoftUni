@@ -1,0 +1,22 @@
+{
+    "eslint.options": {
+        "envs": [
+            "es6"
+        ],
+    },
+    "rules": {
+        "semi": "error",
+        "curly": "error",
+        "quotes": [
+            "warn",
+            "single"
+        ],
+        "no-undef": "error"
+    },
+    "eslintConfig": {
+        "env": {
+            "node": true
+        }
+    },
+    "window.zoomLevel": 0
+}

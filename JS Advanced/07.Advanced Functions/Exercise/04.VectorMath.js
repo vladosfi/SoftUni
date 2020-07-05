@@ -24,3 +24,5 @@ console.log(vectorMath.multiply([3.5, -2], 2));
 console.log(vectorMath.length([3, -4]));
 console.log(vectorMath.dot([1, 0], [0, -1]));
 console.log(vectorMath.cross([3, 7], [1, 0]));
+
+

@@ -52,7 +52,7 @@ function solve() {
         remove,
         sort,
         output
-    }
+    };
 
     function el(type, content, attributes) {
         const result = document.createElement(type);

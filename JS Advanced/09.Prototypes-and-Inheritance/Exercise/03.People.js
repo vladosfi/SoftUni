@@ -1,4 +1,5 @@
 function solve() {
+    
     const juniorTasks = [
         ' is working on a simple task.'
     ];
@@ -58,7 +59,7 @@ function solve() {
         }
 
         collectSalary() { 
-            console.log(`${this.name} received ${this.salary + this.divident} this month.`);
+            console.log(`${this.name} received ${this.salary + this.dividend} this month.`);
         }
     }
 

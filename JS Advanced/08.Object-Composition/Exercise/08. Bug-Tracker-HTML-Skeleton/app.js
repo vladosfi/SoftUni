@@ -1,16 +1,25 @@
 function solve() {
+
+    const comparators = {
+        'ID': (a, b) => a[0] - b[0],
+        'author': (a, b) => a[1].author.localeCompare(b[1].author),
+        'severity': (a, b) => a[1].severity - b[1].severity,
+    };
+
+
     let currentId = 0;
     const reports = new Map();
-    const elements = [];
-    let selector = null;
+    let sortingMethod = 'ID';
+    let outputRef = null;
 
     function report(author, description, reproducible, severity) {
-        const statusSpan = el('span',`${status} | ${severity}`, {className: 'author'});
-        
+        let status = 'Open';
+        const statusSpan = el('span', `${status} | ${severity}`, { className: 'status' });
+
         const element = el('div', [
-            el('div', el('p0', description), { className: 'body' }),
+            el('div', el('p', description), { className: 'body' }),
             el('div', [
-                el('span',`Submitted by: ${author}`, {className: 'author'}),
+                el('span', `Submitted by: ${author}`, { className: 'author' }),
                 statusSpan
             ], { className: 'title' })
         ], {
@@ -18,16 +27,28 @@ function solve() {
             className: 'report'
         });
 
-        reports.set(currentId, {
+        const newReport = {
             ID: currentId,
             author,
             description,
             reproducible,
             severity,
-            status: 'Open',
-            element: null //DOM element          
+            element //DOM element          
+        }
+
+        Object.defineProperty(newReport, 'status', {
+            get: () => status,
+            set: (value) => {
+                status = value;
+                statusSpan.textContent = `${status} | ${severity}`;
+            }
         });
+
+        reports.set(currentId, newReport);
+
         currentId++;
+
+        render();
     }
 
     function setStatus(id, newStatus) {
@@ -35,15 +56,28 @@ function solve() {
     }
 
     function remove(id) {
+        reports.get(id).element.remove();
         reports.delete(id);
+        render();
     }
 
     function sort(method) {
-
+        sortingMethod = method;
+        render();
     }
 
     function output(newSelector) {
-        selector = newSelector;
+        outputRef = document.querySelector(newSelector);
+        render();
+    }
+
+    function render() {
+        // проверяваме дали имаме валиден селектор
+        if (outputRef !== null) {
+            [...reports]
+                .sort(comparators[sortingMethod])
+                .forEach(([id, r]) => outputRef.appendChild(r.element));
+        }
     }
 
     return {

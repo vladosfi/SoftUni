@@ -34,7 +34,7 @@ body {
     display: none;
 }
 
-#wizard{
+#wizard{ 
     z-index: 100;
     position: absolute;
     width: 82px;

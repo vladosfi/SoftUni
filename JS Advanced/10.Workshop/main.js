@@ -19,7 +19,7 @@
 
     const pressedKeyActionMap = {
         ArrowUp(){},
-        ArrowDown(){},
+        ArrowDown(){}, 
         ArrowLest(){},
         ArrowRight(){}
     }

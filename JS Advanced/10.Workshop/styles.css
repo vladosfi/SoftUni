@@ -42,7 +42,7 @@ body {
     background-image: url('./images/wizard.png');
 }
 
-.wizard-fire{
+#wizard.wizard-fire{
     background-image: url('./images/wizard-fire.png');
     background-size: cover;
 }

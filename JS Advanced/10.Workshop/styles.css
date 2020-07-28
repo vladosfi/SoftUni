@@ -35,7 +35,7 @@ body {
 }
 
 #wizard{ 
-    z-index: 100;
+    z-index: 50;
     position: absolute;
     width: 82px;
     height: 100px;
@@ -76,9 +76,9 @@ body {
     position: absolute;
     width: 50%;
     background-color: red;
-    top: 100px;
+    top: 300px;
     left: 25%;
-    z-index: 1;
+    z-index: 100;
     text-align: center;
     padding: 30px;
 }

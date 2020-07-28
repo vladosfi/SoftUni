@@ -10,8 +10,10 @@
         speed: 2,
         wizardMovingMultiplier: 4,
         fireballMovingMultiplier: 5,
-        fireInterval: 1000,
-        cloudSpanInterval: 3000
+        fireInterval: 300,
+        cloudSpanInterval: 3000,
+        bugSpanInterval: 5000,
+        bugKillScore: 2000
     };
 
     const utils = {
@@ -23,6 +25,17 @@
         },
         randomNumberBetween(min, max) {
             return Math.floor(Math.random() * max) + min;
+        },
+        hasCollision(el1, el2) {
+            const el1Rect = el1.getBoundingClientRect();
+            const el2Rect = el2.getBoundingClientRect();
+
+            return !(
+                el1Rect.top > el2Rect.bottom ||
+                el1Rect.bottom < el2Rect.top ||
+                el1Rect.right < el2Rect.left ||
+                el1Rect.left > el2Rect.right
+            );
         }
     };
 
@@ -32,6 +45,9 @@
         },
         get clouds() {
             return Array.from(document.querySelectorAll('.cloud'));
+        },
+        get bugs() {
+            return Array.from(document.querySelectorAll('.bug'));
         }
     };
 
@@ -66,7 +82,8 @@
             loopId: null,
             nextRenderQueue: [],
             lastFireBallTimeStamp: 0,
-            lastCloudSpanTimestamp: 0
+            lastCloudSpanTimestamp: 0,
+            lastBugSpanTimestamp: 0
         };
     }
 
@@ -78,24 +95,45 @@
         wizardCoordinates.x = 200;
         wizardCoordinates.y = 200;
         wizardEl.classList.remove('hidden');
+        gameOverEl.classList.add('hidden');
         gameLoop(0);
     }
 
-    function addFireBall(x, y) {
-        const fbe = document.createElement('div');
-        fbe.classList.add('fire-ball');
-        fbe.style.left = utils.numberToPx(x);
-        fbe.style.top = utils.numberToPx(y);
-        gameAreaEl.appendChild(fbe);
+    function gameOver() {
+        window.cancelAnimationFrame(gameplay.loopId);
+        gameOverEl.classList.remove('hidden');
+        gameStartEl.classList.remove('hidden');
     }
 
-    function addCloud(x, y) {
-        const ce = document.createElement('div');
-        ce.classList.add('cloud');
-        ce.style.left = utils.numberToPx(x);
-        ce.style.top = utils.numberToPx(y);
-        gameAreaEl.appendChild(ce);
+    // function addFireBall(x, y) {
+    //     const fbe = document.createElement('div');
+    //     fbe.classList.add('fire-ball');
+    //     fbe.style.left = utils.numberToPx(x);
+    //     fbe.style.top = utils.numberToPx(y);
+    //     gameAreaEl.appendChild(fbe);
+    // }
+
+    // function addCloud(x, y) {
+    //     const ce = document.createElement('div');
+    //     ce.classList.add('cloud');
+    //     ce.style.left = utils.numberToPx(x);
+    //     ce.style.top = utils.numberToPx(y);
+    //     gameAreaEl.appendChild(ce);
+    // }
+
+    function addGameElementFactory(className) {
+        return function addElement(x, y,) {
+            const e = document.createElement('div');
+            e.classList.add(className);
+            e.style.left = utils.numberToPx(x);
+            e.style.top = utils.numberToPx(y);
+            gameAreaEl.appendChild(e);
+        };
     }
+
+    const addFireBall = addGameElementFactory('fire-ball');
+    const addCloud = addGameElementFactory('cloud');
+    const addBug = addGameElementFactory('bug');
 
     const pressedKeyActionMap = {
         ArrowUp() {
@@ -153,20 +191,49 @@
         });
     }
 
-    function processClouds(timestamp) {
-        if (timestamp - gameplay.lastCloudSpanTimestamp > config.cloudSpanInterval ) {
-            const x = gameAreaEl.offsetWidth - 200;
-            const y = utils.randomNumberBetween(0, gameAreaEl.offsetHeight - 200);
-            addCloud(x, y);
-            gameplay.lastCloudSpanTimestamp = timestamp;
+
+    const processClouds = processGameElementFactory(addCloud, 200, 'lastCloudSpanTimestamp', 'clouds', 'cloudSpanInterval');
+    const processBugs = processGameElementFactory(addBug, 60, 'lastBugSpanTimestamp', 'bugs', 'bugSpanInterval', bugElementProcessor);
+
+    function bugElementProcessor(bugEl) {
+        const fireball = scene.fireBalls.find(fe => utils.hasCollision(fe, bugEl));
+        if (fireball) {
+            bugEl.remove();
+            fireball.remove();
+            gameScoreValueEl.innerHTML = config.bugKillScore + parseInt(gameScoreValueEl.innerHTML);
+            return true;
+        };
+        if (utils.hasCollision(bugEl, wizardEl)) {
+            gameOver();
+            return true;
         }
-        scene.clouds.forEach(ce => {
-            const newX = utils.pxToNumber(ce.style.left) - config.speed;
-            if(newX + 200 < 0){
-                ce.remove();
+        return false;
+    }
+
+    function processGameElementFactory(
+        addFn,
+        elementWidth,
+        gameplayTimestampName,
+        sceneName,
+        configName,
+        additionalElementProcessor
+    ) {
+        return function (timestamp) {
+            if (timestamp - gameplay[gameplayTimestampName] > config[configName]) {
+                const x = gameAreaEl.offsetWidth - elementWidth;
+                const y = utils.randomNumberBetween(0, gameAreaEl.offsetHeight - 200);
+                addFn(x, y);
+                gameplay[gameplayTimestampName] = timestamp;
             }
-            ce.style.left = utils.numberToPx(newX);
-        });
+            scene[sceneName].forEach(ce => {
+                const newX = utils.pxToNumber(ce.style.left) - config.speed;
+                if (additionalElementProcessor && additionalElementProcessor(ce)) { return; }
+                if (newX + 200 < 0) {
+                    ce.remove();
+                }
+                ce.style.left = utils.numberToPx(newX);
+            });
+        }
     }
 
     function applyGravity() {
@@ -182,6 +249,7 @@
         processNextRenderQueue(timestamp);
         processFireBalls(timestamp);
         processClouds(timestamp);
+        processBugs(timestamp);
         gameScoreValueEl.innerText++;
     }
 

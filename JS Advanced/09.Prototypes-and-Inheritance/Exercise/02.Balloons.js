@@ -49,5 +49,5 @@ const a = new balloons.Balloon('green', 10);
 
 console.log(a);
 
-let test = new balloons.PartyBalloon("Tumno-bqlo", 20.5, "Svetlo-cherno", 10.25);
+let test = new balloons.PartyBalloon('Tumno-bqlo', 20.5, 'Svetlo-cherno', 10.25);
 console.log(test);

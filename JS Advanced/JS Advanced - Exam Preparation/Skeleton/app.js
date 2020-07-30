@@ -14,9 +14,45 @@ function solve() {
     function addTask(e) {
         e.preventDefault();
         //Прочитаме съдържанието на формуляра и валидираме
-        const 
-        //създаваме елементите
-        //закачаме функционалност
-        //добавяме елементи в DOM дървото
+        const taskName = inputTask.value;
+        const taskDesk = inputDesk.value;
+        const taskDate = inputDate.value;
+
+        if (taskName.length > 0 && taskDesk.length > 0 && taskDate > 0) {
+            const btnDiv = el('div');
+
+            const task = el('article',[
+                el('h3', taskName),
+                el('p',`Description: ${taskDesk}`),
+                el('p',`Due Date: ${taskDate}`),
+                btnDiv
+            ]);
+            //създаваме елементите
+            //закачаме функционалност
+            //добавяме елементи в DOM дървото
+        }
+    }
+
+    function el(type, content, attributes) {
+        const result = document.createElement(type);
+
+        if (attributes !== undefined) {
+            Object.assign(result, attributes);
+        }
+
+        if (Array.isArray(content)) {
+            content.forEach(append);
+        } else {
+            append(content);
+        }
+
+        function append(node) {
+            if (typeof node === 'string') {
+                node = document.createTextNode(node);
+            }
+            result.appendChild(node);
+        }
+
+        return result;
     }
 }

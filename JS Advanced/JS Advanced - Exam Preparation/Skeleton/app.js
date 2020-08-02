@@ -45,6 +45,7 @@ function solve() {
                 btnDiv.appendChild(finishBtn);
             });
 
+            
 
             finishBtn.addEventListener('click',()=>{
                 finishedDiv.appendChild(task);

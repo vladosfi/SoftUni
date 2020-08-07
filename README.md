@@ -22,4 +22,6 @@
 |<a href="https://softuni.bg/trainings/2613/csharp-web-basics-january-2020?fbclid=IwAR3JWpdukLXpnMuhY8H6YbGm0xtCRFJGHIbkPljyekc3pW1i8u3tIFIu2qk#lesson-14159" > C# Web Basics - януари 2020 </a>   | <a href="https://softuni.bg/trainings/2355/csharp-web-basics-may-2019/internal#lesson-11908" target="_blank"> Link</a> |
 |<a href="https://softuni.bg/trainings/2796/asp-net-core-february-2020" > C# ASP.NET Core - февруари 2020 </a>   | <a href="https://softuni.bg/trainings/2419/asp-net-core-mvc-june-2019" target="_blank"> Link</a> |
 
+|<a href="https://softuni.bg/trainings/2838/js-advanced-may-2020#lesson-15406" > JS Advanced - май 2020 </a>   | <a href="https://softuni.bg/trainings/2838/js-advanced-may-2020" target="_blank"> Link</a> |
+
 

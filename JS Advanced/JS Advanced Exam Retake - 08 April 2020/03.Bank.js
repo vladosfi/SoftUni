@@ -24,7 +24,7 @@ class Bank {
         }
 
         customer.totalMoney += amount;
-        customer.transactions.unshift(`${customer.transactions.length + 1}. ${customer.firstName} ${customer.lastName} made depostit of ${amount}$!`);
+        customer.transactions.unshift(`${customer.transactions.length + 1}. ${customer.firstName} ${customer.lastName} made deposit of ${amount}$!`);
         return `${customer.totalMoney}$`;
     }
 

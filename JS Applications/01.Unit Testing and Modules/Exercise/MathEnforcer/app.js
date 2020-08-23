@@ -18,4 +18,3 @@ module.exports = mathEnforcer = {
         return num1 + num2;
     }
 };
-

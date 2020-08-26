@@ -33,6 +33,10 @@ function attachEvents() {
                     const msg = `${value.author}: ${value.content}\n`;
                     elements.messages().value += msg;
                 }
+
+                // for(const el in response){
+                //     console.log(response[el].author);
+                // };
             });
     })
 

@@ -11,37 +11,43 @@ function attachEvents() {
         phonebookUl() { return document.querySelector('ul#phonebook') },
     }
 
-    elements.createContact().addEventListener('click', createElement);
+    elements.createContact().addEventListener('click', addContact);
 
     elements.loadContact().addEventListener('click', loadPhoneBook);
 
-    async function createElement() {
+    async function addContact() {
         const { value: person } = elements.person();
         const { value: phone } = elements.phone();
 
-        await api.createEntry({ person, phone })
+        const result = await api.createEntry({ person, phone })
 
         elements.person().value = '';
         elements.phone().value = '';
+
+        const id = Object.keys(result)[0];
+        createElement(result, result[id]);
     }
 
     async function loadPhoneBook() {
         const data = await api.getData();
 
         elements.phonebookUl().innerHTML = '';
-        for (const [key, value] of Object.entries(data)) {
+        Object.entries(data).forEach(([id, entry]) => {
+            createElement(id, entry);
+        });
+    }
 
-            const btnDelete = document.createElement('button');
-            btnDelete.textContent = 'Delete';
-            btnDelete.value = key;
-            btnDelete.addEventListener('click', deleteRecord);
+    function createElement(id, entry) {
+        const btnDelete = document.createElement('button');
+        btnDelete.textContent = 'Delete';
+        btnDelete.value = id;
+        btnDelete.addEventListener('click', deleteRecord);
 
-            const listItem = document.createElement('li');
-            listItem.textContent = `${value.person}: ${value.phone}`;
-            listItem.appendChild(btnDelete);
+        const listItem = document.createElement('li');
+        listItem.textContent = `${entry.person}: ${entry.phone}`;
+        listItem.appendChild(btnDelete);
 
-            elements.phonebookUl().appendChild(listItem);
-        }
+        elements.phonebookUl().appendChild(listItem);
 
         async function deleteRecord() {
             try {

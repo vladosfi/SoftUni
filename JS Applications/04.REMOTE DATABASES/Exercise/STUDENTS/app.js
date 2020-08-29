@@ -32,12 +32,13 @@ window.addEventListener('load', () => {
     function renderStudent(student) {
         const id = el('td', student.ID);
         const firstName = el('td', student.FirstName);
-
-        firstName.addEventListener('dblclick', () => updateStudentTable(firstName, student.FirstName));
-
+        firstName.addEventListener('dblclick', () => updateStudentTable(firstName, student.FirstName, 'FirstName'));
         const lastName = el('td', student.LastName);
+        lastName.addEventListener('dblclick', () => updateStudentTable(lastName, student.LastName,'LastName'));
         const facultyNumber = el('td', student.FacultyNumber);
+        facultyNumber.addEventListener('dblclick', () => updateStudentTable(facultyNumber, student.FacultyNumber,'FacultyNumber'));
         const grade = el('td', student.Grade);
+        grade.addEventListener('dblclick', () => updateStudentTable(grade, student.Grade,'Grade'));
 
         const tdElemets = {
             Id: id,
@@ -57,8 +58,7 @@ window.addEventListener('load', () => {
 
         return tr;
 
-        function updateStudentTable(elToEdit, inputValie) {
-            console.log(inputValie);
+        function updateStudentTable(elToEdit, inputValie, propNameToEdit) {
             const editedElement = el('input');
             elToEdit.textContent = '';
             editedElement.value = inputValie;
@@ -70,7 +70,7 @@ window.addEventListener('load', () => {
                     if (input.lenght <= 0) { return; };
                     elToEdit.innerHTML = '';
                     const data = await api.updateStudent({
-                        FirstName: editedElement.value,
+                        propNameToEdit: editedElement.value,
                         objectId: student.objectId,
                     });
                     elToEdit.innerHTML = editedElement.value;

@@ -1,10 +1,10 @@
 import home from './controllers/home.js';
 import about from './controllers/about.js';
-import login , { loginPost } from './controllers/login.js';
+import login, { loginPost, logout } from './controllers/login.js';
 import register, { registerPost } from './controllers/register.js';
 import catalog from './controllers/catalog.js';
 import details from './controllers/details.js';
-import create from './controllers/create.js';
+import create, { createPost } from './controllers/create.js';
 import edit from './controllers/edit.js';
 
 window.addEventListener('load', () => {
@@ -28,6 +28,8 @@ window.addEventListener('load', () => {
 
         this.get('#/login', login);
 
+        this.get('#/logout', logout);
+
         this.get('#/catalog', catalog);
 
         this.get('#/catalog/:id', details);
@@ -38,6 +40,7 @@ window.addEventListener('load', () => {
 
         this.post('#/register', (ctx) => { registerPost.call(ctx); });
         this.post('#/login', (ctx) => { loginPost.call(ctx); });
+        this.post('#/create', (ctx) => { createPost.call(ctx); });
     });
 
     app.run();

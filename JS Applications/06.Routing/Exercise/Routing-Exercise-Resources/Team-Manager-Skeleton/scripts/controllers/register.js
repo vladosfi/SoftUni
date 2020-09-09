@@ -23,9 +23,8 @@ export async function registerPost() {
             Object.assign(error, result);
             throw error;
         }
-        this.redirect('#/home');
+        this.redirect('#/login');
     } catch (err) {
         alert(err.message);
     }
-
 }

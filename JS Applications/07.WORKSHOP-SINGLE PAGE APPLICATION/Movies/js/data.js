@@ -10,7 +10,7 @@ const endpoints = {
     MOVIE_BY_ID: 'data/movies/',
 };
 
-async function register(username, password) {
+export async function register(username, password) {
     return (await fetch(host(endpoints.REGISTER), {
         method: "POST",
         headers: {
@@ -23,7 +23,7 @@ async function register(username, password) {
     })).json();
 }
 
-async function login(username, password) {
+export async function login(username, password) {
     const result = (await fetch(host(endpoints.LOGIN), {
         method: "POST",
         headers: {
@@ -42,7 +42,7 @@ async function login(username, password) {
     return result;
 }
 
-async function logout() {
+export async function logout() {
     const token = localStorage.getItem('userToken');
     if (token) {
         return fetch(host(endpoints.LOGOUT), {
@@ -55,7 +55,7 @@ async function logout() {
 
 
 // get all movies
-async function getMovies() {
+export async function getMovies() {
     const token = localStorage.getItem('userToken');
 
     if (token) {
@@ -68,7 +68,7 @@ async function getMovies() {
 }
 
 // get movie by ID
-async function getMoviesById(id) {
+export async function getMoviesById(id) {
     const token = localStorage.getItem('userToken');
 
     if (token) {
@@ -81,7 +81,7 @@ async function getMoviesById(id) {
 }
 
 // create movie
-async function createMovie(movie) {
+export async function createMovie(movie) {
     const token = localStorage.getItem('userToken');
 
     if (token) {
@@ -97,7 +97,7 @@ async function createMovie(movie) {
 }
 
 // edit movie
-async function updateMovie(id, updatedProps) {
+export async function updateMovie(id, updatedProps) {
     const token = localStorage.getItem('userToken');
 
     if (token) {
@@ -114,7 +114,7 @@ async function updateMovie(id, updatedProps) {
 
 
 // delete movie
-async function deleteMovie(id) {
+export async function deleteMovie(id) {
     const token = localStorage.getItem('userToken');
 
     if (token) {
@@ -129,7 +129,7 @@ async function deleteMovie(id) {
 }
 
 // get movies by userID
-async function getMoviesByOwner(ownerId) {
+export async function getMoviesByOwner(ownerId) {
     const token = localStorage.getItem('userToken');
 
     if (token) {
@@ -145,7 +145,7 @@ async function getMoviesByOwner(ownerId) {
 
 
 // buy ticket
-async function buyTicket(movie) {
+export async function buyTicket(movie) {
     const newTickets = movie.tickets - 1;
     const movieId = movie.objectId;
 

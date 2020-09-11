@@ -1,3 +1,5 @@
+import { beginRequest, endRequest } from './notofocation.js';
+
 function host(endpoint) {
     return `https://api.backendless.com/86A5F958-32F7-ECB1-FF4C-4F443615C900/CD074802-0601-46DD-871E-FDCFF39A29D5/${endpoint}`;
 }
@@ -11,7 +13,8 @@ const endpoints = {
 };
 
 export async function register(username, password) {
-    return (await fetch(host(endpoints.REGISTER), {
+    beginRequest();
+    const result = (await fetch(host(endpoints.REGISTER), {
         method: "POST",
         headers: {
             'Content-Type': 'application/json',
@@ -21,9 +24,15 @@ export async function register(username, password) {
             password
         }),
     })).json();
+
+    endRequest();
+
+    return result;
 }
 
 export async function login(username, password) {
+    beginRequest();
+
     const result = (await fetch(host(endpoints.LOGIN), {
         method: "POST",
         headers: {
@@ -39,18 +48,25 @@ export async function login(username, password) {
     localStorage.setItem('username', result.username);
     localStorage.setItem('userId', result.onjectId);
 
+    endRequest();
+
     return result;
 }
 
 export async function logout() {
+    beginRequest();
+
     const token = localStorage.getItem('userToken');
-    if (token) {
-        return fetch(host(endpoints.LOGOUT), {
-            headers: {
-                'user-token': token
-            }
-        });
-    }
+    localStorage.removeItem('userToken');
+
+    const result = await fetch(host(endpoints.LOGOUT), {
+        headers: {
+            'user-token': token
+        }
+    });
+
+    endRequest();
+    return result;
 }
 
 
@@ -59,11 +75,16 @@ export async function getMovies() {
     const token = localStorage.getItem('userToken');
 
     if (token) {
-        return (await fetch(host(endpoints.MOVIES), {
+        beginRequest();
+
+        const result = (await fetch(host(endpoints.MOVIES), {
             headers: {
                 'user-token': token
             }
         })).json();
+
+        endRequest();
+        return result;
     }
 }
 
@@ -72,11 +93,16 @@ export async function getMoviesById(id) {
     const token = localStorage.getItem('userToken');
 
     if (token) {
-        return (await fetch(host(endpoints.MOVIE_BY_ID + id), {
+        beginRequest();
+
+        const result = (await fetch(host(endpoints.MOVIE_BY_ID + id), {
             headers: {
                 'user-token': token
             }
         })).json();
+
+        endRequest();
+        return result;
     }
 }
 
@@ -85,7 +111,9 @@ export async function createMovie(movie) {
     const token = localStorage.getItem('userToken');
 
     if (token) {
-        return (await fetch(host(endpoints.MOVIES), {
+        beginRequest();
+
+        const result = (await fetch(host(endpoints.MOVIES), {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -93,6 +121,9 @@ export async function createMovie(movie) {
             },
             body: JSON.stringify(movie)
         })).json();
+
+        endRequest();
+        return result;
     }
 }
 
@@ -101,7 +132,9 @@ export async function updateMovie(id, updatedProps) {
     const token = localStorage.getItem('userToken');
 
     if (token) {
-        return (await fetch(host(endpoints.MOVIE_BY_ID + id), {
+        beginRequest();
+
+        const result = (await fetch(host(endpoints.MOVIE_BY_ID + id), {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -109,6 +142,9 @@ export async function updateMovie(id, updatedProps) {
             },
             body: JSON.stringify(updatedProps)
         })).json();
+
+        endRequest();
+        return result;
     }
 }
 
@@ -118,13 +154,18 @@ export async function deleteMovie(id) {
     const token = localStorage.getItem('userToken');
 
     if (token) {
-        return (await fetch(host(endpoints.MOVIE_BY_ID + id), {
+        beginRequest();
+
+        const result = (await fetch(host(endpoints.MOVIE_BY_ID + id), {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
                 'user-token': token
             }
         })).json();
+
+        endRequest();
+        return result;
     }
 }
 
@@ -134,12 +175,17 @@ export async function getMoviesByOwner(ownerId) {
 
     if (token) {
         // return (await fetch(host(endpoints.MOVIES + `?where=ownerId${escape(='ownerId')}`), {
-        return (await fetch(host(endpoints.MOVIES + `?where=ownerId%3D%27${ownerId}%27`), {
+        beginRequest();
+
+        const result = (await fetch(host(endpoints.MOVIES + `?where=ownerId%3D%27${ownerId}%27`), {
             headers: {
                 'Content-Type': 'application/json',
                 'user-token': token
             }
         })).json();
+
+        endRequest();
+        return result;
     }
 }
 
@@ -148,6 +194,7 @@ export async function getMoviesByOwner(ownerId) {
 export async function buyTicket(movie) {
     const newTickets = movie.tickets - 1;
     const movieId = movie.objectId;
-
+    beginRequest();
     return updateMovie(movieId, { tickets: newTickets });
+    endRequest();
 }

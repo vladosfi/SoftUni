@@ -33,7 +33,7 @@ export async function register(username, password) {
 export async function login(username, password) {
     beginRequest();
 
-    const result = (await fetch(host(endpoints.LOGIN), {
+    const result = await (await fetch(host(endpoints.LOGIN), {
         method: "POST",
         headers: {
             'Content-Type': 'application/json',
@@ -46,7 +46,7 @@ export async function login(username, password) {
 
     localStorage.setItem('userToken', result['user-token']);
     localStorage.setItem('username', result.username);
-    localStorage.setItem('userId', result.onjectId);
+    localStorage.setItem('userId', result.objectId);
 
     endRequest();
 
@@ -170,8 +170,9 @@ export async function deleteMovie(id) {
 }
 
 // get movies by userID
-export async function getMoviesByOwner(ownerId) {
+export async function getMoviesByOwner() {
     const token = localStorage.getItem('userToken');
+    const ownerId = localStorage.getItem('userId');
 
     if (token) {
         // return (await fetch(host(endpoints.MOVIES + `?where=ownerId${escape(='ownerId')}`), {
@@ -194,7 +195,9 @@ export async function getMoviesByOwner(ownerId) {
 export async function buyTicket(movie) {
     const newTickets = movie.tickets - 1;
     const movieId = movie.objectId;
+
     beginRequest();
-    return updateMovie(movieId, { tickets: newTickets });
+    const result = updateMovie(movieId, { tickets: newTickets });
     endRequest();
+    return result;
 }

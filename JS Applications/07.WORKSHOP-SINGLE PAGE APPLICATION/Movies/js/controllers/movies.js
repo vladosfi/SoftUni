@@ -1,5 +1,5 @@
 import { showInfo, showError } from '../notofocation.js'
-import { createMovie, getMovies, buyTicket as apiBuyTicket, getMoviesByOwner, getMoviesById } from '../data.js';
+import { createMovie, getMovies, buyTicket as apiBuyTicket, getMoviesByOwner, getMoviesById, updateMovie, deleteMovie as apiDelete } from '../data.js';
 
 export default async function catalog() {
     this.partials = {
@@ -12,7 +12,7 @@ export default async function catalog() {
 
     this.app.userData.movies = movies;
 
-    const context = Object.assign({origin: encodeURIComponent('#/catalog')}, this.app.userData)
+    const context = Object.assign({ origin: encodeURIComponent('#/catalog') }, this.app.userData)
 
     this.partial('./templates/movie/catalog.hbs', context);
 }
@@ -81,12 +81,12 @@ export async function details() {
     };
 
     const movieId = this.params.id;
-    let movie = this.app.userData.movies.find(m=>m.objectId == movieId);
-    if(movie === undefined){
+    let movie = this.app.userData.movies.find(m => m.objectId == movieId);
+    if (movie === undefined) {
         movie = await getMoviesById(movieId);
     }
 
-    const context = Object.assign({movie, origin: encodeURIComponent('#/details/' + movieId)}, this.app.userData);
+    const context = Object.assign({ movie, origin: encodeURIComponent('#/details/' + movieId) }, this.app.userData);
     this.partial('./templates/movie/details.hbs', context);
 }
 
@@ -96,23 +96,70 @@ export async function edit() {
         footer: await this.load('./templates/common/footer.hbs'),
     };
 
-    this.partial('./templates/movie/edit.hbs', this.app.userData);
+    const movieId = this.params.id;
+
+    let movie = this.app.userData.movies.find(m => m.objectId == movieId);
+    if (movie === undefined) {
+        movie = await getMoviesById(movieId);
+    }
+
+    const context = Object.assign({ movie }, this.app.userData)
+    this.partial('./templates/movie/edit.hbs', context);
+}
+
+export async function editPost() {
+    const movieId = this.params.id;
+
+    try {
+        if (this.params.title.length === 0) {
+            throw new Error('Title required');
+            return;
+        }
+
+        let movie = {
+            title: this.params.title,
+            description: this.params.description,
+            image: this.params.image,
+            genres: this.params.genres,
+            tickets: Number(this.params.tickets),
+        }
+
+        const result = await updateMovie(movieId, movie);
+
+        if (result.hasOwnProperty('errorData')) {
+            const error = new Error();
+            Object.assign(error, result);
+            throw error;
+        }
+
+        for (let i = 0; i <= this.app.userData.movies.length - 1; i++) {
+            if (this.app.userData.movies[i].objectId == movieId) {
+                this.app.userData.movies.splice(i, 1, result);
+            }
+        }
+
+        showInfo('Movie edited');
+        this.redirect('#/details/' + result.objectId);
+    } catch (err) {
+        //alert(err.message);
+        showError(err.message);
+    }
 }
 
 export async function buyTicket() {
     const movieId = this.params.id;
     let movie = this.app.userData.movies.find(m => m.objectId == movieId);
 
-    if(movie === undefined){
+    if (movie === undefined) {
         movie = await getMoviesById(movieId);
     }
 
     try {
-        if(movie.tickets < 0){
+        if (movie.tickets < 0) {
             showInfo('No available tickets');
             return;
         }
-        
+
         const result = await apiBuyTicket(movie);
 
         if (result.hasOwnProperty('errorData')) {
@@ -123,6 +170,33 @@ export async function buyTicket() {
 
         showInfo(`Bought ticket for ${movie.title}`);
         this.redirect(this.params.origin);
+    } catch (err) {
+        //alert(err.message);
+        showError(err.message);
+    }
+}
+
+export async function deleteMovie() {
+
+    if(confirm('Are you shure you want to delete this movie?') == false){
+        return this.redirect('#/my_movies');
+    }
+
+    const movieId = this.params.id;
+    let movie = this.app.userData.movies.find(m => m.objectId == movieId);
+
+    try {
+        const result = await apiDelete(movieId);
+
+        if (result.hasOwnProperty('errorData')) {
+            const error = new Error();
+            Object.assign(error, result);
+            throw error;
+        }
+
+
+        showInfo(`Movie ${movie.title} deleted`);
+        this.redirect('#/my_movies');
     } catch (err) {
         //alert(err.message);
         showError(err.message);

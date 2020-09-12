@@ -8,11 +8,11 @@ export default async function catalog() {
         movie: await this.load('./templates/movie/movie.hbs'),
     };
 
-    const movies = await getMovies();
-
+    const search = this.params.search || '';
+    const movies = await getMovies(search);
     this.app.userData.movies = movies;
 
-    const context = Object.assign({ origin: encodeURIComponent('#/catalog') }, this.app.userData)
+    const context = Object.assign({ origin: encodeURIComponent('#/catalog'), search }, this.app.userData)
 
     this.partial('./templates/movie/catalog.hbs', context);
 }
@@ -178,7 +178,7 @@ export async function buyTicket() {
 
 export async function deleteMovie() {
 
-    if(confirm('Are you shure you want to delete this movie?') == false){
+    if (confirm('Are you shure you want to delete this movie?') == false) {
         return this.redirect('#/my_movies');
     }
 

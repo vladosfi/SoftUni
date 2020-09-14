@@ -171,8 +171,8 @@ export async function buyTicket() {
             throw error;
         }
 
-        showInfo(`Bought ticket for ${movie.title}`);
         this.redirect(this.params.origin);
+        showInfo(`Bought ticket for ${movie.title}`);
     } catch (err) {
         //alert(err.message);
         showError(err.message);

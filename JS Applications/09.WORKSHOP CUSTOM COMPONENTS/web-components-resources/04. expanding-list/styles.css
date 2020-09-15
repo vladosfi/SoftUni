@@ -2,6 +2,10 @@ ul {
     list-style-type: none;
 }
 
+li.closed > ul {
+    display: none;
+}
+/* 
 li::before {
     display:inline-block;
     width: 1rem;
@@ -29,4 +33,26 @@ li::before {
 .closed .closed::before,
 .closed .open::before {
     display: none;
+} */
+
+li.closed::before {
+    background-image: url(img/right.png);
+    content: "";
+    width: 13px;
+    height: 13px;
+    background-size: cover;
+    position: absolute;
+    margin-left: -15px;
+    margin-top: 2px;
+}
+
+li.open::before {
+    background-image: url(img/down.png);
+    content: "";
+    width: 13px;
+    height: 13px;
+    background-size: cover;
+    position: absolute;
+    margin-left: -15px;
+    margin-top: 2px;
 }

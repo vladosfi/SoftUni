@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <template id="slider-template">
+    <!-- <template id="slider-template">
         <style>
             .slider-container {
                 font-family: 'Montserrat', sans-serif;
@@ -63,8 +63,14 @@
                 Percentage: <span class="slider-percentage-value">0 %</span>
             </div>
         </div>
-    </template>
-
+    </template> -->
+    <app-slider id="test" slider-value="10" is-inverted="true"></app-slider>
+    <script src="./slider.js" type="module"></script>
+    <script>
+        setTimeout(function () {
+            document.getElementById('test').setAttribute('slider-value', 60);
+        }, 4000);
+    </script>
 </body>
 
 </html>

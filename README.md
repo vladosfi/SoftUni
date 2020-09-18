@@ -23,5 +23,8 @@
 |<a href="https://softuni.bg/trainings/2796/asp-net-core-february-2020" > C# ASP.NET Core - февруари 2020 </a>   | <a href="https://softuni.bg/trainings/2419/asp-net-core-mvc-june-2019" target="_blank"> Link</a> |
 |<a href="https://softuni.bg/trainings/2838/js-advanced-may-2020#lesson-15406" > JS Advanced - май 2020 </a>   | <a href="https://softuni.bg/trainings/2838/js-advanced-may-2020" target="_blank"> Link</a> |
 |<a href="https://softuni.bg/trainings/2840/js-applications-june-2020#lesson-15438" > JS Applications - юни 2020 </a>   | <a href="https://softuni.bg/trainings/2840/js-applications-june-2020#lesson-15438" target="_blank"> Link</a> |
+|<a href="https://softuni.bg/trainings/3122/html-and-css-september-2020/internal" > HTML & CSS - септември 2020 </a>   | <a href="https://softuni.bg/trainings/3122/html-and-css-september-2020/internal" target="_blank"> Link</a> |
+|<a href="https://softuni.bg/trainings/3047/angular-november-2020/internal" > Angular - ноември 2020 </a>   | <a href="https://softuni.bg/trainings/3047/angular-november-2020/internal" target="_blank"> Link</a> |
+
 
 

@@ -1,6 +1,6 @@
 <nav class="site-header sticky-top py-1">
     <div class="container d-flex flex-column flex-md-row justify-content-between">
-        <a class="py-2" href="#">
+        <a class="py-2" href="#/home">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor"
                 stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="d-block mx-auto" role="img"
                 viewBox="0 0 24 24" focusable="false">
@@ -11,10 +11,13 @@
                 </path>
             </svg>
         </a>
-        <a class="py-2 d-none d-md-inline-block" href="#">Organize Event</a>
-        <a class="py-2 d-none d-md-inline-block" href="#">USERNAME</a>
-        <a class="py-2 d-none d-md-inline-block" href="#">Logout</a>
-        <a class="py-2 d-none d-md-inline-block" href="#">Login</a>
+        {{#if isAuth}}
+        <a class="py-2 d-none d-md-inline-block" href="#/create">Organize Event</a>
+        <a class="py-2 d-none d-md-inline-block" href="#/profile">{{user}}</a>
+        <a class="py-2 d-none d-md-inline-block" href="#/logout">Logout</a>
+        {{else}}
+        <a class="py-2 d-none d-md-inline-block" href="#/login">Login</a>
+        {{/if}}
     </div>
 </nav>
 

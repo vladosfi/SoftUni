@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forms</title>
+</head>
+<body>
+    <form action="">
+        <fieldset>
+            <legend>Customer Details</legend>
+            <label >First Name</label>
+            <input type="text" placeholder="George" autofocus>
+            <br>
+            <label >Last Name</label>
+            <input type="text" placeholder="Devis">
+            <br>
+            <label for="">Male</label>
+            <input type="radio" name="gender">
+            <label for="">Female</label>
+            <input type="radio" name="gender">
+            <label for="">Other</label>
+            <input type="radio" name="gender">
+            <br>
+            <label for="">Preffered contact method:</label>
+            <label for="">Email</label>
+            <input type="radio" name="contact">
+            <label for="">Phone</label>
+            <input type="radio" name="contact">
+            <br>
+            <label >Email</label>
+            <input type="email" placeholder="your@email.com">
+            <br>
+            <label >Phone</label>
+            <input type="number" placeholder="+359885236225">
+            <br>
+            <label for="">Town</label>
+            <select name="town" id="towns">
+                <option value="varna">Varna</option>
+                <option value="plovdiv">Plovdiv</option>
+                <option value="ruse">Ruse</option>
+            </select>
+            <br>
+            <label for="">Age</label>
+            <input type="number" min="18" max="70">
+            <br>
+            <label for="browser">Progreamming language</label>
+            <input list="browsers" name="browser" id="browser">
+            <datalist id="browsers">
+              <option value="HTML">
+              <option value="CSS">
+            </datalist>
+            <br>
+            <textarea name="" id="" cols="20" rows="5" placeholder="More information..."></textarea>
+            <br>
+            <input type="checkbox" checked>
+            <label for="">I agree the Terms and Conditions</label>
+            <br>
+            <input type="button" value="Submit">
+        </fieldset>
+    </form>
+</body>
+</html>

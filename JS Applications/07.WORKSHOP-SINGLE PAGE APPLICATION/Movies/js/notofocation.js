@@ -1,4 +1,3 @@
-
 const elements = {
     info: document.querySelector('#infoBox'),
     error: document.querySelector('#errorBox'),

@@ -1,6 +1,6 @@
 
 const elements = {
-    info: document.querySelector('#infoBox'),
+    info: document.querySelector('#successBox'),
     error: document.querySelector('#errorBox'),
     loading: document.querySelector('#loadingBox'),
 };

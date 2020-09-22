@@ -259,6 +259,12 @@ form textarea {
   text-align: center;
 }
 
+#notifications{
+  position: fixed;
+  top: 45px;
+  right: 0px; 
+}
+
 #successBox, #loadingBox, #errorBox {
   display: none;
   text-align: center;

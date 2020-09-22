@@ -9,13 +9,13 @@ elements.info.addEventListener('click', hideInfo);
 elements.error.addEventListener('click', hideError);
 
 export function showInfo(message) {
-    elements.info.children[0].textContent = message;
+    elements.info.textContent = message;
     elements.info.style.display = 'block';
     setTimeout(hideInfo, 3000);
 }
 
 export function showError(message) {
-    elements.error.children[0].textContent = message;
+    elements.error.textContent = message;
     elements.error.style.display = 'block';
 }
 

@@ -24,7 +24,7 @@ export default class API {
     }
 
     getOptions(headers) {
-        const token = localStorage.getItem('userToken');
+        const token = sessionStorage.getItem('userToken');
 
         const options = { headers: headers || {} };
 
@@ -35,17 +35,16 @@ export default class API {
         return options;
     }
 
-    async get(endpoint, parseJson = true) {
+    async get(endpoint) {
         this.beginRequest();
-        let result;
-        if (parseJson) {
-            result = (await fetch(this.host(endpoint), this.getOptions())).json();
-        } else {
-            result = (await fetch(this.host(endpoint), this.getOptions()));
-        }
+        const result = await fetch(this.host(endpoint), this.getOptions());
         this.endRequest();
 
-        return result;
+        try {
+            return await result.json();
+        } catch (err) {
+            return result;
+        }
     }
 
     async post(endpoint, body) {
@@ -87,7 +86,7 @@ export default class API {
 
     async register(firstName, lastName, username, password) {
         return this.post(this.endpoints.REGISTER, {
-            firstName, 
+            firstName,
             lastName,
             username,
             password
@@ -101,19 +100,21 @@ export default class API {
             password
         });
 
-        localStorage.setItem('userToken', result['user-token']);
-        localStorage.setItem('username', result.username);
-        localStorage.setItem('userId', result.objectId);
+        sessionStorage.setItem('userToken', result['user-token']);
+        sessionStorage.setItem('username', result.username);
+        sessionStorage.setItem('userId', result.objectId);
+        sessionStorage.setItem('names', `${result.firstName} ${result.lastName}`);
 
         return result;
     }
 
     async logout() {
-        const result = await this.get(this.endpoints.LOGOUT, false);
+        const result = await this.get(this.endpoints.LOGOUT);
 
-        localStorage.removeItem('userToken');
-        localStorage.removeItem('username');
-        localStorage.removeItem('userId');
+        sessionStorage.removeItem('userToken');
+        sessionStorage.removeItem('username');
+        sessionStorage.removeItem('userId');
+        sessionStorage.removeItem('names');
 
         return result;
     }

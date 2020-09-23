@@ -261,8 +261,9 @@ form textarea {
 
 #notifications{
   position: fixed;
-  top: 45px;
+  top: 48px;
   right: 0px; 
+  z-index: 100;
 }
 
 #successBox, #loadingBox, #errorBox {

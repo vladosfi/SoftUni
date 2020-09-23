@@ -25,14 +25,14 @@ window.addEventListener('load', () => {
         this.get('#/delete/:id', deleteRecipeById);
         this.get('#/like/:id', like);
 
-
-
         this.post('#/register', (ctx) => { registerPost.call(ctx); });
         this.post('#/login', (ctx) => { loginPost.call(ctx); });
         this.post('#/create', (ctx) => { createPost.call(ctx); });
         this.post('#/edit/:id', (ctx) => { editPost.call(ctx); });
 
-
+        this.get('', function () {
+            this.swap('<h1> 404 page not found!</h1>');
+        });
     });
 
     app.run();

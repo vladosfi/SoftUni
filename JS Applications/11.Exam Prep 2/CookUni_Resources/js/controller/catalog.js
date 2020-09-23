@@ -1,4 +1,4 @@
-import { checkResult, createRecipe, getAll, getRecipeByID, deleteRecipe, editRecipe } from '../data.js';
+import { checkResult, createRecipe, getAll, getRecipeByID, deleteRecipe, editRecipe, likeRecipe } from '../data.js';
 import { showError, showInfo } from '../notofocation.js';
 
 export default async function home() {
@@ -132,7 +132,7 @@ export async function editPost() {
         }
 
         const recipeId = this.params.id;
-        const result = await editRecipe(recipeId,recipe);
+        const result = await editRecipe(recipeId, recipe);
 
         checkResult(result);
 
@@ -154,10 +154,22 @@ export async function detailsPage() {
     const recipeId = this.params.id;
     const recipe = await getRecipeByID(recipeId);
     recipe.isOwner = recipe.ownerId === this.app.userData.userId;
-    console.log(recipe);
-
+    
     const context = Object.assign({ recipe }, this.app.userData);
-    this.partial('../../templates/catalog/details.hbs', context);
+    await this.partial('../../templates/catalog/details.hbs', context);
+
+    const likeBtn = document.querySelector('#likeBtn');
+    likeBtn.addEventListener('click', async (e) => {
+        e.preventDefault();
+
+        try {
+            const result = await likeRecipe(recipeId);
+            checkResult(result);
+            likeBtn.textContent = `${result.likes} likes`;
+        } catch (err) {
+            showError(err.message);
+        }
+    })
 }
 
 export async function deleteRecipeById() {
@@ -168,7 +180,7 @@ export async function deleteRecipeById() {
     this.redirect('#/home');
 }
 
-export async function likeRecipe() {
+export async function like() {
     const recipeId = this.params.id;
     const recipe = await getRecipeByID(recipeId);
 

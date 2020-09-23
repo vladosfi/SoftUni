@@ -1,5 +1,5 @@
 import { registerPage, registerPost, loginPage, loginPost, logout } from './controller/user.js';
-import home, { createPage, createPost, editPage, editPost, detailsPage, deleteRecipeById, likeRecipe } from './controller/catalog.js';
+import home, { createPage, createPost, editPage, editPost, detailsPage, deleteRecipeById, like } from './controller/catalog.js';
 
 window.addEventListener('load', () => {
     const app = Sammy('#rooter', function () {
@@ -23,7 +23,7 @@ window.addEventListener('load', () => {
         this.get('#/edit/:id', editPage);
         this.get('#/details/:id', detailsPage);
         this.get('#/delete/:id', deleteRecipeById);
-        this.get('#/like/:id', likeRecipe);
+        this.get('#/like/:id', like);
 
 
 

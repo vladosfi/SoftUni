@@ -136,7 +136,7 @@ export async function editPost() {
 
         checkResult(result);
 
-        showInfo('Recipe edites successfully.');
+        showInfo('Recipe edite successfully.');
 
         this.redirect('#/home');
     } catch (err) {

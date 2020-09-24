@@ -303,3 +303,20 @@ form textarea {
   border-radius: 0.25rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
+
+.pagination {
+  display: inline-block;
+}
+
+.pagination a {
+  color: #fff;
+  background-color: #f44336;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+.pagination>a:hover {
+  background-color: blueviolet;
+  color: black;
+}

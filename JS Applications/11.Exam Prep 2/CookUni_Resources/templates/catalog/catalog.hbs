@@ -1,11 +1,13 @@
 <h1 class="text-center">Our Recipes</h1>
 
 {{#if recipes}}
+{{>paging}}
 <div id="sharedRecipes">
     {{#each recipes}}
     {{>recipe}}
     {{/each}}
 </div>
+{{>paging}}
 {{else}}
 <div id='foodNotFound'>
     <img src="https://t4.ftcdn.net/jpg/00/62/17/31/240_F_62173114_ozantkVtkPgzL0fxssAkTqKX1FHPr0UW.jpg" />

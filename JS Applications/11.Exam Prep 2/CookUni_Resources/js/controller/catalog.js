@@ -1,19 +1,25 @@
-import { checkResult, createRecipe, getAll, getRecipeByID, deleteRecipe, editRecipe, likeRecipe } from '../data.js';
+import { checkResult, createRecipe, getAll, getRecipeByID, deleteRecipe, editRecipe, likeRecipe, getRecipeCount } from '../data.js';
 import { showError, showInfo } from '../notofocation.js';
 
 export default async function home() {
     this.partials = {
         header: await this.load('../../templates/common/header.hbs'),
         footer: await this.load('../../templates/common/footer.hbs'),
+        paging: await this.load('./templates/common/paging.hbs'),
         catalog: await this.load('../../templates/catalog/catalog.hbs'),
         recipe: await this.load('../../templates/catalog/recipe.hbs'),
     }
 
+    const page = this.params.page || 1;
+    const recipeCount = await getRecipeCount();
+    const pageCount = Math.ceil(recipeCount / 9);
+
     const context = Object.assign({}, this.app.userData)
     if (this.app.userData.username) {
         //load recipes from database
-        const recipes = await getAll();
+        const recipes = await getAll(page);
         context.recipes = recipes;
+        context.paging = (new Array(pageCount)).fill(null).map((p, i) => ({ number: i + 1, current: page == (i + 1) }));
     }
 
     this.partial('../../templates/home.hbs', context);
@@ -154,7 +160,7 @@ export async function detailsPage() {
     const recipeId = this.params.id;
     const recipe = await getRecipeByID(recipeId);
     recipe.isOwner = recipe.ownerId === this.app.userData.userId;
-    
+
     const context = Object.assign({ recipe }, this.app.userData);
     await this.partial('../../templates/catalog/details.hbs', context);
 

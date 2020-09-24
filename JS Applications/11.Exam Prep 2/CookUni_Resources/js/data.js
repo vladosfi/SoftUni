@@ -4,7 +4,7 @@ import API from './api.js';
 const endpoints = {
     RECIPES: 'data/recipes',
     RECIPE_BY_ID: 'data/recipes/',
-
+    RECIPE_COUNT: 'data/recipes/count'
 };
 
 const api = new API(
@@ -18,8 +18,17 @@ export const logout = api.logout.bind(api);
 export const register = api.register.bind(api);
 
 // Get all recipes
-export async function getAll() {
-    return api.get(endpoints.RECIPES);
+export async function getAll(page) {
+
+    const pagingQuery = `pageSize=9&offset=${(page - 1) * 9}`;
+
+    return api.get(endpoints.RECIPES + '?' + pagingQuery);
+}
+
+//Get recipe count
+export async function getRecipeCount() {
+    const result = await api.get(endpoints.RECIPE_COUNT);
+    return result;
 }
 
 // Create (share) recipe
@@ -38,7 +47,7 @@ export async function editRecipe(id, recipe) {
 }
 
 // Delete recipe by ID
-export async function deleteRecipe(id){
+export async function deleteRecipe(id) {
     await api.delete(endpoints.RECIPE_BY_ID + id);
 }
 
@@ -48,7 +57,7 @@ export async function likeRecipe(id) {
     return await editRecipe(id, { likes: recepie.likes + 1 });
 }
 
-export function checkResult (result){
+export function checkResult(result) {
     if (result.hasOwnProperty('errorData')) {
         const error = new Error();
         Object.assign(error, result);

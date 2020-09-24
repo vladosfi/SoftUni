@@ -1,0 +1,15 @@
+<div class="paging">
+    {{#each paging}}
+
+    {{#if current}}
+    <div class="pagination">
+        <a>{{number}}</a>
+    </div>
+    {{else}}
+    <div class="pagination">
+        <a href='#/home?page={{number}}'>{{number}}</a>
+    </div>
+    {{/if}}
+
+    {{/each}}
+</div>

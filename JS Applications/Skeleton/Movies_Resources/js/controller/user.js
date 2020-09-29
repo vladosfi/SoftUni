@@ -41,8 +41,6 @@ export async function registerPost() {
         }
 
         const result = await register(
-            this.params.firstName,
-            this.params.lastName,
             this.params.username,
             this.params.password);
 
@@ -57,7 +55,6 @@ export async function registerPost() {
 
         this.app.userData.username = loginResult.username;
         this.app.userData.userId = loginResult.objectId;
-        this.app.userData.names = `${loginResult.firstName} ${loginResult.lastName}`;
 
         showInfo('User registration successful.');
 
@@ -79,8 +76,6 @@ export async function loginPost() {
 
         this.app.userData.username = result.username;
         this.app.userData.userId = result.objectId;
-        this.app.userData.names = `${result.firstName} ${result.lastName}`;
-
         showInfo('Login successful.');
 
         this.redirect('#/home');
@@ -95,7 +90,6 @@ export async function logout() {
         
         this.app.userData.username = '';
         this.app.userData.userId = '';
-        this.app.userData.names = '';
 
         showInfo('Logout successful.');
         this.redirect('#/home');

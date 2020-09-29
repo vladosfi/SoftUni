@@ -1,35 +1,31 @@
-import { showError, showInfo } from '../notofocation.js';
+import { showError, showInfo } from '../notifocation.js';
 import { register, checkResult, login, logout as apiLogout } from '../data.js';
 
 export async function registerPage() {
     this.partials = {
+        notifications: await this.load('../../templates/common/notifications.hbs'),
         header: await this.load('../../templates/common/header.hbs'),
-        footer: await this.load('../../templates/common/footer.hbs')
+        footer: await this.load('../../templates/common/footer.hbs'),
     }
     this.partial('../../templates/user/register.hbs');
 }
 
 export async function loginPage() {
     this.partials = {
+        notifications: await this.load('../../templates/common/notifications.hbs'),
         header: await this.load('../../templates/common/header.hbs'),
-        footer: await this.load('../../templates/common/footer.hbs')
+        footer: await this.load('../../templates/common/footer.hbs'),
+
     }
     this.partial('../../templates/user/login.hbs');
 }
 
 
 export async function registerPost() {
+
     try {
-        if (this.params.firstName.length < 2) {
-            throw new Error('The first name should be at least 2 characters long');
-        }
-
-        if (this.params.lastName.length < 2) {
-            throw new Error('The last name should be at least 2 characters long');
-        }
-
-        if (this.params.username.length < 3) {
-            throw new Error('The username should be at least 3 characters long');
+        if (this.params.email.length < 1) {
+            throw new Error('The email should be feeled');
         }
 
         if (this.params.password.length < 6) {
@@ -41,25 +37,12 @@ export async function registerPost() {
         }
 
         const result = await register(
-            this.params.firstName,
-            this.params.lastName,
-            this.params.username,
+            this.params.email,
             this.params.password);
 
         checkResult(result);
 
-        const loginResult = await await login(
-            this.params.username,
-            this.params.password
-        );
-
-        checkResult(loginResult);
-
-        this.app.userData.username = loginResult.username;
-        this.app.userData.userId = loginResult.objectId;
-        this.app.userData.names = `${loginResult.firstName} ${loginResult.lastName}`;
-
-        showInfo('User registration successful.');
+        showInfo('Successful registration!');
 
         this.redirect('#/home');
     } catch (err) {
@@ -71,7 +54,7 @@ export async function registerPost() {
 export async function loginPost() {
     try {
         const result = await login(
-            this.params.username,
+            this.params.email,
             this.params.password
         );
 
@@ -79,7 +62,6 @@ export async function loginPost() {
 
         this.app.userData.username = result.username;
         this.app.userData.userId = result.objectId;
-        this.app.userData.names = `${result.firstName} ${result.lastName}`;
 
         showInfo('Login successful.');
 
@@ -91,8 +73,8 @@ export async function loginPost() {
 
 export async function logout() {
     try {
-        await apiLogout();  
-        
+        await apiLogout();
+
         this.app.userData.username = '';
         this.app.userData.userId = '';
         this.app.userData.names = '';

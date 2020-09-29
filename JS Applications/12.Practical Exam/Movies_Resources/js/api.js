@@ -1,5 +1,5 @@
 export default class API {
-    constructor(appId, apiKey, beginRequest, endRequest) {
+    constructor(appId, apiKey) {
         this.appId = appId;
         this.apiKey = apiKey;
         this.endpoints = Object.assign({
@@ -7,16 +7,6 @@ export default class API {
             LOGIN: 'users/login',
             LOGOUT: 'users/logout',
         });
-        this.beginRequest = () => {
-            if (beginRequest) {
-                beginRequest();
-            }
-        };
-        this.endRequest = () => {
-            if (endRequest) {
-                endRequest();
-            }
-        };
     }
 
     host(endpoint) {
@@ -36,9 +26,7 @@ export default class API {
     }
 
     async get(endpoint) {
-        this.beginRequest();
         const result = await fetch(this.host(endpoint), this.getOptions());
-        this.endRequest();
 
         try {
             return await result.json();
@@ -52,9 +40,7 @@ export default class API {
         options.method = 'POST';
         options.body = JSON.stringify(body);
 
-        this.beginRequest();
         const result = (await fetch(this.host(endpoint), options)).json();
-        this.endRequest();
 
         return result;
     }
@@ -65,9 +51,7 @@ export default class API {
         options.method = 'PUT';
         options.body = JSON.stringify(body);
 
-        this.beginRequest();
         const result = (await fetch(this.host(endpoint), options)).json();
-        this.endRequest();
 
         return result;
     }
@@ -77,17 +61,13 @@ export default class API {
 
         options.method = 'DELETE';
 
-        this.beginRequest();
         const result = (await fetch(this.host(endpoint), options)).json();
-        this.endRequest();
 
         return result;
     }
 
-    async register(firstName, lastName, username, password) {
+    async register(username, password) {
         return this.post(this.endpoints.REGISTER, {
-            firstName,
-            lastName,
             username,
             password
         });
@@ -103,8 +83,6 @@ export default class API {
         sessionStorage.setItem('userToken', result['user-token']);
         sessionStorage.setItem('username', result.username);
         sessionStorage.setItem('userId', result.objectId);
-        sessionStorage.setItem('names', `${result.firstName} ${result.lastName}`);
-
         return result;
     }
 
@@ -114,8 +92,6 @@ export default class API {
         sessionStorage.removeItem('userToken');
         sessionStorage.removeItem('username');
         sessionStorage.removeItem('userId');
-        sessionStorage.removeItem('names');
-
         return result;
     }
 }

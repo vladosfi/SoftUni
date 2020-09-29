@@ -1,28 +1,19 @@
 {{>header}}
-<form class="text-center p-5 form-layout" action="#/register" method="POST">
-
-    <p class="h4 mb-4">Sign up</p>
-
-    <div class="form-row mb-4">
-        <div class="col">
-
-            <input type="text" id="defaultRegisterFormFirstName" class="form-control" name="firstName"
-                placeholder="First name">
-        </div>
-        <div class="col">
-
-            <input type="text" id="defaultRegisterFormLastName" class="form-control" name="lastName"
-                placeholder="Last name">
-        </div>
+<form class="text-center border border-light p-5" action="#/register" method="post">
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" placeholder="Email" name="email" value="">
+    </div>
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" placeholder="Password" name="password" value="">
     </div>
 
-    <input type="text" id="defaultRegisterFormUsername" class="form-control mb-4" name="username"
-        placeholder="Username">
-    <input type="password" id="defaultRegisterFormPassword" class="form-control" name="password" placeholder="Password">
-    <hr>
-    <input type="password" id="defaultRegisterRepeatPassword" class="form-control" name="repeatPassword"
-        placeholder="Repeat Password">
-    <button class="btn btn-danger my-4 btn-block w-25 m-auto" type="submit">Sign up</button>
+    <div class="form-group">
+        <label for="repeatPassword">Repeat Password</label>
+        <input type="password" class="form-control" placeholder="Repeat-Password" name="repeatPassword" value="">
+    </div>
 
+    <button type="submit" class="btn btn-primary">Register</button>
 </form>
 {{>footer}}

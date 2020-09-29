@@ -1,17 +1,16 @@
-import { beginRequest, endRequest, showError } from './notofocation.js';
+import { showError } from './notifocation.js';
 import API from './api.js';
 
 const endpoints = {
-    RECIPES: 'data/recipes',
-    RECIPE_BY_ID: 'data/recipes/',
-    RECIPE_COUNT: 'data/recipes/count'
+    MOVIES: 'data/movies',
+    MOVIE_BY_ID: 'data/movies/',
+    MOVIE_COUNT: 'data/movies/count'
 };
 
 const api = new API(
-    '348DBB66-8E64-4EEC-FFEA-D8566B435400',
-    '03201775-FFE1-45C6-8B99-8763AF936DCD',
-    beginRequest,
-    endRequest);
+    '8FD13186-05E1-537E-FFD2-8E367B9C7400',
+    '28EBBFAA-E8A6-4481-B118-B46676C48369',
+);
 
 export const login = api.login.bind(api);
 export const logout = api.logout.bind(api);

@@ -20,7 +20,7 @@ window.addEventListener('load', () => {
         this.post('#/register', (ctx) => { registerPost.call(ctx); });
         this.get('#/login', loginPage);
         this.post('#/login', (ctx) => { loginPost.call(ctx); });
-        // this.get('#/logout', logout);
+        this.get('#/logout', logout);
 
         // this.get('', function () {
         //     this.swap('<h1> 404 page not found!</h1>');

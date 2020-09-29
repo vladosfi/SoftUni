@@ -3,7 +3,6 @@ import { register, checkResult, login, logout as apiLogout } from '../data.js';
 
 export async function registerPage() {
     this.partials = {
-        notifications: await this.load('../../templates/common/notifications.hbs'),
         header: await this.load('../../templates/common/header.hbs'),
         footer: await this.load('../../templates/common/footer.hbs'),
     }
@@ -12,7 +11,6 @@ export async function registerPage() {
 
 export async function loginPage() {
     this.partials = {
-        notifications: await this.load('../../templates/common/notifications.hbs'),
         header: await this.load('../../templates/common/header.hbs'),
         footer: await this.load('../../templates/common/footer.hbs'),
 

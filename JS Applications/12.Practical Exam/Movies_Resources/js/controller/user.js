@@ -42,7 +42,20 @@ export async function registerPost() {
 
         showInfo('Successful registration!');
 
+        const loginResult = await login(
+            this.params.email,
+            this.params.password
+        );
+
+        checkResult(loginResult);
+
+        this.app.userData.username = loginResult.username;
+        this.app.userData.userId = loginResult.objectId;
+
+        showInfo('Login successful.');
+
         this.redirect('#/home');
+
     } catch (err) {
         showError(err.message);
     }
@@ -77,7 +90,7 @@ export async function logout() {
         this.app.userData.userId = '';
         this.app.userData.names = '';
 
-        showInfo('Logout successful.');
+        showInfo('Successful logout');
         this.redirect('#/home');
     } catch (err) {
         showError(err.message);

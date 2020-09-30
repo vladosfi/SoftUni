@@ -5,7 +5,7 @@ export function showInfo(message) {
     elements.info.addEventListener('click', hideInfo);
     elements.info.textContent = message;
     elements.info.parentElement.style.display = 'block';
-    setTimeout(hideInfo, 3000);
+    setTimeout(hideInfo, 30000);
 }
 
 export function showError(message) {

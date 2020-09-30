@@ -4,7 +4,6 @@ import API from './api.js';
 const endpoints = {
     MOVIES: 'data/movies',
     MOVIE_BY_ID: 'data/movies/',
-    MOVIE_COUNT: 'data/movies/count'
 };
 
 const api = new API(
@@ -16,12 +15,34 @@ export const login = api.login.bind(api);
 export const logout = api.logout.bind(api);
 export const register = api.register.bind(api);
 
-// Get all recipes
-export async function getAll(page) {
+// Get all movies
+export async function getAll() {
+    return api.get(endpoints.MOVIES);
+}
 
-    const pagingQuery = `pageSize=9&offset=${(page - 1) * 9}`;
+// Create movie
+export async function createMovie(movie) {
+    return api.post(endpoints.MOVIES, movie);
+}
 
-    return api.get(endpoints.RECIPES + '?' + pagingQuery);
+// Movie details
+export async function getMovieById(id) {
+    return api.get(endpoints.MOVIE_BY_ID + id);
+}
+
+// Edit movie
+export async function updateMovie(id, data) {
+    return api.put(endpoints.MOVIE_BY_ID + id, data);
+}
+
+// Delete movie
+export async function postMovieLike(id, likes) {
+    return api.put(endpoints.MOVIE_BY_ID + id, { liked: likes });
+}
+
+// Movie like
+export async function deleteMovie(id) {
+    return api.delete(endpoints.MOVIE_BY_ID + id);
 }
 
 export function checkResult(result) {

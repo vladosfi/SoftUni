@@ -16,8 +16,12 @@ export const logout = api.logout.bind(api);
 export const register = api.register.bind(api);
 
 // Get all movies
-export async function getAll() {
-    return api.get(endpoints.MOVIES);
+export async function getAll(search) {
+    if (!search) {
+        return api.get(endpoints.MOVIES);
+    } else {
+        return api.get(endpoints.MOVIES + `?where=${escape(`genres LIKE '%${search}%'`)}`);
+    }
 }
 
 // Create movie

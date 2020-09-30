@@ -34,7 +34,7 @@ export async function createPost() {
         name: this.params.title,
         description: this.params.description,
         imageUrl: this.params.imageUrl,
-        liked: 0,
+        liked: [],
         ownerId: this.app.userData.userId,
     }
 

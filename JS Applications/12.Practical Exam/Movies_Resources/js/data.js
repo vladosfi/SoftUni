@@ -20,7 +20,7 @@ export async function getAll(search) {
     if (!search) {
         return api.get(endpoints.MOVIES);
     } else {
-        return api.get(endpoints.MOVIES + `?where=${escape(`genres LIKE '%${search}%'`)}`);
+        return api.get(endpoints.MOVIES + `?where=${escape(`name LIKE '%${search}%'`)}`);
     }
 }
 

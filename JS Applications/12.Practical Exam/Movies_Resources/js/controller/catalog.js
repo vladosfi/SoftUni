@@ -9,8 +9,11 @@ export default async function home() {
         catalog: await this.load('../../templates/catalog/catalog.hbs'),
     }
 
-    const movies = await getAll();
-    const context = Object.assign({ movies }, this.app.userData);
+    const search = this.params.search || '';
+    const movies = await getAll(search);
+    this.app.userData.movies = movies;
+
+    const context = Object.assign({ }, this.app.userData)
 
     this.partial('../../templates/home.hbs', context);
 }

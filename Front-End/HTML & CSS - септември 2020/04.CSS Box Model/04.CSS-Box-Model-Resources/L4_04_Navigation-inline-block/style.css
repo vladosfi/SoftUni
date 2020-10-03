@@ -1,0 +1,30 @@
+html{
+    font-family: Helvetica, sans-serif;
+}
+
+body{
+    margin: 0 auto;
+    width: 80%;
+}
+
+header{
+    border-bottom: 2px solid black;
+    padding-bottom: 10px;
+}
+
+h1{
+    display: inline-block;
+}
+nav{
+ display: inline-block;
+ margin-left: 100px;
+}
+nav ul li {
+    display: inline-block;
+}
+nav a{
+    color: #0D9C2E;
+    text-decoration: none;
+    padding: 20px;
+    display: inline-block;
+}

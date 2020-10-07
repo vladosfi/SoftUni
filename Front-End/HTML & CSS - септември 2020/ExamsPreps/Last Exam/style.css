@@ -1,0 +1,82 @@
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css');
+body {
+    font-family: Helvetica, sans-serif;
+    color: #4D5E6A;
+}
+
+section {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.article-text, .article-price {
+    display: inline-block;
+    -webkit-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.36);
+    -moz-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.36);
+    box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.36);
+    border-radius: 10px;
+    width: 40%;
+    vertical-align: top;
+}
+
+.article-text {
+    background-color: #E1F3FF;
+    padding: 30px;
+}
+
+.article-text-ul {
+    padding: 0;
+}
+
+.article-text-ul li {
+    list-style: none;
+    margin: 10px 0;
+}
+
+.article-text ul li::before {
+    font-family: "Font Awesome 5 Free";
+    content: "\f00c";
+    display: inline-block;
+    margin-right: 8px;
+    font-weight: 900;
+    color: #51ABF2;
+}
+
+.article-price {
+    display: inline-block;
+    border: 4px solid #51ABF2;
+    border-radius: 10px;
+    margin-left: 50px;
+    padding: 67px 20px;
+    text-align: center;
+}
+
+.article-price h1.price {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.article-price .price span {
+    font-size: 36px;
+    color: #51ABF2;
+    font-weight: bold;
+}
+
+.price span::before {
+    font-family: "Font Awesome 5 Free";
+    content: "\f155";
+    display: inline-block;
+    margin-right: 8px;
+}
+
+.article-price button{
+    background-color: #51ABF2;
+    border: none;
+    color: white;
+    padding: 12px 60px;
+    text-transform: uppercase;
+    border-radius: 7px;
+    -webkit-box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.36);
+    -moz-box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.36);
+    box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.36);
+}

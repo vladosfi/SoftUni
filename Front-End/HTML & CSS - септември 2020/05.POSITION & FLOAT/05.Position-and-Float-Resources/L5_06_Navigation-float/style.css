@@ -1,0 +1,87 @@
+body {
+    font-family: Georgia, serif;
+    background-color: rgb(238, 238, 238);
+    width: 1000px;
+    margin: 0 auto;
+}
+
+header {
+    border-bottom: 3px solid;
+    display: inline-block;
+    width: 1000px;
+    vertical-align: top;
+    margin-top: 50px;
+}
+
+header h1 {
+    float: left;
+    text-transform: uppercase;
+    margin-top: 0;
+}
+
+header nav {
+    float: right;
+}
+
+header nav ul li {
+    list-style: none;
+    color: rgb(0, 102, 0);
+    padding-right: 10px;
+    display: inline-block;
+}
+
+.clear {
+    clear: both;
+}
+
+main {
+    float: left;
+    width: 75%;
+}
+
+aside nav ul li {
+    list-style: square;
+}
+
+body aside section nav ul li {
+    color: rgb(0, 102, 0);
+    text-decoration: none;
+}
+
+img {
+    border: 3px solid;
+    padding: 10px;
+    -webkit-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.25);
+}
+
+.first-img {
+    float: right;
+    margin-left: 10px;
+}
+
+blockquote {
+    float: right;
+    width: 50%;
+    font-family: Georgia, serif;
+    border-left: 3px solid #DCDCDC;
+    margin: 2px 0 0 10px;
+    padding: 0 0 0px 20px;
+    font-style: oblique;
+}
+
+blockquote cite {
+    float: right;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.second-image {
+    float: left;
+    margin-right: 20px;
+}
+
+aside {
+    float: right;
+}

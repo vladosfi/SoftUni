@@ -1,0 +1,39 @@
+
+html{
+    box-sizing: border-box;
+}
+div.container{
+    display: flex;
+    align-items: center;
+    max-width: 65vw;
+    text-align: center;
+}
+
+.week{
+    flex: 1 1 60%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-self: center;
+}
+.workweek{    
+    /* min-width: 100%; */
+}
+.weekend{
+    /* min-width: 100%; */
+}
+
+span{
+    border: 1px solid black;
+    min-width: 100px;
+    min-height: 100px;
+    flex-grow: 1;
+    padding-top: 15px;
+}
+
+.notes{
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+}

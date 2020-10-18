@@ -1,0 +1,32 @@
+body {
+    font-family: Helvetica, sans-serif;
+    margin: 50px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 2px solid rgb(0, 0, 0);
+}
+
+h1 {
+    margin-top: 0;
+    text-transform: uppercase;
+}
+
+ul {
+    margin-top: 0;
+    display: flex;
+    list-style: none;
+    justify-content: space-around;
+    width: 300px;
+}
+
+ul li a {
+    color: rgb(0, 153, 0);
+    text-decoration: none;
+}
+
+ul li a:hover {
+    background-color: lightblue;
+}

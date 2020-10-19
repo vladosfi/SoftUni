@@ -1,0 +1,39 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: rgb(238, 238, 238);
+    height: 100vh;
+    margin: 0;
+}
+
+h1, h2, p {
+    padding: 0 20px;
+}
+
+header {
+    text-transform: uppercase;
+    border-bottom: 2px solid black;
+}
+
+main {
+    /* display: flex;
+    flex-direction: column; */
+    margin-bottom: auto;
+}
+
+footer {
+    background-color: rgb(102, 102, 102);
+    color: rgb(255, 255, 255);
+    padding: 10px;
+}

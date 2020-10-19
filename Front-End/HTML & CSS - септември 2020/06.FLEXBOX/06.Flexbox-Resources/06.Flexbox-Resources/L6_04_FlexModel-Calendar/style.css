@@ -3,13 +3,20 @@ html {
     margin: 0;
 }
 
-h1{
+body {
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+}
+
+h1 {
     margin: 0;
 }
 
 div.container {
     display: flex;
     max-width: 65vw;
+    align-self: center;
 }
 
 .week {
@@ -37,19 +44,19 @@ div.container {
     justify-content: center;
 }
 
-.notes{
+.notes {
     flex: 1;
     display: flex;
     flex-direction: column;
     align-self: stretch;
     justify-content: stretch;
-
 }
-.notes span{
-        border: 1px solid black;
-        flex-grow: 1;
-        display: flex;
-        flex-direction: column;    
-        align-items: center;    
-        padding-top: 20px;
+
+.notes span {
+    border: 1px solid black;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
 }

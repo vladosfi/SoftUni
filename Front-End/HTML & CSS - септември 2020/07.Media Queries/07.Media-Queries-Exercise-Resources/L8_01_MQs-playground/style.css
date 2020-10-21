@@ -1,0 +1,25 @@
+span {
+    font-weight: bold;
+}
+
+@media screen and (max-width: 600px) {
+    .mq-width span::after {
+        font-weight: normal;
+        content: " Viewport width is larger than 600px";
+    }
+}
+
+@media screen and (max-height: 600px) {
+    .mq-height span::after {
+        font-weight: normal;
+        content: " Viewport height is larger than 600px";
+    }
+}
+
+/* Minimum aspect ratio */
+@media (min-aspect-ratio: 8/5) {
+    .mq-ar span::after {
+        font-weight: normal;
+        content: " Viewport Aspect Ratio is larger than 8/5";
+    }
+  }

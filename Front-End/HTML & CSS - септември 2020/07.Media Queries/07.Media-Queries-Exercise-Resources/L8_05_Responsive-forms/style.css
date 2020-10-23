@@ -1,0 +1,102 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css");
+body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+    height: 100vh;
+}
+
+form>fieldset {
+    display: flex;
+    flex-direction: column;
+    justify-content: first baseline;
+    background-color: #F8F8F8;
+    border: 1px solid #B6B6B6;
+    padding: 15px 30px;
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.50);
+    -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.50);
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.50);
+}
+
+form>fieldset>legend {
+    padding: 8px 60px 8px 8px;
+    background-color: #F8F8F8;
+    border: 1px solid #B6B6B6;
+    border-radius: 3px;
+    font-weight: bold;
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.50);
+    -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.50);
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.50);
+}
+
+form>fieldset>label {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 15px;
+    align-items: baseline;
+}
+
+form>fieldset>label>span {
+    font-weight: bold;
+}
+
+form>fieldset>label>input[type=text], form>fieldset>label>input[type=password] {
+    border: 1px solid #B6B6B6;
+    padding: 5px 5px 5px 25px;
+    border-radius: 4px;
+    margin-left: 10px;    
+}
+
+form>fieldset>input[type=submit] {
+    background-color: #2D2D2D;
+    color: white;
+    text-shadow: 0px 0px 2px rgba(255, 255, 255, 1);
+    font-weight: bold;
+    border: 0;
+    border-radius: 5px;
+    align-self: start;
+    padding: 8px 12px;
+    margin-top: 20px;
+}
+
+.username-text::before, .password-text::before {
+    font-family: "Font Awesome 5 Free";
+    display: inline-block;
+    vertical-align: middle;
+    padding-right: 3px;
+    font-weight: 900;
+    font-size: 20px;
+    position: relative;
+    left: 115%;
+}
+
+.username-text::before {
+    content: "\f007";
+}
+
+.password-text::before {
+    content: "\f084";
+}
+
+@media screen and (max-width: 600px) {
+    form>fieldset>label>input[type=text], 
+    form>fieldset>label>input[type=password] {
+        flex-basis: 100%;
+        max-width: 100%;
+    }
+
+    form>fieldset>label>span {
+        font-weight: bold;
+        padding-left: 0;
+        margin-left: 0;
+    }
+
+    .username-text::before, .password-text::before {        
+        position: relative;
+        left: 15%;
+        top: 25px;
+    }
+}

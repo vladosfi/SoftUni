@@ -6,7 +6,7 @@ body {
     font-family: Verdana, sans-serif;
     background-color: #EBEBEB;
     font-size: 16px;
-    width: 1200px;
+    max-width: 1200px;
     margin: 0 auto;
 }
 
@@ -33,7 +33,7 @@ h1, h2, h3 {
 
 
 h1 {
-    font-size: 3em;
+    font-size: 3.2em;
     text-transform: uppercase;
 
 }
@@ -101,20 +101,16 @@ aside ul li a{
 
 
 
-@media screen and (min-width: 1199px) {
-
-
+@media screen and (max-width: 1199px) {
     body {
         font-family: Verdana, sans-serif;
-        background-color: #EBEBEB;
-        background-color: goldenrod;
         font-size: 16px;
-        width: 1200px;
-        margin: 0 40px;
+        max-width: 1200px;
+        margin: 0 auto;
     }
 
     h1 {
-        font-size: 3em;
+        font-size: 2.5em;
     }
     nav>ul>li {
         margin: 5px;
@@ -123,11 +119,16 @@ aside ul li a{
         color: white;
         border-radius: 8px;
     }
+
+    blockquote{
+        padding-bottom: 60px;
+        width: 50%;
+    }
 }
 
 @media screen and (max-width: 799px) {
     body{
-        background-color: red;
+        margin: 20px;
     }
 
     header {
@@ -159,36 +160,48 @@ aside ul li a{
         color: white;
         border-radius: 8px;
     }    
+
+    blockquote{
+        padding-bottom: 60px;
+        width: 50%;
+    }
+
+    .first-article img{
+        float: right;
+    }
+
+    .third-article img{
+        float: left;
+        margin-left: 0;
+        margin-right: 20px;
+    }
 }
 
 @media screen and (max-width: 499px) {
     body{
-        background-color: dodgerblue;
         max-width: 100%;
-        margin: 0 20px;
+        margin: 0 40px;
     }
 
     h1 {
         font-size: 2em;
-        padding: 0 0 20px 0;        
+        margin: 0 20px;
+        margin: 0;
+        padding: 0 0 30px 0;
     }
-
     header {
         display: flex;
         flex-direction: column;
         align-items: stretch;
+        border-bottom: 3px solid;
     }
     .menu {
         display: block;
-        
+        font-size: 14px;
     }
 
-    nav{
-        margin-top: 20px;
-        max-width: 80%;
-    }
-    nav>ul {
-        border-top: 2px solid;
+    header nav>ul {
+        border-top: 3px solid;
         margin: 0;
         flex-direction: column;
         border-radius: 0;
@@ -199,6 +212,27 @@ aside ul li a{
         background-color: #2D2D2D;
         color: white;
         border-radius: 8px;
+    }
+
+    div.page{
+        margin: 0;
+        margin-right: 40px;
+    }
+    
+    blockquote{
+        padding-bottom: 60px;
+    }
+
+    .first-article img{
+        float: left;
+        margin-left: 0;
+        margin-right: 20px;
+    }
+
+    .third-article img{
+        float: left;
+        margin-left: 0;
+        margin-right: 20px;
     }
 }
 

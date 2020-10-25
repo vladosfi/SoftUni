@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+body {
+    background-color: #EEEEEE;
+    font-family: 'Lato', sans-serif;
+}
+
+table {
+    width: 750px;
+    border-collapse: collapse;
+    margin: 50px auto;
+}
+
+thead {
+    background-color: #333333;
+    color: white;
+}
+
+thead tr th {
+    padding: 8px 10px;
+    border: 1px solid #9B9B9B;
+}
+
+tbody tr td {
+    padding: 8px 10px;
+    border: 1px solid #DCDCDC;
+}
+
+tbody tr:nth-child(even) {
+    background-color: white;
+}
+
+@media screen and (max-width: 760px) {
+    table {
+        width: 100%;
+    }
+    /* Force table to not be like tables anymore */
+    table, thead, tbody, th, td, tr {
+        display: block;
+    }
+    /* Hide table headers (but not display: none;, for accessibility) */
+    thead {
+        display: none;
+    }
+    tbody tr {
+        border: 1px solid #ccc;
+    }
+    tbody tr td {
+        /* Behave  like a "row" */
+        border: none;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        padding-left: 50%;
+    }
+    tbody tr td:before {
+        /* Now like a table header */
+        position: absolute;
+        /* Top/left values mimic padding */
+        top: 6px;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        /* Label the data */
+        content: attr(data-column);
+        color: #000;
+        font-weight: bold;
+    }
+}

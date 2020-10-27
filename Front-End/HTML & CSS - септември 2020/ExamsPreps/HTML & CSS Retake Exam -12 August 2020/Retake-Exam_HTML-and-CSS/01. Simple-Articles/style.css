@@ -10,8 +10,14 @@ h1, h2, h3, h4, h5, h6 {
     font-family: 'Montserrat', sans-serif;
 }
 
+h2{
+    font-weight: 600;
+}
+
 section {
     display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 article {
@@ -32,7 +38,7 @@ ul {
 }
 
 ul li {
-    padding: 5px 0;
+    padding: 6px 0;
 }
 
 ul li::before {
@@ -42,6 +48,7 @@ ul li::before {
     font-weight: 900;
     content: '\f00c';
     color: #4BACF8;
+    font-size: 14px;
 }
 
 .article-price {
@@ -51,7 +58,6 @@ ul li::before {
     text-align: center;
     border: 5px solid #44A9F8;
     font-size: 16px;
-    margin-left: 30px;
     font-weight: 500;
 }
 

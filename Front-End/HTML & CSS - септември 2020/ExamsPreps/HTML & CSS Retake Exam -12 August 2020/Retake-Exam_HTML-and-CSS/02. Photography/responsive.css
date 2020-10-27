@@ -1,1 +1,19 @@
 /* TODO: Add media queries */
+
+@media screen and (max-width: 600px) {
+    .thumbnails {
+        flex-wrap: wrap;
+    }
+    .thumbnails>div {
+        width: 100%;
+    }
+
+    body > div > main > section > div{
+        margin: 0 0 2em 0;
+    }
+
+    img {
+        max-height: 250px;
+        object-fit: fill;
+      }
+}

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Flexbox Layouts</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1 class="site-title">CSS Flexbox Layout Module</h1>
+  </header>
+
+  <main>
+    <section class="flex-container-properties">
+      <h2>Flex container properties</h2>
+      <div class="input-group">
+        <label for="flex-direction">Flex-Direction</label>
+        <select name="flex-direction" id="flex-direction">
+          <option value="row">row</option>
+          <option value="row-reverse">row-reverse</option>
+          <option value="column">column</option>
+          <option value="column-reverse">column-reverse</option>
+        </select>
+      </div>
+  
+      <div class="input-group">
+        <label for="justify-content">Justify-Content</label>
+        <select name="justify-content" id="justify-content">
+          <option value="center" selected>center</option>
+          <option value="flex-end">flex-end</option>
+          <option value="flex-start">flex-start</option>
+          <option value="space-around">space-around</option>
+          <option value="space-between">space-between</option>
+          <option value="space-evenly">space-evenly</option>
+          <option value="stretch">stretch</option>
+        </select>
+      </div>
+  
+      <div class="input-group">
+        <label for="align-items">Align-Items</label>
+        <select name="align-items" id="align-items">
+          <option value="baseline">baseline</option>
+          <option value="center" selected>center</option>
+          <option value="flex-end">flex-end</option>
+          <option value="flex-start">flex-start</option>
+          <option value="stretch">stretch</option>
+        </select>
+      </div>
+  
+      <div class="input-group">
+        <label for="wrap">Flex-Wrap</label>
+        <select name="flex-wrap" id="flex-wrap">
+          <option value="nowrap">nowrap</option>
+          <option value="wrap" selected>wrap</option>
+          <option value="wrap-reverse">wrap-reverse</option>
+        </select>
+      </div>
+  
+      <div class="input-group">
+        <label for="align-content">Align-Content</label>
+        <select name="align-content" id="align-content">
+          <option value="center">center</option>
+          <option value="flex-end">flex-end</option>
+          <option value="flex-start">flex-start</option>
+          <option value="space-around">space-around</option>
+          <option value="space-between">space-between</option>
+          <option value="stretch" selected>stretch</option>
+        </select>
+      </div>
+    </section>
+  
+    <section class="flex-items-properties">
+      <h2>Flex items properties</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>property</th>
+            <th>One</th>
+            <th>Two</th>
+            <th>Three</th>
+            <th>Four</th>
+            <th>Five</th>
+            <th>Six</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>order</td>
+            <td><input id="one:order" type="number" value="0"></td>
+            <td><input id="two:order" type="number" value="0"></td>
+            <td><input id="three:order" type="number" value="0"></td>
+            <td><input id="four:order" type="number" value="0"></td>
+            <td><input id="five:order" type="number" value="0"></td>
+            <td><input id="six:order" type="number" value="0"></td>
+          </tr>
+  
+          <tr>
+            <td>flex-grow</td>
+            <td><input id="one:flex-grow" type="number" value="0" min="0"></td>
+            <td><input id="two:flex-grow" type="number" value="0" min="0"></td>
+            <td><input id="three:flex-grow" type="number" value="0" min="0"></td>
+            <td><input id="four:flex-grow" type="number" value="0" min="0"></td>
+            <td><input id="five:flex-grow" type="number" value="0" min="0"></td>
+            <td><input id="six:flex-grow" type="number" value="0" min="0"></td>
+          </tr>
+  
+          <tr>
+            <td>flex-shrink</td>
+            <td><input id="one:flex-shrink" type="number" value="1" min="0"></td>
+            <td><input id="two:flex-shrink" type="number" value="1" min="0"></td>
+            <td><input id="three:flex-shrink" type="number" value="1" min="0"></td>
+            <td><input id="four:flex-shrink" type="number" value="1" min="0"></td>
+            <td><input id="five:flex-shrink" type="number" value="1" min="0"></td>
+            <td><input id="six:flex-shrink" type="number" value="1" min="0"></td>
+          </tr>
+  
+          <tr>
+            <td>flex-basis</td>
+            <td><input id="one:flex-basis" type="number" min=250 value="250"></td>
+            <td><input id="two:flex-basis" type="number" min=300 value="300"></td>
+            <td><input id="three:flex-basis" type="number" min=350 value="350"></td>
+            <td><input id="four:flex-basis" type="number" min=350 value="350"></td>
+            <td><input id="five:flex-basis" type="number" min=300 value="300"></td>
+            <td><input id="six:flex-basis" type="number" min=250 value="250"></td>
+          </tr>
+  
+          <tr>
+            <td>align-self</td>
+            <td>
+              <select id="one:align-self">
+                <option value="auto" selected>auto</option>
+                <option value="baseline">baseline</option>
+                <option value="center">center</option>
+                <option value="flex-start">flex-start</option>
+                <option value="flex-end">flex-end</option>
+                <option value="stretch">stretch</option>
+              </select>
+            </td>
+            <td>
+              <select id="two:align-self">
+                <option value="auto" selected>auto</option>
+                <option value="baseline">baseline</option>
+                <option value="center">center</option>
+                <option value="flex-start">flex-start</option>
+                <option value="flex-end">flex-end</option>
+                <option value="stretch">stretch</option>
+              </select>
+            </td>
+            <td>
+              <select id="three:align-self">
+                <option value="auto" selected>auto</option>
+                <option value="baseline">baseline</option>
+                <option value="center">center</option>
+                <option value="flex-start">flex-start</option>
+                <option value="flex-end">flex-end</option>
+                <option value="stretch">stretch</option>
+              </select>
+            </td>
+            <td>
+              <select id="four:align-self">
+                <option value="auto" selected>auto</option>
+                <option value="baseline">baseline</option>
+                <option value="center">center</option>
+                <option value="flex-start">flex-start</option>
+                <option value="flex-end">flex-end</option>
+                <option value="stretch">stretch</option>
+              </select>
+            </td>
+            <td>
+              <select id="five:align-self">
+                <option value="auto" selected>auto</option>
+                <option value="baseline">baseline</option>
+                <option value="center">center</option>
+                <option value="flex-start">flex-start</option>
+                <option value="flex-end">flex-end</option>
+                <option value="stretch">stretch</option>
+              </select>
+            </td>
+            <td>
+              <select id="six:align-self">
+                <option value="auto" selected>auto</option>
+                <option value="baseline">baseline</option>
+                <option value="center">center</option>
+                <option value="flex-start">flex-start</option>
+                <option value="flex-end">flex-end</option>
+                <option value="stretch">stretch</option>
+              </select>
+            </td>
+          </tr>
+  
+        </tbody>
+      </table>
+    </section>
+  
+    <section class="container">
+      <div class="one flex-item">
+        One,
+        <br>
+        order: 0, flex-grow: 0,
+        <br>
+        flex-shrink: 1, flex-basis: 250px,
+        <br>
+        align-self: auto
+      </div>
+      <div class="two flex-item">
+        Two,
+        <br>
+        order: 0, flex-grow: 0,
+        <br>
+        flex-shrink: 1, flex-basis: 300px,
+        <br>
+        align-self: auto
+      </div>
+      <div class="three flex-item">
+        Three,
+        <br>
+        order: 0, flex-grow: 0,
+        <br>
+        flex-shrink: 1, flex-basis: 350px,
+        <br>
+        align-self: auto
+      </div>
+      <div class="four flex-item">
+        Four,
+        <br>
+        order: 0, flex-grow: 0,
+        <br>
+        flex-shrink: 1, flex-basis: 350px,
+        <br>
+        align-self: auto
+      </div>
+      <div class="five flex-item">
+        Five,
+        <br>
+        order: 0, flex-grow: 0,
+        <br>
+        flex-shrink: 1, flex-basis: 300px,
+        <br>
+        align-self: auto
+      </div>
+      <div class="six flex-item">
+        Six,
+        <br>
+        order: 0, flex-grow: 0,
+        <br>
+        flex-shrink: 1, flex-basis: 250px,
+        <br>
+        align-self: auto
+      </div>
+    </section>
+  </main>
+  <script src="main.js"></script>
+</body>
+</html>

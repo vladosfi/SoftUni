@@ -1,0 +1,40 @@
+/* TODO: Add media queries */
+
+@media screen and (max-width:884px) {
+    .newsletter-boxes {
+        display: flex;
+        flex-direction: column;
+    }
+    .newsletter-bottom {
+        display: flex;
+    }
+
+    h4{
+        font-size: 1.6em;
+    }
+    p{
+        font-size: 1.2em;
+    }
+
+    .newsletter-bottom h4 {
+        text-align: left;
+    }
+    .newsletter-bottom hr {
+        margin: 2em 2em;
+    }
+    .newsletter-box h4{
+        font-size: 1.6em;
+    }
+    .newsletter-box p{
+        font-size: 1.3rem;
+    }
+
+    .newsletter-bottom-content-links, .newsletter-bottom-content p{
+        font-size: 1.3rem;
+        text-align: left;
+    }
+
+    .bottom-logo {
+        width: 20%;
+    }
+}

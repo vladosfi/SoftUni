@@ -1,4 +1,6 @@
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css');
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 * {
     margin: 0;
 }
@@ -7,6 +9,8 @@ body {
     display: flex;
     flex-direction: column;
     font-family: 'Lato', sans-serif;
+    color: #343434;
+    overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -137,7 +141,7 @@ main {
 
 .container article {
     align-self: center;
-    flex-basis: 60%;
+    flex-basis: 70%;
 }
 
 .container img {
@@ -147,4 +151,87 @@ main {
 
 .certificates-and-other h3 {
     color: white;
+}
+
+.career-center {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+    margin: 50px 0;
+}
+
+.career-center article {
+    flex-basis: 65%;
+}
+
+.career-center>article>h3 {
+    font-weight: 500;
+}
+
+.career-center>article>p {
+    padding: 40px 0;
+}
+
+.career-center button {
+    padding: 10px 20px;
+    font-weight: bold;
+    color: #A45DC6;
+    background-color: white;
+    border: 1px solid #A45DC6;
+    border-radius: 25px;
+}
+
+.career-center button:hover {
+    cursor: pointer;
+}
+
+footer {
+    display: flex;
+    justify-content: space-around;
+    padding: 30px 0px;
+    background-color: #2C2C3A;
+}
+
+footer article ul {
+    padding-left: 0px;
+}
+
+footer article ul li {
+    padding: 5px 0px;
+}
+
+footer article ul li {
+    list-style: none;
+}
+
+footer h3 {
+    padding: 10px 0px;
+    color: #9B5DC6;
+}
+
+footer article a {
+    color: white;
+    text-decoration: none;
+}
+
+.social{
+    display: flex;
+    flex-direction: column;
+    color: white;
+}
+
+.social p{
+    font-size: 14px;
+    padding: 5px 0;
+}
+
+.social-icons{
+    display: flex;
+    padding: 15px 0px;
+    font-size: 28px;
+}
+
+.social-icons li{
+    padding: 0px 5px;
 }

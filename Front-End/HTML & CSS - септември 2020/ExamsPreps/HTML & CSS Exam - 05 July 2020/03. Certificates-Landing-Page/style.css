@@ -1,0 +1,150 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+* {
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    font-family: 'Lato', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', sans-serif;
+    color: #54546D;
+}
+
+p {
+    padding: 10px 0;
+}
+
+header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 0px 20px 0px;
+    width: 100%;
+    -webkit-box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.3);
+    background-color: white;
+}
+
+.header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+}
+
+.header-section nav {
+    display: flex;
+    align-items: baseline;
+    align-self: center;
+}
+
+.header-section nav ul {
+    display: flex;
+}
+
+.header-section nav ul li {
+    list-style: none;
+    padding: 0 5px;
+}
+
+.header-section nav ul li a {
+    text-decoration: none;
+    color: #54546D;
+}
+
+.header-section nav button {
+    background-color: #9E5AD4;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+    margin-left: 10px;
+    font-weight: bold;
+    -webkit-box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.3);
+}
+
+.header-section nav button:hover {
+    cursor: pointer;
+}
+
+main {
+    display: flex;
+    flex-wrap: wrap;
+    align-self: center;
+    justify-content: center;
+}
+
+.cerificates {
+    display: flex;
+    justify-content: space-between;
+    align-content: flex-end;
+    width: 80%;
+    margin: 50px 0;
+}
+
+.cerificate-details {
+    flex-basis: 60%;
+}
+
+.italic-text {
+    font-style: italic;
+    color: #5B5656;
+    font-size: 14px;
+    padding: 5px 0px;
+}
+
+.cerificate-images::after {
+    position: absolute;
+    display: inline-block;
+    content: "";
+    right: -9px;
+    top: -159px;
+    z-index: -10;
+    width: 650px;
+    height: 500px;
+    border-radius: 50%;
+    background-color: #54546D;
+}
+
+.cerificate-images::before {
+    position: absolute;
+    display: inline-block;
+    right: 110px;
+    top: 40px;
+    z-index: -1;
+    content: url('./images/award.svg');
+}
+
+.certificates-and-other {
+    display: flex;
+    justify-content: center;
+    background-color: #14162B;
+    color: white;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+}
+
+.container article {
+    align-self: center;
+    flex-basis: 60%;
+}
+
+.container img {
+    position: relative;
+    top: 30px
+}
+
+.certificates-and-other h3 {
+    color: white;
+}

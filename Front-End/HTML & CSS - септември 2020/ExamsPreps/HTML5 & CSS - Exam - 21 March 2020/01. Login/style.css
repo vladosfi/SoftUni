@@ -1,0 +1,92 @@
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+* {
+    margin: 0;
+}
+
+body {
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('image.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: 'Poppins', sans-serif;
+    height: 100vh;
+}
+
+h1 {
+    margin-bottom: 10px;
+    color: white;
+    text-transform: uppercase;
+    font-weight: 400;
+    font-size: 30px;
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 300px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+}
+
+form input[type="text"], form input[type="password"] {
+    padding: 15px 120px;
+    margin-top: 20px;
+    width: 200px;
+    border: none;
+    border-bottom: 1px solid #E6E6E6;
+    font-size: 20px;
+}
+
+.usename::before {
+    position: absolute;
+    top: 30px;
+    left: 50px;
+    font-family: "Font Awesome 5 Free";
+    display: inline-block;
+    padding-right: 10px;
+    font-weight: 900;
+    content: '\f007';
+    color: #989898;
+    font-size: 24px;   
+}
+
+.password::before {
+    position: absolute;
+    top: 105px;
+    left: 50px;
+    font-family: "Font Awesome 5 Free";
+    display: inline-block;
+    padding-right: 10px;
+    font-weight: 900;
+    content: '\f023';
+    color: #989898;
+    font-size: 24px;   
+}
+
+
+form input[type="button"] {
+    background-color: #D41872;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    width: 50%;
+    padding: 10px 25px;
+    margin: 25px auto;
+}
+
+form input[type="button"]:hover{
+    cursor: pointer;
+}

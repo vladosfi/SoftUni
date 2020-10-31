@@ -1,0 +1,221 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap');
+* {
+    margin: 0;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    overflow-x: hidden;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+}
+
+header nav ul {
+    display: flex;
+    list-style: none;
+}
+
+header nav ul li {
+    text-transform: uppercase;
+    padding: 0 110px;
+    font-weight: bold;
+    color: #9D9D9D;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.solo {
+    display: flex;
+    padding: 150px 10%;
+    margin-bottom: 300px;
+}
+
+.solo h1 {
+    font-size: 42px;
+    font-weight: 100;
+    text-transform: uppercase;
+}
+
+.solo article {
+    flex-basis: 40%;
+}
+
+.solo p {
+    font-size: 16px;
+    letter-spacing: 1px;
+    line-height: 2;
+    margin-bottom: 50px;
+    font-weight: 300;
+}
+
+.solo>img {
+    position: absolute;
+    width: 700px;
+    right: -20px;
+    top: 100px;
+}
+
+.btn {
+    padding: 10px 35px;
+    border: none;
+    background-color: #FF0000;
+    color: white;
+    border-radius: 25px;
+    text-transform: uppercase;
+}
+
+.btn:hover {
+    cursor: pointer;
+}
+
+.powerbeats {
+    display: flex;
+    background-color: #FBFCFF;
+    padding: 100px 10%;
+}
+
+.powerbeats img {
+    width: 50%;
+}
+
+.powerbeats article {
+    padding: 0 0px 0 100px;
+    width: 50%;
+}
+
+.powerbeats h2 {
+    margin: 0;
+    font-size: 62px;
+    padding-right: 70px;
+    font-weight: 300;
+    text-transform: uppercase;
+    text-align: right;
+}
+
+.powerbeats h3 {
+    margin: 0px 0px 80px 0px;
+    padding-right: 70px;
+    font-weight: 300;
+    text-align: right;
+    text-transform: uppercase;
+}
+
+.powerbeats p {
+    font-size: 18px;
+    line-height: 1.6;
+    font-weight: 100;
+}
+
+.bold-text {
+    font-weight: bold;
+}
+
+.price {
+    display: flex;
+    align-items: center;
+    margin-top: 100px;
+}
+
+.price h4 {
+    font-size: 36px;
+}
+
+.price button {
+    margin-left: 30px;
+}
+
+.free-try {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #575757;
+}
+
+.free-try article {
+    display: flex;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.free-try h2 {
+    margin-left: 30px;
+    font-size: 36px;
+    font-weight: 100;
+    color: white;
+    text-transform: uppercase;
+}
+
+.free-try a {
+    text-decoration: none;
+    font-weight: bold;
+    color: white;
+    text-transform: uppercase;
+    margin: 30px 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid white;
+}
+
+.beats-red {
+    display: flex;
+    background-color: #DADADA;
+    color: #333333;
+    box-sizing: border-box;
+    height: 782px;
+}
+
+.beats-red-img {
+    flex-basis: 50%;
+}
+
+.beats-red-img img {
+    margin-top: -3px;
+    min-width: 100%;
+}
+
+.beats-red-give-life {
+    display: flex;
+    align-items: center;
+    margin: 0 30px;
+    flex-basis: 50%;
+}
+
+.beats-red-give-life-text h2 {
+    font-size: 172px;
+    letter-spacing: -16px;
+    line-height: 1;
+    text-transform: uppercase;
+}
+
+.beats-red-give-life-text p {
+    font-size: 36px;
+    font-weight: 100;
+    padding-left: 15px;
+}
+
+.red {
+    font-weight: bold;
+    color: red;
+    text-transform: uppercase;
+}
+
+.beats-red-give-life-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 30px;
+}
+
+footer {
+    margin: 50px 0;
+    font-size: 26px;
+    font-weight: 100;
+    text-align: center;
+    color: #333333;
+}

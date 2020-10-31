@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+body {
+    font-family: 'Lato', sans-serif;
+    color: hsl(25, 8%, 47%);
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h1, h2 {
+    color: black;
+}
+
+header img {
+    min-width: 100px;
+    max-width: 150px;
+    height: 100px;
+}
+
+header h1 {
+    font-size: 36px;
+    font-weight: 100;
+    margin-top: 0px;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+}
+
+section {
+    display: flex;
+    align-items: center;
+    width: 80%;
+}
+
+section h2 {
+    font-weight: 400;
+}
+
+section h3 {
+    font-size: 16px;
+}
+
+.article-info > p{
+    letter-spacing: 1px;
+    font-weight: 300;
+    line-height: 1.5;
+}
+
+section ul {
+    padding-left: 0;
+}
+
+.article-info {
+    margin-right: 25px;
+}
+
+.article-image {
+    margin-left: 25px;
+}
+
+.good-price, .clients, .big-chain {
+    display: flex;
+    align-items: center;
+    text-align: left
+}
+
+div h3{
+    margin-bottom: 0px;
+}
+
+div p{
+    margin-top: 8px;
+}
+
+div img{
+    max-width: 50px;
+}
+
+/* .big-chain > img{
+    margin-right: -5px;
+} */

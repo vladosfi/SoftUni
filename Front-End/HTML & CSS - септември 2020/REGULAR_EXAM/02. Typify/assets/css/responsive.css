@@ -1,0 +1,65 @@
+@media screen and (max-width:600px) {
+    .banner {
+        padding: 3em 0 3em 0;
+    }
+    .banner h2 {
+        width: 90%;
+        font-size: 1.6em;
+    }
+    .banner .button.special {
+        width: 100%;
+    }
+    .wrapper>.inner {
+        max-width: 100%;
+    }
+    header.major {
+        margin-bottom: 1em;
+    }
+    section.wrapper {
+        padding: 2em 0 2em 0;
+    }
+    .major>h2 {
+        font-size: 1.4em;
+    }
+
+    .features{
+        flex-direction: column;
+        margin-bottom: 0px;
+    }
+
+    .feature{
+        width: 90%;
+        align-self: center;
+    }
+
+    .grid-form{
+        flex-direction: column;
+    }
+
+    .grid-form .form-control.narrow{
+        width: 90%;
+        align-self: center;
+    }
+
+    .grid-form .form-control{
+        width: 90%;
+        align-self: center;
+    }
+
+    ul.actions li{
+        width: 90%;
+    }
+
+    form{
+        margin: 0;
+    }
+
+    .footer::before {
+        width: 80%;
+        left: 10%;
+    }
+    
+    .footer{
+        padding: 2em 0 1em 0;
+    }
+}

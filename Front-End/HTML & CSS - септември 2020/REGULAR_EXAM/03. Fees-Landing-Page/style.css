@@ -1,0 +1,234 @@
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css');
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+}
+
+main {
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 100px 25px 100px;
+}
+
+.navigation img {
+    max-width: 150px;
+    min-width: 100px;
+}
+
+.navigation nav ul {
+    list-style: none;
+    display: flex;
+}
+
+.navigation nav ul li a {
+    padding: 0 10px;
+    color: #4F576F;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.prices {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #54546D;
+}
+
+.prices::before {
+    position: absolute;
+    left: -70px;
+    top: 250px;
+    z-index: 1;
+    content: url('./images/calculator-icon.svg');
+}
+
+.prices h1 {
+    margin: 30px 0;
+    font-weight: 600;
+    font-size: 28px;
+    color: white;
+}
+
+.header-articles {
+    display: flex;
+    position: relative;
+    top: 140px;
+}
+
+.header-article {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px 10px;
+    width: 460px;
+    justify-content: space-between;
+    border-radius: 10px;
+    background-color: white;
+    overflow: hidden;
+    -webkit-box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.3);
+}
+
+.header-article h2 {
+    padding: 30px 0 15px 0;
+    color: #4D316F;
+}
+
+.header-article>p {
+    padding: 10px 30px;
+    text-align: center;
+    font-size: 16px;
+    color: #6A3536;
+}
+
+.header-article button {
+    margin: 50px 0;
+    padding: 15px 30px;
+    border-radius: 25px;
+    border: none;
+    background-color: #9A5DC6;
+    color: white;
+    font-weight: bold;
+    -webkit-box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.3);
+}
+
+.header-article button:hover {
+    cursor: pointer;
+}
+
+.header-article-design-price-info {
+    background: rgb(3, 154, 61);
+    background: linear-gradient(90deg, rgba(3, 154, 61, 1) 0%, rgba(75, 214, 128, 1) 100%);
+    color: white;
+    width: 100%;
+    text-align: center;
+    padding: 30px;
+}
+
+.course-type {
+    width: 50%;
+}
+
+.border {
+    padding: 0 0px 0 0;
+    border-left: 1px solid white;
+}
+
+.header-article-design-price-two {
+    display: flex;
+    color: white;
+    width: 100%;
+    text-align: center;
+    padding: 30px;
+    background: rgb(77, 108, 136);
+    background: linear-gradient(90deg, rgba(77, 108, 136, 1) 0%, rgba(98, 155, 208, 1) 100%);
+}
+
+.header-article-design-price-three {
+    display: flex;
+    color: white;
+    width: 100%;
+    text-align: center;
+    padding: 30px;
+    background: rgb(75, 57, 166);
+    background: linear-gradient(90deg, rgba(75, 57, 166, 1) 0%, rgba(139, 124, 225, 1) 100%);
+}
+
+.fa-check {
+    color: #12A945;
+}
+
+.fa-times {
+    color: #FC4C50;
+}
+
+.fas {
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.training {
+    margin: 0 auto;
+    width: 80%;
+    padding: 100px 0;
+    color: #69546D;
+}
+
+.training h2 {
+    color: #69546D;
+    padding: 20px 0;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 50px auto;
+    font-size: 18px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-top-left-radius: 5px;
+    overflow: hidden;
+}
+
+tbody tr {
+    padding: 18px 20px;
+    background-color: #F8F8F8;
+}
+
+tbody tr td {
+    padding: 18px 10px;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #E6E6E6;
+}
+
+.postbank {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    margin-bottom: 100px;
+}
+
+.postbank-info {
+    flex-basis: 70%;
+}
+
+.postbank-info p {
+    color: #564663;
+    padding: 10px 0;
+}
+
+.postbank-info h2 {
+    padding: 20px 0;
+    color: #69546D;
+}
+
+footer {
+    background-color: #54546D;
+    color: #9C91A0;
+    padding: 30px;
+    text-align: center;
+}

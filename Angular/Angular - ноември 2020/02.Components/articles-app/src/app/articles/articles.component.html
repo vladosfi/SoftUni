@@ -1,0 +1,4 @@
+<ul>
+  <app-article *ngFor="let a of articles" [article]="a" [articleDesc]="a.description" (delete)="deleteArticleHandler($event)">
+  </app-article>
+</ul>

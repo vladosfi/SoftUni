@@ -16,7 +16,7 @@ function host(url) {
     const auth = getUserData();
     if (auth !== null) {
         result += `?auth=${auth.idToken}`;
-    }
+    } 
     return result;
 }
 
@@ -64,23 +64,21 @@ export async function login(email, password) {
         returnSecureToken: true,
     });
 
-    let data = await response.json();
+    setUserData(response);
 
-    setUserData(data);
-
-    return data;
+    return response;
 }
 
 export async function register(email, password) {
-    let res = await post(endpoints.REGISTER + apiKey, {
+    let response = await post(endpoints.REGISTER + apiKey, {
         email,
         password,
         returnSecureToken: true,
     });
 
-    setUserData(res);
+    setUserData(response);
 
-    return res;
+    return response;
 }
 
 export async function getAll() {

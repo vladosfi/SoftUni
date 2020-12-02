@@ -10,6 +10,7 @@ const app = Sammy('#root', function (context) {
     // Home routes
     this.get('/', homePage);
     this.get('/home', homePage);
+    this.get('/index.html', homePage);
 });
 
 app.run();

@@ -23,9 +23,11 @@ export function getUserId() {
 }
 
 export function objectToArray(data) {
+    //console.log(data);
     if (data === null) {
         return [];
     } else {
+        //console.log(Object.entries(data).map(([k, v]) => Object.assign({ _id: k }, v)));
         return Object.entries(data).map(([k, v]) => Object.assign({ _id: k }, v));
     }
 }
@@ -40,4 +42,26 @@ export async function addPartials(ctx) {
         header: partials[0],
         footer: partials[1]
     };
+}
+
+const categoryMap = {
+    'JavaScript': 'js',
+    'C#': 'csharp',
+    'Java': 'java',
+    'Python': 'python',
+};
+
+export function mapCategories(data) {
+    const result = {
+        js: [],
+        csharp: [],
+        java: [],
+        python: [],
+    };
+
+    for (let article of data) {
+        result[categoryMap[article.category]].push(article);
+    }
+
+    return result;
 }

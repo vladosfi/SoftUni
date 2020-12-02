@@ -16,7 +16,7 @@ function host(url) {
     const auth = getUserData();
     if (auth !== null) {
         result += `?auth=${auth.idToken}`;
-    } 
+    }
     return result;
 }
 
@@ -37,6 +37,11 @@ export const request = async (url, method, body) => {
     let response = await fetch(url, options);
 
     let data = await response.json();
+
+    if (data.hasOwnProperty('error')) {
+        const message = data.error.message;
+        throw new Error(message);
+    }
 
     return data;
 }

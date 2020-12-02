@@ -1,5 +1,5 @@
 import { getAll, createArticle, getById } from "../data.js";
-import { addPartials, mapCategories } from "../util.js";
+import { addPartials, mapCategories, categoryMap } from "../util.js";
 
 export async function homePage() {
     await addPartials(this);
@@ -39,7 +39,7 @@ export async function detailsPage() {
     await addPartials(this);
 
     const article = await getById(this.params.id);
-    const context ={
+    const context = {
         user: this.app.userData,
         article
     }
@@ -63,6 +63,8 @@ export async function postCreate(ctx) {
     try {
         if (title.length == 0 || category.length == 0 || content.length == 0) {
             throw new Error('All fields are required!');
+        } else if (categoryMap.hasOwnProperty(category) === false) {
+            throw new Error('Invalid category!');
         } else {
             const result = await createArticle({ title, category, content });
             ctx.redirect('/home');

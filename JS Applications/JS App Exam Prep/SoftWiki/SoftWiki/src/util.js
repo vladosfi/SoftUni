@@ -44,7 +44,7 @@ export async function addPartials(ctx) {
     };
 }
 
-const categoryMap = {
+export const categoryMap = {
     'JavaScript': 'js',
     'C#': 'csharp',
     'Java': 'java',

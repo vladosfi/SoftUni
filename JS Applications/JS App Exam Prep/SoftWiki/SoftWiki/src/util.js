@@ -1,3 +1,7 @@
+export function clearUserData() {
+    sessionStorage.clear();
+}
+
 export function setUserData(data) {
     sessionStorage.setItem('auth', JSON.stringify(data));
 }
@@ -13,7 +17,7 @@ export function getUserData() {
 }
 
 export function getUserId() {
-    const auth = sessionStorage.getItem('localId');
+    const auth = sessionStorage.getItem('auth');
 
     if (auth !== null) {
         return JSON.parse(auth).localId;

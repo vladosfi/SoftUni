@@ -1,9 +1,9 @@
-import { createPage, homePage, postCreate, detailsPage } from './controllers/catalog.js';
-import { registerPage, loginPage, postRegister, postLogin } from './controllers/user.js';
-import * as api from './data.js';
+import { createPage, homePage, postCreate, detailsPage, editPage, postEdit, deleteArticle } from './controllers/catalog.js';
+import { registerPage, loginPage, postRegister, postLogin, logoutPage } from './controllers/user.js';
+// import * as api from './data.js';
 import { getUserData } from './util.js';
 
-window.api = api;
+// window.api = api;
 
 const app = Sammy('#root', function (context) {
     //Template engine setup
@@ -14,17 +14,22 @@ const app = Sammy('#root', function (context) {
 
     // Home routes
     this.get('/', homePage);
-    this.get('/home', homePage);
-    this.get('/index.html', homePage);
-    this.get('/register', registerPage);
-    this.get('/login', loginPage);
-    this.get('/create', createPage);
-    this.get('/details/:id', detailsPage);
+    this.get('/#/home', homePage);
+    this.get('#/index.html', homePage);
+    this.get('#/register', registerPage);
+    this.get('#/login', loginPage);
+    this.get('#/create', createPage);
+    this.get('#/edit/:id', editPage);
+    this.get('#/details/:id', detailsPage);
+    this.get('#/delete/:id', deleteArticle);
+    this.get('#/logout', logoutPage);
 
 
-    this.post('/register', (ctx) => { postRegister(ctx); });
-    this.post('/login', (ctx) => { postLogin(ctx); });
-    this.post('/create', (ctx) => { postCreate(ctx); });
+
+    this.post('#/register', (ctx) => { postRegister(ctx); });
+    this.post('#/login', (ctx) => { postLogin(ctx); });
+    this.post('#/create', (ctx) => { postCreate(ctx); });
+    this.post('#/edit/:id', (ctx) => { postEdit(ctx); });
 });
 
 app.run();

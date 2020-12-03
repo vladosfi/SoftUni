@@ -1,9 +1,15 @@
 import { register, login } from "../data.js";
-import { addPartials } from "../util.js";
+import { addPartials, clearUserData } from "../util.js";
 
 export async function registerPage() {
     await addPartials(this);
     this.partial('/templates/user/registerPage.hbs');
+}
+
+export async function logoutPage(){
+    clearUserData();
+    this.app.userData = null;
+    this.redirect('#/home');
 }
 
 export async function loginPage() {
@@ -22,7 +28,7 @@ export async function postRegister(ctx) {
         } else {
             const result = await register(email, password);
             ctx.app.userData = result;
-            ctx.redirect('/home');
+            ctx.redirect('#/home');
         }
     } catch (err) {
         alert(err.message);
@@ -39,7 +45,7 @@ export async function postLogin(ctx) {
         } else {
             const result = await login(email, password);
             ctx.app.userData = result;
-            ctx.redirect('/home');
+            ctx.redirect('#/home');
         }
     } catch (err) {
         alert(err.message);

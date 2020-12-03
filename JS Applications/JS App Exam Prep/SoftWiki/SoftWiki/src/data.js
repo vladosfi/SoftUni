@@ -38,7 +38,7 @@ export const request = async (url, method, body) => {
 
     let data = await response.json();
 
-    if (data.hasOwnProperty('error')) {
+    if (data && data.hasOwnProperty('error')) {
         const message = data.error.message;
         throw new Error(message);
     }
@@ -88,11 +88,12 @@ export async function register(email, password) {
 
 export async function getAll() {
     const records = await get(host(endpoints.ARTICLES));
+    //const sorted = records.sort((a,b) => a.title.localeCompare(b.title));
     return objectToArray(records);
 }
 
 export async function getById(id) {
-    const record = get(host(endpoints.ARTICLE_BY_ID + id));
+    const record = await get(host(endpoints.ARTICLE_BY_ID + id));
     record._id = id;
     return record;
 }

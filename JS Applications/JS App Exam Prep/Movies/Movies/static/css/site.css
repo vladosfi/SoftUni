@@ -41,3 +41,13 @@
     text-decoration: underline;
     box-shadow: 0 5px 10px #cccccc;
 }
+
+#successBox,
+#loadingBox,
+#errorBox{
+    display: none;
+    position: absolute;
+    top: 55px;
+    right: 16%;
+    z-index: 1;
+}

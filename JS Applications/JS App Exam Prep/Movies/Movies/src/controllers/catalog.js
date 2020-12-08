@@ -51,7 +51,7 @@ export async function deleteMovie() {
 }
 
 export async function likePage() {
-    
+
     const { title, description, likes } = await getById(this.params.id);
     likes.push(this.app.userData.email);
 
@@ -134,16 +134,14 @@ export async function postCreate(ctx) {
 }
 
 export async function postEdit(ctx) {
-    const { title, category, content } = ctx.params;
+    const { title, description, imageUrl } = ctx.params;
 
     try {
-        if (title.length == 0 || category.length == 0 || content.length == 0) {
+        if (title.length == 0 || description.length == 0 || imageUrl.length == 0) {
             throw new Error('All fields are required!');
-        } else if (categoryMap.hasOwnProperty(category) === false) {
-            throw new Error('Invalid category!');
         } else {
-            const result = await editMovie(ctx.params.id, { title, category, content });
-            ctx.redirect('#/home');
+            const result = await editMovie(ctx.params.id, { title, description, imageUrl });
+            ctx.redirect('#/details/' + ctx.params.id);
         }
     } catch (err) {
         showError(err.message);

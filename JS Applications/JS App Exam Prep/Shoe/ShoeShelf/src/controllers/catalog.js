@@ -1,12 +1,23 @@
-import { getAll, createArticle, getById, editArticle, deleteById } from "../data.js";
+import { getAll, createShoe, getById, editArticle, deleteById } from "../data.js";
 import { addPartials, mapCategories, categoryMap, getUserId } from "../util.js";
+
+export async function redirectToHome() {
+    this.redirect('/');
+}
 
 export async function homePage() {
     await addPartials(this);
-    this.partials.article = await this.load('/templates/catalog/homePage.hbs');
+    this.partials.shoes = await this.load('/templates/catalog/homePage.hbs');
 
-    const data = mapCategories(await getAll());
-    const context = data;
+    const userData = this.app.userData;
+    let context = {};
+
+    if (userData && userData.email) {
+        const data = mapCategories(await getAll());
+        context.user = userData;
+        context = data;
+    }
+
 
     // const context = {
     //     js: [
@@ -30,10 +41,9 @@ export async function homePage() {
     //     ],
     // }
 
-    context.user = this.app.userData;
-    // console.log(context.user);
-
+    console.log(context.shoes);
     this.partial('/templates/catalog/homePage.hbs', context);
+
 }
 
 export async function deleteArticle() {
@@ -88,15 +98,16 @@ export async function createPage() {
 }
 
 export async function postCreate(ctx) {
-    const { title, category, content } = ctx.params;
+    const { name, price, imageUrl, description, brand } = ctx.params;
+    const buyers = "";
 
     try {
-        if (title.length == 0 || category.length == 0 || content.length == 0) {
+        if (name.length == 0 || price.length == 0 || imageUrl.length == 0 || description.length == 0 || brand.length == 0) {
             throw new Error('All fields are required!');
-        } else if (categoryMap.hasOwnProperty(category) === false) {
-            throw new Error('Invalid category!');
+        } else if (!ctx.app.userData) {
+            throw new Error('You must be logged in to make purchase!');
         } else {
-            const result = await createArticle({ title, category, content });
+            const result = await createShoe({ name, price, imageUrl, description, brand, buyers });
             ctx.redirect('#/home');
         }
     } catch (err) {

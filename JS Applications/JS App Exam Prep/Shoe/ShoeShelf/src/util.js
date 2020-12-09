@@ -57,14 +57,11 @@ export const categoryMap = {
 
 export function mapCategories(data) {
     const result = {
-        js: [],
-        csharp: [],
-        java: [],
-        python: [],
+        shoes: [],
     };
 
-    for (let article of data) {
-        result[categoryMap[article.category]].push(article);
+    for (let shoe of data) {
+        result['shoes'].push(shoe);
     }
 
     return result;

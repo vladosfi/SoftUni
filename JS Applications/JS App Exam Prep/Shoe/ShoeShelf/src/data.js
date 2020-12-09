@@ -6,8 +6,8 @@ const databaseUrl = 'https://shoes-ace8a-default-rtdb.firebaseio.com/';
 const endpoints = {
     LOGIN: 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=',
     REGISTER: 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=',
-    ARTICLES: 'articles',
-    ARTICLE_BY_ID: 'articles/'
+    SHOES: 'shoes',
+    SHOE_BY_ID: 'shoes/'
 };
 
 
@@ -39,7 +39,10 @@ export const request = async (url, method, body) => {
     let data = await response.json();
 
     if (data && data.hasOwnProperty('error')) {
-        const message = data.error.message;
+        let message = data.error.message;
+        if(message == undefined){
+            message = data.error;
+        }
         throw new Error(message);
     }
 
@@ -87,26 +90,26 @@ export async function register(email, password) {
 }
 
 export async function getAll() {
-    const records = await get(host(endpoints.ARTICLES));
+    const records = await get(host(endpoints.SHOES));
     //const sorted = records.sort((a,b) => a.title.localeCompare(b.title));
     return objectToArray(records);
 }
 
 export async function getById(id) {
-    const record = await get(host(endpoints.ARTICLE_BY_ID + id));
+    const record = await get(host(endpoints.SHOE_BY_ID + id));
     record._id = id;
     return record;
 }
 
-export async function createArticle(article) {
-    const data = Object.assign({ _ownerId: getUserId() }, article);
-    return post(host(endpoints.ARTICLES), data);
+export async function createShoe(shoe) {
+    const data = Object.assign({ _ownerId: getUserId() }, shoe);
+    return post(host(endpoints.SHOES), data);
 }
 
-export async function editArticle(id, article) {
-    return patch(host(endpoints.ARTICLE_BY_ID + id), article);
+export async function editArticle(id, shoe) {
+    return patch(host(endpoints.SHOE_BY_ID + id), shoe);
 }
 
 export async function deleteById(id) {
-    return del(host(endpoints.ARTICLE_BY_ID + id));
+    return del(host(endpoints.SHOE_BY_ID + id));
 }

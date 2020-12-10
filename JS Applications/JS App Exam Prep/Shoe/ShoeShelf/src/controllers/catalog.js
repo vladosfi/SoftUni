@@ -14,8 +14,8 @@ export async function homePage() {
 
     if (userData && userData.email) {
         const data = mapCategories(await getAll());
-        context.user = userData;
         context = data;
+        context.user = userData;
     }
 
 
@@ -42,11 +42,12 @@ export async function homePage() {
     // }
 
     console.log(context.shoes);
+    console.log(context.user);
     this.partial('/templates/catalog/homePage.hbs', context);
 
 }
 
-export async function deleteArticle() {
+export async function deleteShoes() {
     try {
         const result = await deleteById(this.params.id);
         this.redirect('#/home');
@@ -58,14 +59,15 @@ export async function deleteArticle() {
 export async function detailsPage() {
     await addPartials(this);
 
-    const article = await getById(this.params.id);
+    const result = await getById(this.params.id);
     const context = {
         user: this.app.userData,
-        article,
-        canEdit: article._ownerId == getUserId()
+        shoe: result,
+        canEdit: result._ownerId == getUserId()
     }
-    console.log(article._ownerId);
-    console.log(getUserId());
+    // console.log(shoe._ownerId);
+    // console.log(getUserId());
+    //console.log(context);
 
     this.partial('/templates/catalog/detailsPage.hbs', context);
 }
@@ -73,15 +75,16 @@ export async function detailsPage() {
 export async function editPage(id) {
     await addPartials(this);
 
-    const article = await getById(this.params.id);
-    if (article._ownerId !== getUserId()) {
+    const shoe = await getById(this.params.id);
+    if (shoe._ownerId !== getUserId()) {
         this.redirect('#/home');
     } else {
         const context = {
             user: this.app.userData,
-            article
+            shoe
         }
-
+        shoe.name.replace(" ", '&nbsp;');
+        console.log(context)
         this.partial('/templates/catalog/editPage.hbs', context);
     }
 }
@@ -116,15 +119,18 @@ export async function postCreate(ctx) {
 }
 
 export async function postEdit(ctx) {
-    const { title, category, content } = ctx.params;
+    const { name, price, imageUrl, description, brand } = ctx.params;
+    const buyers = "";
+
+    console.log(ctx.params);
 
     try {
-        if (title.length == 0 || category.length == 0 || content.length == 0) {
+        if (name.length == 0 || price.length == 0 || imageUrl.length == 0 || description.length == 0 || brand.length == 0) {
             throw new Error('All fields are required!');
-        } else if (categoryMap.hasOwnProperty(category) === false) {
-            throw new Error('Invalid category!');
+        } else if (!ctx.app.userData) {
+            throw new Error('You must be logged in to make purchase!');
         } else {
-            const result = await editArticle(ctx.params.id, { title, category, content });
+            const result = await editArticle(ctx.params.id, { name, price, imageUrl, description, brand, buyers });
             ctx.redirect('#/home');
         }
     } catch (err) {

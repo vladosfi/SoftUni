@@ -107,6 +107,8 @@ export async function createShoe(shoe) {
 }
 
 export async function editArticle(id, shoe) {
+    console.log(id);
+    console.log(shoe);
     return patch(host(endpoints.SHOE_BY_ID + id), shoe);
 }
 

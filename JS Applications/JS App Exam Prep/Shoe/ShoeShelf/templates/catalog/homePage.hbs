@@ -16,9 +16,9 @@
 <div class="shoes">
     {{#each shoes}}
     <div class="shoe">
-        <img src="https://i1.t4s.cz/products/ar4149-001/nike-air-zoom-pegasus-36-gs-251390-ar4149-001.jpeg">
+        <img src="{{imageUrl}}">
         <h3>{{name}}</h3>
-        <a>Buy it for {{name}}</a>
+        <a href="#/details/{{_id}}">Buy it for {{price}}</a>
         {{shoes}}
     </div>
     {{/each}}

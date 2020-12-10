@@ -1,4 +1,4 @@
-import { createPage, homePage, postCreate, detailsPage, editPage, postEdit, deleteArticle, redirectToHome } from './controllers/catalog.js';
+import { createPage, homePage, postCreate, detailsPage, editPage, postEdit, deleteShoes as deleteShoes, redirectToHome } from './controllers/catalog.js';
 import { registerPage, loginPage, postRegister, postLogin, logoutPage } from './controllers/user.js';
 // import * as api from './data.js';
 import { getUserData } from './util.js';
@@ -21,7 +21,7 @@ const app = Sammy('main', function (context) {
     this.get('#/create', createPage);
     this.get('#/edit/:id', editPage);
     this.get('#/details/:id', detailsPage);
-    this.get('#/delete/:id', deleteArticle);
+    this.get('#/delete/:id', deleteShoes);
     this.get('#/logout', logoutPage);
 
 

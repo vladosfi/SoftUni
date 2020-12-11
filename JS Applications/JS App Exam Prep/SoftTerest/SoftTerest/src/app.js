@@ -1,4 +1,4 @@
-import { createPage, homePage, postCreate, detailsPage, editPage, postEdit, deleteArticle } from './controllers/catalog.js';
+import { createPage, homePage, postCreate, detailsPage, editPage, postEdit, deleteArticle,dashboardPage } from './controllers/catalog.js';
 import { registerPage, loginPage, postRegister, postLogin, logoutPage } from './controllers/user.js';
 // import * as api from './data.js';
 import { getUserData } from './util.js';
@@ -23,6 +23,7 @@ const app = Sammy('#root', function (context) {
     this.get('#/details/:id', detailsPage);
     this.get('#/delete/:id', deleteArticle);
     this.get('#/logout', logoutPage);
+    this.get('#/dashboard', dashboardPage);
 
 
 

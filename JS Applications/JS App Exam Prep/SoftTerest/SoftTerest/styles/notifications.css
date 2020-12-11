@@ -1,0 +1,38 @@
+/* #notifications {
+    background-color: rgba(238, 74, 74, 0.699);
+    margin: 0 auto;
+    text-align: center;
+    padding: 1%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    border-radius: 6px;
+    color: white;
+    font-style: italic;
+    text-decoration: underline;
+    box-shadow: 0 5px 10px #cccccc;
+    position: absolute;
+    z-index: 1;
+    top: 50px;
+    right: 20px;
+}
+
+#successBox, #loadingBox, #errorBox {
+    display: none;
+    position: relative;
+    top: 55px;
+    right: 16%;
+    z-index: 1;
+} */
+
+#notifications{
+    position: fixed;
+    top: 65px;
+    right: 0px;
+    z-index: 1;
+    width: 100%;
+  }
+  
+  #successBox, #loadingBox, #errorBox {
+    display: none;
+    text-align: left;
+  }

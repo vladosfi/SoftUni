@@ -1,7 +1,7 @@
 import { setUserData, getUserId, getUserData, objectToArray } from "./util.js";
 
-const apiKey = 'AIzaSyCnHxCLGWpkop5xf31Uc74XP5W2Jh7nbQ0';
-const databaseUrl = 'https://shoes-ace8a-default-rtdb.firebaseio.com/';
+const apiKey = 'AIzaSyDNRxDrSN5vnIc5mIMS6Yk_cNwQMmgcKWs';
+const databaseUrl = 'https://softwiki-examprep-f2cfb.firebaseio.com/';
 
 const endpoints = {
     LOGIN: 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=',

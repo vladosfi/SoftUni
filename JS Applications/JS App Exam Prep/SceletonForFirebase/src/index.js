@@ -30,6 +30,10 @@ const app = Sammy('#root', function (context) {
     this.post('#/login', (ctx) => { postLogin(ctx); });
     this.post('#/create', (ctx) => { postCreate(ctx); });
     this.post('#/edit/:id', (ctx) => { postEdit(ctx); });
+	
+	    this.get('', function () {
+        this.swap('<h1> 404 page not found!</h1>');
+    });
 });
 
 app.run();

@@ -1,0 +1,49 @@
+{{>header}}
+<!-- Home -->
+<div class="content">
+    <section class="js">
+        <h2>JavaScript</h2>
+        <div class="articles">
+                {{#each js}}
+                {{>article}}
+                {{else}}
+                <!-- No articles message -->
+                <h3 class="no-articles">No articles yet</h3>
+                {{/each}}
+        </div>
+    </section>
+    <section class="CSharp">
+        <h2>C#</h2>
+        <div class="articles">
+            {{#each csharp}}
+            {{>article}}
+            {{else}}
+            <!-- No articles message -->
+            <h3 class="no-articles">No articles yet</h3>
+            {{/each}}
+        </div>
+    </section>
+    <section class="Java">
+        <h2>Java</h2>
+        <div class="articles">
+            {{#each java}}
+            {{>article}}
+            {{else}}
+            <!-- No articles message -->
+            <h3 class="no-articles">No articles yet</h3>
+            {{/each}}
+        </div>
+    </section>
+    <section class="Python">
+        <h2>Pyton</h2>
+        <div class="articles">
+            {{#each python}}
+            {{>article}}
+            {{else}}
+            <!-- No articles message -->
+            <h3 class="no-articles">No articles yet</h3>
+            {{/each}}
+        </div>
+    </section>
+</div>
+{{>footer}}

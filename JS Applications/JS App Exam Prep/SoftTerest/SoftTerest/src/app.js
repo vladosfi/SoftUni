@@ -1,4 +1,4 @@
-import { createPage, homePage, postCreate, detailsPage, editPage, postEdit, deleteArticle,dashboardPage } from './controllers/catalog.js';
+import { createPage, homePage, postCreate, detailsPage, deleteArticle, dashboardPage, likeArticle } from './controllers/catalog.js';
 import { registerPage, loginPage, postRegister, postLogin, logoutPage } from './controllers/user.js';
 // import * as api from './data.js';
 import { getUserData } from './util.js';
@@ -19,20 +19,17 @@ const app = Sammy('#root', function (context) {
     this.get('#/register', registerPage);
     this.get('#/login', loginPage);
     this.get('#/create', createPage);
-    this.get('#/edit/:id', editPage);
     this.get('#/details/:id', detailsPage);
     this.get('#/delete/:id', deleteArticle);
     this.get('#/logout', logoutPage);
     this.get('#/dashboard', dashboardPage);
-
-
+    this.get('#/like/:id', likeArticle);
 
     this.post('#/register', (ctx) => { postRegister(ctx); });
     this.post('#/login', (ctx) => { postLogin(ctx); });
     this.post('#/create', (ctx) => { postCreate(ctx); });
-    this.post('#/edit/:id', (ctx) => { postEdit(ctx); });
-	
-	    this.get('', function () {
+
+    this.get('', function () {
         this.swap('<h1> 404 page not found!</h1>');
     });
 });

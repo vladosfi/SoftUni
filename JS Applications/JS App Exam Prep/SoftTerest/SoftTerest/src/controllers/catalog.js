@@ -17,9 +17,25 @@ export async function homePage() {
 export async function deleteArticle() {
     try {
         const result = await deleteById(this.params.id);
+        showInfo('Idea deleted successfully.')
         this.redirect('#/home');
     } catch (err) {
-        alert(err.message);
+        showError(err.message);
+    }
+}
+
+export async function likeArticle() {
+
+    const idea = await getById(this.params.id);
+    const likes = idea.likes + 1;
+    try {
+        if(idea._ownerId != getUserId()){
+            const result = await editArticle(this.params.id, { likes });
+        }
+        this.redirect('#/details/' + this.params.id);
+
+    } catch (err) {
+        showError(err.message);
     }
 }
 
@@ -38,22 +54,6 @@ export async function detailsPage() {
     this.partial('/templates/catalog/detailsPage.hbs', context);
 }
 
-export async function editPage(id) {
-    await addPartials(this);
-
-    const article = await getById(this.params.id);
-    if (article._ownerId !== getUserId()) {
-        this.redirect('#/home');
-    } else {
-        const context = {
-            user: this.app.userData,
-            article
-        }
-
-        this.partial('/templates/catalog/editPage.hbs', context);
-    }
-}
-
 
 export async function createPage() {
     await addPartials(this);
@@ -67,16 +67,18 @@ export async function createPage() {
 
 
 export async function dashboardPage() {
-    await addPartials(this);
+    if(getUserId()){
+        await addPartials(this);
 
-    const data = mapCategories(await getAll());
-    const context = data;
-
-    context.user = this.app.userData;
-
-    console.log(context)
-
-    this.partial('/templates/catalog/dashboardPage.hbs', context);
+        const data = mapCategories(await getAll());
+        const context = data;
+    
+        context.user = this.app.userData;
+    
+        this.partial('/templates/catalog/dashboardPage.hbs', context);
+    } else{
+        this.redirect('#/home');
+    }    
 }
 
 
@@ -93,23 +95,6 @@ export async function postCreate(ctx) {
         } else {
             const result = await createArticle({ title, description, imageURL, likes, comments });
             showInfo('Idea created successfully.');
-            ctx.redirect('#/home');
-        }
-    } catch (err) {
-        showError(err.message);
-    }
-}
-
-export async function postEdit(ctx) {
-    const { title, description, content } = ctx.params;
-
-    try {
-        if (title.length == 0 || description.length == 0 || content.length == 0) {
-            throw new Error('All fields are required!');
-        } else if (categoryMap.hasOwnProperty(description) === false) {
-            throw new Error('Invalid category!');
-        } else {
-            const result = await editArticle(ctx.params.id, { title, description, content });
             ctx.redirect('#/home');
         }
     } catch (err) {

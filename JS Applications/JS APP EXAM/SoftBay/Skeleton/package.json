@@ -1,0 +1,14 @@
+{
+    "name": "name",
+    "description": "description",
+    "authors": "author",
+    "version": "1.0.0",
+    "main": "pathToMain",
+    "dependencies": {
+        "handlebars": "^4.7.6",
+        "jquery": "^3.5.1",
+        "sammy": "^0.7.6",
+        "bootstrap": "^4.3.1",
+        "popper.js": "^1.15.0"
+    }
+}

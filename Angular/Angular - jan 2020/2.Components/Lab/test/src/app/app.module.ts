@@ -11,7 +11,7 @@ import { AboutComponent } from './about/about.component';
   ],
   imports: [
     BrowserModule
-  ],
+  ], 
   providers: [],
   bootstrap: [AppComponent]
 })

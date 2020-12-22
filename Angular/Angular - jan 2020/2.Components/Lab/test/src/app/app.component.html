@@ -1,2 +1,13 @@
+<h1>{{title}}</h1>
 Hello - App!
-<app-about></app-about>
+
+<button (click)="toggleVisible()"></button>
+
+<div *ngIf="visible">Visible</div>
+
+<ul>
+    <li *ngFor="let user of users">
+        <span>{{user.name}}</span> -
+        <span>{{user.age}}</span>
+    </li>
+</ul>

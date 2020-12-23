@@ -1,13 +1,39 @@
 <h1>{{title}}</h1>
+
+<input [class]="badCurly" [value]="title">
+<br>
+<input [class.special]="badCurly" [value]="title">
+<br>
+<!-- <input [class.special]="notExistingClass" [value]="title"> -->
+<br>
+
+
+<input #titleInput>
+<!-- var titleInput = document.createElement(input); -->
+<button (click)="title = titleInput.value">Change Title</button>
+<br>
+
+
+
 Hello - App!
 
 <button (click)="toggleVisible()"></button>
 
 <div *ngIf="visible">Visible</div>
+<div *ngIf="!visible">Not Visible</div>
 
+<span>Passed from <b>parrent</b> component</span>
 <ul>
     <li *ngFor="let user of users">
         <span>{{user.name}}</span> -
         <span>{{user.age}}</span>
+    </li>
+</ul>
+
+
+<span>Passed from <b>child</b> component</span>
+<ul>
+    <li *ngFor="let user of users">
+        <app-user [info]="user" (delete)="deleteUserHandler(user)"></app-user>
     </li>
 </ul>

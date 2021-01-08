@@ -1,0 +1,18 @@
+<h1>Login Form - Template Form</h1>
+<form #loginForm="ngForm" (ngSubmit)="loginHandler(loginForm.value)">
+    <div>
+        <label for="">Email</label>
+        <input #emailInput="ngModel" ngModel name="email" type="text" required email pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+        <div *ngIf="emailInput.invalid && emailInput.touched">Please enter valid email!</div>
+    </div>
+    <div #passwordsGroup="ngModelGroup" ngModelGroup="passwords" appPasswordMatch>
+        <label for="">Password</label>
+        <input #passwordInput="ngModel" ngModel name="password" type="password" required minlength="6">
+        <div *ngIf="passwordInput.errors?.required && passwordInput.touched">Password is required!</div>
+        <div *ngIf="passwordInput.errors?.minlength?.actualLength < 5 && passwordInput.touched">Password must be at least six character long!</div>
+        <input #passwordInput="ngModel" ngModel name="repeatPassword" type="password" required minlength="6">
+        <div *ngIf="passwordsGroup?.errors?.passwordMatch">Match false</div>
+    </div>
+    <button [disabled]="loginForm.invalid">LOGIN</button>
+</form>
+{{loginForm.value | json}}

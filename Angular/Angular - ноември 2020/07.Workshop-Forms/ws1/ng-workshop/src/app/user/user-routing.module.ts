@@ -7,14 +7,14 @@ import { RegisterComponent } from './register/register.component';
 const routes: Routes = [
     {
         path: 'user',
-        canActivateChild:[
-            // AuthGuard
+        canActivateChild: [
+            AuthGuard
         ],
         children: [
             {
                 path: 'register',
                 component: RegisterComponent,
-                data:{
+                data: {
                     isLogged: false,
                     noNavigation: true
                 }
@@ -22,14 +22,14 @@ const routes: Routes = [
             {
                 path: 'login',
                 component: LoginComponent,
-                data:{
+                data: {
                     isLogged: false
                 }
             },
             {
                 path: 'profile',
                 component: ProfileComponent,
-                data:{
+                data: {
                     isLogged: true
                 }
             }

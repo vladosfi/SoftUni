@@ -44,9 +44,9 @@ function register(req, res, next) {
 }
 
 function login(req, res, next) {
-    const { username, password } = req.body;
+    const { email, password } = req.body;
 
-    userModel.findOne({ username })
+    userModel.findOne({ email })
         .then(user => {
             return Promise.all([user, user ? user.matchPassword(password) : false]);
         })

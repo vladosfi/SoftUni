@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import {  ActivationEnd, Router } from '@angular/router';
+import { ActivationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { filter, throttleTime } from 'rxjs/operators';
 import { UserService } from '../../user/user.service';
@@ -24,7 +24,7 @@ export class HeaderComponent implements OnDestroy {
       this.hideNavigation = !!e.snapshot.data?.noNavigation;
     });
   }
-  
+
   logoutHandler(): void {
     this.userService.logout();
   }

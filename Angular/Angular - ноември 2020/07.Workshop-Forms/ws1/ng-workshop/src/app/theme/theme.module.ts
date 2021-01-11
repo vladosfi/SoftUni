@@ -10,6 +10,7 @@ import { SharedModule } from '../shared/shared.module';
 import { NewComponent } from './new/new.component';
 import { ThemeComponent } from './theme/theme.component';
 import { PostModule } from '../post/post.module';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -23,12 +24,13 @@ import { PostModule } from '../post/post.module';
     CommonModule,
     SharedModule,
     PostModule,
-    ThemeRouterModule
+    ThemeRouterModule,
+    FormsModule
   ],
-  providers:[
+  providers: [
     ThemeService
   ],
-  exports:[
+  exports: [
     ThemeListComponent,
     ThemeListItemComponent
   ]

@@ -22,17 +22,18 @@ export class AuthGuard implements CanActivateChild {
         }
 
         return stream$.pipe(
-            tap((user: IUser | null) => {
+            map((user) => {
                 const isLoggedFromData = childRoute.data.isLogged;
-
-                if (typeof isLoggedFromData === 'boolean' && isLoggedFromData === !!user) {
+                return typeof isLoggedFromData !== 'boolean' || isLoggedFromData === !!user;
+            }),
+            tap((canContinue) => {
+                if (canContinue) {
                     return;
                 }
 
                 const url = this.router.url;
                 this.router.navigateByUrl(url);
-            }),
-            map((user: IUser | null) => !!user)
+            })
         );
     }
 }

@@ -19,14 +19,17 @@ export class HeaderComponent implements OnDestroy {
     return this.userService.isLogged;
   }
 
-  constructor(public userService: UserService, router: Router) {
+  constructor(
+    public userService: UserService,
+    private router: Router
+  ) {
     this.subscription = router.events.pipe(filter(e => e instanceof ActivationEnd), throttleTime(0)).subscribe((e: any) => {
       this.hideNavigation = !!e.snapshot.data?.noNavigation;
     });
   }
 
   logoutHandler(): void {
-    this.userService.logout();
+    this.userService.logout().subscribe(() => this.router.navigate(['/user/login']));
   }
 
   ngOnDestroy(): void {

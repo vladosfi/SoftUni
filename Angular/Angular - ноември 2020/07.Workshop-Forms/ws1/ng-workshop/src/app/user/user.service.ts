@@ -25,7 +25,7 @@ export class UserService {
   getCurrentUserProfile(): Observable<any> {
     return this.http.get(`${apiUrl}/users/profile`, { withCredentials: true }).pipe(
       tap((user: IUser) => this.currentUser = user),
-      catchError(() => {this.currentUser = null; return of(null)})
+      catchError(() => { this.currentUser = null; return of(null) })
     );
   }
 
@@ -42,6 +42,14 @@ export class UserService {
   }
 
   logout(): Observable<any> {
-    return this.http.post(`${apiUrl}/users/login`, {}, { withCredentials: true })
+    return this.http.post(`${apiUrl}/users/logout`, {}, { withCredentials: true }).pipe(
+      tap(() => this.currentUser = null)
+    );
+  }
+
+  updateProfile(data: any): Observable<IUser> {
+    return this.http.put(`${apiUrl}/users/profile`, data, { withCredentials: true }).pipe(
+      tap((user: IUser) => this.currentUser = user)
+    )
   }
 }

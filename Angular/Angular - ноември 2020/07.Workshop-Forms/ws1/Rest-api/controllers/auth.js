@@ -78,7 +78,7 @@ function logout(req, res) {
     tokenBlacklistModel.create({ token })
         .then(() => {
             res.clearCookie(authCookieName)
-                .status(401)
+                .status(200)
                 .send({ message: 'Logged out!' });
         })
         .catch(err => res.send(err));

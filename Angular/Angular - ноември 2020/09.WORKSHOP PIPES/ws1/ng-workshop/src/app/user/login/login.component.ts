@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserService } from '../user.service';
+import { AuthService } from 'src/app/core/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
   errorMessage: string = '';
 
   constructor(
-    private userService: UserService,
+    private authService: AuthService,
     private router: Router
   ) { }
 
@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
     this.errorMessage = '';
 
     this.isLoading = true;
-    this.userService.login(formValue).subscribe({
+    this.authService.login(formValue).subscribe({
       next: (data) => {
         this.isLoading = false;
         this.router.navigate(['/']);

@@ -7,13 +7,10 @@ import { AuthService } from '../core/auth.service';
 
 
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class UserService {
-
-
-  constructor(
+  
+  constructor( 
     private http: HttpClient,
     private authService: AuthService
   ) { }

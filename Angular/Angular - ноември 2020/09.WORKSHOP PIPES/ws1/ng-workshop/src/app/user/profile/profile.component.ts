@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/core/auth.service';
 import { IUser } from 'src/app/shared/interfaces';
 import { UserService } from '../user.service';
 
@@ -12,10 +13,13 @@ export class ProfileComponent implements OnInit {
   inEditMode = false;
 
   get currentUser(): IUser {
-    return this.userService.currentUser;
+    return this.authService.currentUser;
   }
 
-  constructor(private userService: UserService) { }
+  constructor(
+    private authService: AuthService,
+    private userService: UserService
+    ) { }
 
   ngOnInit(): void {
   }

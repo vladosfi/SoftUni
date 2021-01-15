@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { filter, throttleTime } from 'rxjs/operators';
-import { UserService } from '../../user/user.service';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-header',
@@ -16,11 +16,11 @@ export class HeaderComponent implements OnDestroy {
   subscription: Subscription;
 
   get isLogged(): boolean {
-    return this.userService.isLogged;
+    return this.authService.isLogged;
   }
 
   constructor(
-    public userService: UserService,
+    public authService: AuthService,
     private router: Router
   ) {
     this.subscription = router.events.pipe(filter(e => e instanceof ActivationEnd), throttleTime(0)).subscribe((e: any) => {
@@ -29,7 +29,7 @@ export class HeaderComponent implements OnDestroy {
   }
 
   logoutHandler(): void {
-    this.userService.logout().subscribe(() => this.router.navigate(['/user/login']));
+    this.authService.logout().subscribe(() => this.router.navigate(['/user/login']));
   }
 
   ngOnDestroy(): void {

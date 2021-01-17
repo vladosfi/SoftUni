@@ -17,13 +17,13 @@ export class UserService {
 
   getCurrentUserProfile(): Observable<any> {
     return this.http.get(`/users/profile`).pipe(
-      tap((user: IUser) => this.authService.currentUser = user)
+      tap((user: IUser) => this.authService.updateCurrentUser(user))
     );
   }
 
   updateProfile(data: any): Observable<IUser> {
     return this.http.put(`/users/profile`, data).pipe(
-      tap((user: IUser) => this.authService.currentUser = user)
+      tap((user: IUser) => this.authService.updateCurrentUser(user))
     )
   }
 }

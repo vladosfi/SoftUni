@@ -9,7 +9,7 @@ export class AppInterceptor implements HttpInterceptor {
     apiURL = environment.apiUrl;
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        if (!req.url.includes('http://')) {
+        if (!req.url.includes('http://' && 'https://')) {
             req = req.clone({ url: `${this.apiURL}${req.url}`, withCredentials: true });
         }
 

@@ -1,44 +1,51 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { catchError, tap, map } from 'rxjs/operators';
 import { IUser } from '../shared/interfaces';
 
-@Injectable() 
+@Injectable()
 
 export class AuthService {
-  currentUser: IUser;
-
-  get isLogged(): boolean {
-    return !!this.currentUser;
-  }
+  private _currentUser: BehaviorSubject<IUser | null> = new BehaviorSubject(undefined);
+  currentUser$ = this._currentUser.asObservable();
+  isLogged$ = this.currentUser$.pipe(map(user => !!user));
+  isReady$ = this.currentUser$.pipe(map(user => user !== undefined));
 
   constructor(private http: HttpClient) {
 
   }
 
+  updateCurrentUser(user: IUser | null): void {
+    this._currentUser.next(user);
+  }
+
 
   login(data: any): Observable<any> {
     return this.http.post(`/users/login`, data).pipe(
-      tap((user: IUser) => this.currentUser = user)
+      tap((user: IUser) => this._currentUser.next(user))
     );
   }
 
   register(data: any): Observable<any> {
     return this.http.post(`/users/register`, data).pipe(
-      tap((user: IUser) => this.currentUser = user)
+      tap((user: IUser) => this._currentUser.next(user))
     );
   }
 
   logout(): Observable<any> {
     return this.http.post(`/users/logout`, {}).pipe(
-      tap(() => this.currentUser = null)
+      tap(() => this._currentUser.next(null))
     );
   }
 
   authenticate(): Observable<any> {
     return this.http.get(`/users/profile`).pipe(
-      tap((user: IUser) => this.currentUser = user)
+      tap((user: IUser) => this._currentUser.next(user)),
+      catchError(() => {
+        this._currentUser.next(null);
+        return [null];
+      })
     );
   }
 

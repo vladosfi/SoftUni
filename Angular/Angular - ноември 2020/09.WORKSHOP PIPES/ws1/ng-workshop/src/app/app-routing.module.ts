@@ -24,6 +24,11 @@ const routes: Routes = [
                 loadChildren: () => import('./user/user.module').then(m => m.UserModule)
             },
             {
+                path: 'theme',
+                canActivateChild: [AuthGuard],
+                loadChildren: () => import('./theme/theme.module').then(m => m.ThemeModule)
+            },
+            {
                 path: '**',
                 component: NotFoundComponent
             }

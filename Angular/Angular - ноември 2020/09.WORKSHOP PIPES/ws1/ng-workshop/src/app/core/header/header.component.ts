@@ -15,10 +15,9 @@ export class HeaderComponent implements OnDestroy {
   hideNavigation = false;
   subscription: Subscription;
 
-  get isLogged(): boolean {
-    return this.authService.isLogged;
-  }
-
+  isLogged$ = this.authService.isLogged$;
+  isReady$ = this.authService.isReady$;
+  
   constructor(
     public authService: AuthService,
     private router: Router

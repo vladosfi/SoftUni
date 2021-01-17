@@ -11,12 +11,9 @@ import { UserService } from '../user.service';
 export class ProfileComponent implements OnInit {
 
   inEditMode = false;
+  currentUser$ = this.authService.currentUser$;
 
-  get currentUser(): IUser {
-    return this.authService.currentUser;
-  }
-
-  constructor(
+   constructor(
     private authService: AuthService,
     private userService: UserService
     ) { }

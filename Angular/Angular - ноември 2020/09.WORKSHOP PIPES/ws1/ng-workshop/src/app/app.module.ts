@@ -9,7 +9,6 @@ import {AppRoutingModule} from './app-routing.module';
 import { CoreModule } from './core/core.module';
 import { HeaderComponent } from './core/header/header.component';
 import { FooterComponent } from './core/footer/footer.component';
-import { ThemeModule } from './theme/theme.module';
 import { PostModule } from './post/post.module';
 import { NotFoundComponent } from './not-found/not-found.component';
 
@@ -24,7 +23,6 @@ import { NotFoundComponent } from './not-found/not-found.component';
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    ThemeModule,
     PostModule.forRoot()
   ],
   providers: [

@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { LoaderComponent } from './loader/loader.component';
 import { AsideComponent } from './aside/aside.component';
 import { EmailValidatorDirective } from './email-validator.directive';
+import { ShortenTextPipe } from './shorten-text.pipe';
+import { TimeDiffPipe } from './time-diff.pipe';
 
 
 
@@ -10,7 +12,9 @@ import { EmailValidatorDirective } from './email-validator.directive';
   declarations: [
     LoaderComponent,
     AsideComponent,
-    EmailValidatorDirective
+    EmailValidatorDirective,
+    ShortenTextPipe,
+    TimeDiffPipe
   ],
   imports: [
     CommonModule
@@ -18,7 +22,9 @@ import { EmailValidatorDirective } from './email-validator.directive';
   exports:[
     LoaderComponent,
     AsideComponent,
-    EmailValidatorDirective
+    EmailValidatorDirective,
+    ShortenTextPipe,
+    TimeDiffPipe
   ]
 })
 export class SharedModule { }

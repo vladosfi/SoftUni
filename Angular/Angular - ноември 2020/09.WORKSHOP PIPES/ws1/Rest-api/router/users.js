@@ -12,4 +12,4 @@ router.get('/profile', auth(),authController.getProfileInfo);
 router.put('/profile', auth(),authController.editProfileInfo);
 
 
-module.exports = router
+module.exports = router;

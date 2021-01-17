@@ -1,4 +1,6 @@
-import { Component, DoCheck } from '@angular/core';
+import { Component } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs/operators';
 import { AuthService } from '../core/auth.service';
 
 @Component({
@@ -6,14 +8,20 @@ import { AuthService } from '../core/auth.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements DoCheck {
+export class HomeComponent {
 
-  isLogged = false;
+  isLogged$ = this.authService.isLogged$;
 
-  constructor(private authService: AuthService) { }
+  url: string;
 
-  ngDoCheck(): void {
-    this.isLogged = this.authService.isLogged;
+  constructor(
+    private authService: AuthService,
+    router: Router) {
+
+    router.events.pipe(filter(e => e instanceof NavigationEnd)).subscribe((e: NavigationEnd) => {
+      this.url = e.url;
+    });
   }
+
 
 }

@@ -24,7 +24,7 @@
 |<a href="https://softuni.bg/trainings/2838/js-advanced-may-2020#lesson-15406" > JS Advanced - май 2020 </a>   | <a href="https://softuni.bg/trainings/2838/js-advanced-may-2020" target="_blank"> Link</a> |
 |<a href="https://softuni.bg/trainings/2840/js-applications-june-2020#lesson-15438" > JS Applications - юни 2020 </a>   | <a href="https://softuni.bg/trainings/2840/js-applications-june-2020#lesson-15438" target="_blank"> Link</a> |
 |<a href="https://softuni.bg/trainings/3122/html-and-css-september-2020/internal" > HTML & CSS - септември 2020 </a>   | <a href="https://softuni.bg/trainings/3122/html-and-css-september-2020/internal" target="_blank"> Link</a> |
-|<a href="https://softuni.bg/trainings/3047/angular-november-2020/internal" > Angular - ноември 2020 </a>   | <a href="https://softuni.bg/trainings/2760/angular-january-2020#lesson-14700" target="_blank"> Link</a> |
+|<a href="https://softuni.bg/trainings/3249/angular-november-2020/internal#lesson-22291" > Angular - ноември 2020 </a>   | <a href="https://softuni.bg/trainings/2760/angular-january-2020#lesson-14700" target="_blank"> Link</a> |
 
 
 

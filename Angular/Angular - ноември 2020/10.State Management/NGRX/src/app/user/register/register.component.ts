@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { AuthService } from 'src/app/core/auth.service';
 import { emailValidator, rePasswordValidatorFactory } from 'src/app/shared/validators';
+import { IUserModuleState } from '../+store';
+import { userLoginSetErrorMessage, userRegisterSetLoading } from '../+store/actions';
 
 @Component({
   selector: 'app-register',
@@ -13,12 +16,15 @@ import { emailValidator, rePasswordValidatorFactory } from 'src/app/shared/valid
 export class RegisterComponent implements OnInit {
 
   form: FormGroup;
-  isLoading = false;
+
+  isLoading$ = this.store.select(state => state.user.register.isLoading);
+  errorMessage$ = this.store.select(state => state.user.register.errorMessage);
 
   constructor(
     private fb: FormBuilder,
     private authServic: AuthService,
-    private router: Router
+    private router: Router,
+    private store: Store<IUserModuleState>
   ) {
     const passwordControl = this.fb.control('', [Validators.required, Validators.minLength(5)]);
 
@@ -35,16 +41,19 @@ export class RegisterComponent implements OnInit {
   }
 
   submitHandler(): void {
-    this.isLoading = true;
+
     const data = this.form.value;
+    this.store.dispatch(userRegisterSetLoading({ isLoading: true }));
+    this.store.dispatch(userLoginSetErrorMessage({ message: '' }));
+
     this.authServic.register(data).subscribe({
       next: () => {
-        this.isLoading = false;
+        this.store.dispatch(userRegisterSetLoading({ isLoading: false }));
         this.router.navigate(['/']);
       },
       error: (err) => {
-        this.isLoading = false;
-        console.log(err);
+        this.store.dispatch(userRegisterSetLoading({ isLoading: false }));
+        this.store.dispatch(userLoginSetErrorMessage({ message: err.error.message }));
       }
     })
   }

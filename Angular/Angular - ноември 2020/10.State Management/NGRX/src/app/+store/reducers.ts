@@ -1,7 +1,6 @@
-import { createReducer, on } from '@ngrx/store';
-import { stat } from 'fs';
+import { createReducer, on } from '@ngrx/store';  
 import { IUser } from '../shared/interfaces';
-import { login, logout, register, authenticate } from './actions';
+import { login, logout, register, authenticate, updateUser } from './actions';
 
 export interface IAuthState {
     currentUser: IUser | null | undefined;
@@ -18,14 +17,15 @@ const setCurrentUser = (
         ReturnType<typeof authenticate> |
         ReturnType<typeof register>
 ) => {
-    return { ...state, currentUser: action.user };
+    return { ...state, currentUser: action.user }; 
 };
 
-export const authReducer = createReducer(
+export const authReducer = createReducer<IAuthState>(
     initialState,
     on(login, setCurrentUser),
     on(register, setCurrentUser),
     on(authenticate, setCurrentUser),
+    on(updateUser, setCurrentUser),
     on(logout, (state) => {
         return { ...state, currentUser: null };
     })

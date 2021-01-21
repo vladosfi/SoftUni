@@ -1,26 +1,24 @@
-import { Component, OnInit } from '@angular/core';
-import { ITheme } from '../../shared/interfaces';
-import { ThemeService } from '../theme.service';
+import { AfterViewInit, Component, } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { IThemeModuleState } from '../+store';
+import { themeListLoadThemeList, themeListSetIsLoading, themeListSetThemeList } from '../+store/actions';
 
 @Component({
   selector: 'app-theme-list',
   templateUrl: './theme-list.component.html',
   styleUrls: ['./theme-list.component.css']
 })
-export class ThemeListComponent implements OnInit {
+export class ThemeListComponent implements AfterViewInit {
 
-  themeList: ITheme[];
+  themeList$ = this.store.select(state => state.theme.list.themeList);
 
-  constructor(private themeService: ThemeService) { }
-
-  ngOnInit(): void {
-    this.themeService.loadThemeList().subscribe((themeList) => {
-      this.themeList = themeList;
-    });
+  constructor(
+    private store: Store<IThemeModuleState>
+  ) {
+    this.store.dispatch(themeListLoadThemeList());
   }
 
   ngAfterViewInit(): void {
     console.log('View was initialized');
   }
-
 }

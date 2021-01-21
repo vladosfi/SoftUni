@@ -1,7 +1,8 @@
-import { trigger } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { IPost, ITheme } from 'src/app/shared/interfaces';
+import { Store } from '@ngrx/store';
+import { IThemeModuleState } from '../+store';
+import { themeDetailClear, themeDetailSetTheme } from '../+store/actions';
 import { ThemeService } from '../theme.service';
 
 @Component({
@@ -9,21 +10,26 @@ import { ThemeService } from '../theme.service';
   templateUrl: './detail.component.html',
   styleUrls: ['./detail.component.css']
 })
-export class DetailComponent implements OnInit {
+export class DetailComponent implements OnInit, OnDestroy {
 
-  theme: ITheme<IPost> = null;
+  theme$ = this.store.select(state => state.theme.detail.theme);
+  isLoading$ = this.store.select(state => state.theme.detail.isLoading);
 
   constructor(
-    activatedRoute: ActivatedRoute,
-    themeService: ThemeService
+    private store: Store<IThemeModuleState>,
+    themeService: ThemeService,
+    activatedRoute: ActivatedRoute
   ) {
     const id = activatedRoute.snapshot.params.id;
     themeService.loadTheme(id).subscribe(theme => {
-      this.theme = theme;
+      this.store.dispatch(themeDetailSetTheme({ theme }));
     });
   }
-
+  
   ngOnInit(): void {
   }
 
+  ngOnDestroy(): void {
+    this.store.dispatch(themeDetailClear());
+  }
 }

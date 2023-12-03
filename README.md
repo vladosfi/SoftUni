@@ -1,9 +1,6 @@
 # SoftUni Software Engineering
 # <p align="center">Courses from the software engineering program in SoftUni<p>
 
-
-![align="center" image](https://github.com/vladosfi/SoftUni/assets/4414067/b0b565a0-f949-48ec-9b01-1f430525852a)
-
 <p align="center">
     <img width="250" src="https://upload.wikimedia.org/wikipedia/commons/7/76/Logo_Software_University_%28SoftUni%29_-_blue.png" alt="SoftUni logo">
 </p>

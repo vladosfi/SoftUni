@@ -5,10 +5,6 @@
 ![image](https://github.com/vladosfi/SoftUni/assets/4414067/b0b565a0-f949-48ec-9b01-1f430525852a)
 
 
-<br/>
-<br/>
-<br/>
-
 <h2> Certificates </h2>
 
 |**Course**|**Link**| 

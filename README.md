@@ -1,9 +1,9 @@
 # SoftUni Software Engineering
 # <p align="center">Courses from the software engineering program in SoftUni<p>
 
-
+<p align="center">
 ![image](https://github.com/vladosfi/SoftUni/assets/4414067/b0b565a0-f949-48ec-9b01-1f430525852a)
-
+</p>
 
 <h2> Certificates </h2>
 

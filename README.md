@@ -2,7 +2,7 @@
 # <p align="center">Courses from the software engineering program in SoftUni<p>
 
 
-![image](https://github.com/vladosfi/SoftUni/assets/4414067/b0b565a0-f949-48ec-9b01-1f430525852a)
+![align="center" image](https://github.com/vladosfi/SoftUni/assets/4414067/b0b565a0-f949-48ec-9b01-1f430525852a)
 
 
 <h2> Certificates </h2>
